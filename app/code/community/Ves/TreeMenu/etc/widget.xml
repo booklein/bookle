@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<widgets>
+<!-- Widget single image-->
+	<widget_treemenu type="ves_treemenu/widget_menu">
+		<name>Ves Base : Tree Menu</name>
+		<description>Create Tree Menu Widget</description>
+		<parameters>
+            <show translate="label">
+                <label>Enabled Module</label>
+                <sort_order>1</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+                <value>true</value>
+                
+            </show>
+
+            <menumode translate="label">
+                <label>Mode of Menu</label>
+                <sort_order>2</sort_order>
+                <type>select</type>
+                <source_model>ves_treemenu/system_config_source_listMode</source_model>
+                <visible>1</visible>
+                <value>all</value>
+                
+            </menumode>
+            
+            <title translate="label">
+                <label>Title</label>
+                <type>text</type>
+                <sort_order>3</sort_order>
+                <comment>Empty to hide</comment>
+                <visible>1</visible>
+                <value></value>
+                
+            </title>
+            
+            <showtitle translate="label">
+                <label>Show Title</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>4</sort_order>
+                <visible>1</visible>
+                <value>true</value>
+                
+            </showtitle>
+
+            <showproductcount translate="label">
+                <label>Show Product Count</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>5</sort_order>
+                <visible>1</visible>
+                <value>false</value>
+                
+            </showproductcount>
+            
+            <menustyle translate="label">
+                <label>Menu Style</label>
+                <type>select</type>
+                <source_model>ves_treemenu/system_config_source_listMenuStyles</source_model>
+                <sort_order>15</sort_order>
+                <visible>1</visible>
+                <value>Accordion</value>
+                
+            </menustyle>
+
+            <event translate="label">
+                <label>Event</label>
+                <type>select</type>
+                <source_model>ves_treemenu/system_config_source_listEvents</source_model>
+                <sort_order>20</sort_order>
+                <visible>1</visible>
+                <value>click</value>
+                
+            </event>
+
+            <show_number_item translate="label">
+                <label>Show Number Item</label>
+                <type>text</type>
+                <sort_order>25</sort_order>
+                <comment>Empty to disable load more icon</comment>
+                <visible>1</visible>
+            </show_number_item>
+
+            <template translate="label">
+				<visible>1</visible>
+                <label>Module Template</label>
+                <description>Input custom module template file path. For example: ves/treemenu/default/default.phtml Empty for default</description>
+                <type>text</type>
+                <sort_order>250</sort_order>
+            </template> 
+		</parameters>
+	</widget_treemenu>
+</widgets>

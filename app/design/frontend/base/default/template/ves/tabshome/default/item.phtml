@@ -1,0 +1,245 @@
+<?php
+/*Start copy at here*/
+/*framework: get current theme setting*/
+$list_image_width = (int)$this->getConfig("image_width", 300);
+$list_image_height = (int)$this->getConfig("image_height", 300);
+
+$swap_image_number = (int)$this->getConfig("swap_image_number", 0);
+
+$popup_quickview_width = $this->getConfig("popup_quickview_width", "60%");
+$popup_quickview_height = $this->getConfig("popup_quickview_height", "80%");
+
+$enable_pzoom = $this->getConfig("show_pzoom");
+$enable_new_icon = $this->getConfig("enable_new_icon");
+$enable_sale_icon = $this->getConfig("enable_sale_icon");
+$show_title = $this->getConfig('show_title');
+$enable_short_desc = $this->getConfig('show_desc');
+$show_review = $this->getConfig('review');
+$show_price = $this->getConfig('show_price');
+$show_addcart = $this->getConfig("show_btn");
+$show_compare_wishlist = $this->getConfig("enable_wc") ;
+/*end get setting*/
+
+/*quickview was enabled?*/
+$quickview = isset($config['enable_quickview']) ? $config['enable_quickview'] : 0;
+/*Swap images was enabled?*/
+$swap_image = isset($config['enable_swap']) ? $config['enable_swap'] : 0;
+
+$moduleId = rand().time();
+$itemsperpage = (int)$this->getConfig("itemspage",4);
+$auto_play_mode = (int)$this->getConfig("auto_play");
+
+$title_maxchar = (int)$this->getConfig("desc_maxchar");
+$title_maxchar = $title_maxchar > 0 ?$title_maxchar: 100;
+$desc_maxchar = (int)$this->getConfig("desc_maxchar");
+$desc_maxchar = $desc_maxchar > 0 ?$desc_maxchar: 100;
+$interval = (int)$this->getConfig("interval");
+
+$auto_play = $auto_play_mode?"true":"false";
+$cols = (int)$this->getConfig("itemsrow",4);
+$cols = !empty($cols)?$cols:1;
+$span = floor(12/$cols);
+$active = 'news';
+
+/*end copy at here*/
+$current = 0;
+$modid = rand(1,9)+rand();
+$is_related = false;
+
+$price_prefix = "_clone_tabshome_".$modid;
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+
+<?php
+$helper = Mage::helper("ves_tempcp/framework")->getFramework( );
+if(!$helper || !is_object($helper)) {
+	$packageName =  Mage::getSingleton('core/design_package')->getPackageName();
+	if(!$packageName) {
+		$packageName = "default";
+	}
+
+	$themeName =  Mage::getDesign()->getTheme('frontend');
+	$themeName = $packageName."/".$themeName;
+	$themeConfig = Mage::helper('ves_tempcp/theme')->getCurrentTheme();
+	$helper = Mage::helper("ves_tempcp/framework")->initFramework( $themeName, $themeConfig );
+} else {
+	$themeConfig = $helper->getConfig();
+}
+if(!isset($profile)) {
+	$profile = Mage::helper("ves_tempcp/framework")->getProfile();
+}
+
+
+$listing_products_columns = $themeConfig->get("listing_products_columns", 0);
+$listing_products_columns_small = $themeConfig->get("listing_products_columns_small", 0);
+$listing_products_columns_minismall = $themeConfig->get("listing_products_columns_minismall", 0);
+
+if(!isset($enable_pzoom) ){
+	$enable_pzoom = $themeConfig->get("category_pzoom", 0);
+}
+if(!isset($max_cols)) {
+	$max_cols = $profile->getParam("max_cols", 12);
+}
+
+
+$MAX_ITEM_ROW    = $themeConfig->get('listing_products_columns', 3);
+$MAX_ITEM_ROW    = $MAX_ITEM_ROW?$MAX_ITEM_ROW:3;
+$MAX_ITEM_ROW_MEDIUM = $themeConfig->get('listing_products_columns_medium', $MAX_ITEM_ROW) ;
+$MAX_ITEM_ROW_MEDIUM    = $MAX_ITEM_ROW_MEDIUM?$MAX_ITEM_ROW_MEDIUM:$MAX_ITEM_ROW;
+$MAX_ITEM_ROW_SMALL = $themeConfig->get('listing_products_columns_small', 3) ;
+$MAX_ITEM_ROW_SMALL    = $MAX_ITEM_ROW_SMALL?$MAX_ITEM_ROW_SMALL:3;
+$MAX_ITEM_ROW_MINI  = $themeConfig->get('listing_products_columns_minismall', 2);
+$MAX_ITEM_ROW_MINI    = $MAX_ITEM_ROW_MINI?$MAX_ITEM_ROW_MINI:2;
+
+if(!isset($cols) ){
+	$cols = $MAX_ITEM_ROW ; 
+}
+
+if(!isset($span) ){
+	$span = floor((int)$max_cols/$cols);
+}
+
+if(!isset($medium) ){
+	$medium = floor((int)$max_cols/$MAX_ITEM_ROW_MEDIUM);
+}
+
+if(!isset($small) ){
+	$small = floor((int)$max_cols/$MAX_ITEM_ROW_SMALL);
+}
+if(!isset($mini) ){
+	$mini = floor((int)$max_cols/$MAX_ITEM_ROW_MINI);
+}
+
+if(!isset($ajax_cart) ){
+	$ajax_cart = $themeConfig->get("enable_ajaxcart", 0);
+}
+
+if(!isset($swap_image)) {
+	$swap_image = $themeConfig->get("enable_swap", 0);
+}
+
+if(!isset($enable_lazyload)) {
+	$enable_lazyload = $themeConfig->get("enable_lazyload", 0);
+}
+
+if(!isset($enable_short_desc)) {
+	$enable_short_desc = $themeConfig->get("enable_short_desc", 0);
+}
+
+if(!isset($quickview)) {
+	$quickview = $themeConfig->get("enable_quickview", 0);
+}
+
+if(!isset($list_image_width)) {
+	$list_image_width = $themeConfig->get("listing_image_width", 300);
+	$list_image_width = !empty($list_image_width)?(int)$list_image_width: 300;
+}
+
+if(!isset($list_image_height)) {
+	$list_image_height = $themeConfig->get("listing_image_height", 300);
+	$list_image_height = !empty($list_image_height)?(int)$list_image_height: 300;
+}
+
+
+if(!isset($swap_image_number)) {
+	$swap_image_number = $themeConfig->get("swap_image_number", 0);
+	$swap_image_number = !empty($swap_image_number)?(int)$swap_image_number: 0;
+}
+
+if(!isset($default_layout)) {
+	$default_layout = $themeConfig->get("default_list_layout", "default.phtml");
+}
+
+if(!isset($popup_quickview_width)) {
+	$popup_quickview_width = $themeConfig->get("popup_quickview_width", "60%");
+}
+
+if(!isset($popup_quickview_height)) {
+	$popup_quickview_height = $themeConfig->get("popup_quickview_height", "80%");
+}
+
+if(!isset($popup_image_width)) {
+	$popup_image_width = $themeConfig->get("popup_image_width", 600);
+	$popup_image_width = !empty($popup_image_width)?(int)$popup_image_width: 600;
+}
+
+if(!isset($popup_image_height)) {
+	$popup_image_height = $themeConfig->get("popup_image_height", 600);
+	$popup_image_height = !empty($popup_image_height)?(int)$popup_image_height: 600;
+}
+
+if(!isset($number_day_new)) {
+	$number_day_new = $themeConfig->get("number_day_new", 3);
+}
+
+if(!isset($layout_mode)) {
+	$layout_mode = "grid";
+}
+
+if(!isset($price_prefix)) {
+	$price_prefix = "_clone";
+}
+
+$limit_item = $this->getConfig("limit_item", 6);
+$_columnCount = isset($_columnCount)?$_columnCount: $cols;
+$lastPage = ceil( $limit_item / $itemsperpage );
+$curPage = $this->getConfig('page');
+$_product = $product;
+$i = isset($i)?$i:0;
+
+if( ($i-1) % $itemsperpage == 0): ?> 
+
+<?php if($this->getConfig('ajax_type')=='carousel'){
+	?>
+	<div class="item <?php if($i==1): ?> first active<?php endif; ?>  product-grid no-margin"> 
+		<?php } ?>
+	<?php endif; ?>
+
+	<?php if( ($i - 1) % $cols == 0 ){ ?>
+	<div class="row products-row">
+		<?php } ?> 
+		<?php if ($products_layout_path = Mage::helper("ves_tempcp/framework")->getLayoutPath("list/".$default_layout) ) { ?>
+			<?php require ($products_layout_path); ?>
+			<?php } ?>
+
+			<?php if($enable_pzoom && $loadScript) { ?>
+			<script type="text/javascript"><!--
+				jQuery(document).ready(function() {
+					jQuery('.colorbox').colorbox({
+						overlayClose: true,
+						opacity: 0.5,
+						rel: false,
+						onLoad:function(){
+							jQuery("#cboxNext").remove(0);
+							jQuery("#cboxPrevious").remove(0);
+							jQuery("#cboxCurrent").remove(0);
+						}
+					});
+				});
+				//--></script>
+				<?php } ?>
+
+				<?php if($quickview && $loadScript ) { ?>
+				<script type="text/javascript">
+					jQuery(document).ready(function() {
+						jQuery(".ves-colorbox").colorbox({
+							width: '<?php echo $popup_quickview_width; ?>', 
+							height: '<?php echo $popup_quickview_height; ?>',
+							overlayClose: true,
+							opacity: 0.5,
+							iframe: true, 
+						});
+					});
+				</script>
+				<?php } ?>
+				<?php if($i % $cols == 0 || $i % $itemsperpage == 0){ ?> 
+			</div>
+			<?php } ?>
+
+			<?php
+			if($i % $itemsperpage == 0): ?> 
+
+			<?php if($this->getConfig('ajax_type') == 'carousel'){ ?>
+		</div>
+		<?php } ?>
+	<?php endif;

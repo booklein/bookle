@@ -1,0 +1,139 @@
+// Box Modules 
+// ========================================================================
+$block-module-margin-bottom: 			30px !default;
+$block-module-padding  :				20px !default;
+$block-module-border-color: 			$border-color  !default;
+
+$block-module-heading-border: 			1px !default;
+$block-module-heading-transform:        uppercase !default;
+$block-module-heading-line-height:      28px !default;
+$block-module-heading-font-family:    	$font-family-base !default;
+$block-module-heading-bg:				#f5f5f5 !default;
+$block-module-heading-padding: 			10px 0px !default;
+$block-module-heading-font:				$font-family-secondary !default;
+$block-module-heading-span-font-size:	 12px !default;
+$block-module-heading-font-size:		$font-size-base + 4 !default;
+$block-module-heading-color:			$theme-color-default !default;
+$block-module-content-bg:				$white !default;
+$block-module-content-border:			1px solid $border-color !default;
+$block-module-content-padding:			20px !default;
+$block-module-content-margin:         	0px !default;
+$block-module-content-radius:         	0px !default;
+
+
+$block-module-highlighted-bg			: red !default;
+$block-module-highlighted-border		: solid 1px red !default;
+$block-module-footer-heading-color 		: #FFFFFF !default; 
+
+$block-product-padding:               0 !default;
+$block-heading-letter-spacing:        0px !default;
+
+
+$footer-heading-font: 14px !default;
+/*  
+ * LAYOUT VARIABLES 
+ */
+
+// Header
+// ========================================================================
+$header-outside-bg: 				transparent !default;
+$header-bg:  						#fff !default;
+$header-container-padding:			0px 40px !default;
+$header-border-color: 				$border-color !default;
+$header-icon-bg:                    $wild-sand !default;
+$header-border-color:               1px solid transparent !default;
+$header-heading-color:              $theme-color-secondary !default;
+$header-text-color:                 $tundora !default;
+$header-link-color: 				$header-text-color !default;
+$header-icon-font-size:             $font-size-base + 4 !default;
+
+// Topbar 
+// ========================================================================
+$topbar-bg: 						$body-bg !default;
+$topbar-color: 						$theme-color-default !default;
+$topbar-font-size: 					$font-size-base - 2 !default;
+$topbar-font-family:				$font-family-base !default;
+$topbar-font-weight:                400 !default;
+$topbar-link-color: 				$white !default;
+$topbar-link-hover-color: 			$theme-color-primary !default;
+$color-icon-topbar: 				$theme-color-default !default;
+$topbar-padding: 					0 8px !default;
+$topbar-height:                     41px !default;
+$topbar-border:                     1px solid #e8e8e8 !default;
+
+// Mass header 
+$masshead-outside-bg :			$theme-color-primary !default;
+$masshead-bg: 			 		$white !default;
+$masshead-content-padding:		8px 0 !default;
+$masshead-color:				$theme-color-primary !default;
+$masshead-color-hover:			lighten($theme-color-primary,5%);	
+// Main menu 
+
+
+// Promotions
+
+
+// Showcase
+$showcase-bg: 					$white;
+
+
+//Main Content
+$content-bg:					$white;
+
+
+// Footer
+// ========================================================================
+
+$footer-bg: 						$gray-dark !default;
+$footer-color: 						$text-color !default;
+$footer-heading-font-size: 			$font-size-base + 2!default;
+$footer-heading-color: 				$theme-color-tertiary !default;
+$footer-heading-padding:            0 !default;
+$footer-link-color: 				#999 !default;
+$footer-link-hover-color: 			$theme-color !default;
+$footer-font-size:   	 			14px !default;
+     
+$footer-content-padding:            15px !default;
+$footer-content-margin:             0 !default;
+$footer-list-padding:               6px 0 !default;
+$footer-margin:                     20px !default;
+
+ /////// footer top
+$footer-top-outside-border:			1px solid #505862 !default;
+$footer-top-outside-bg :			transparent !default;
+$footer-top-bg: 			 		$theme-color-tertiary !default;
+$footer-top-color:					$text-color !default;
+$footer-top-content-padding:		30px !default;
+$footer-top-color-hover:			lighten($footer-top-color,5%);	
+$footer-top-border:					#505862 !default;
+
+/////// footer center 
+$footer-center-outside-bg :			transparent !default;
+$footer-center-bg: 			 		$gray-dark !default;
+$footer-center-content-padding:		40px 0!default;
+$footer-center-color:				#999 !default;
+$footer-center-color-hover:			lighten($footer-center-color,5%);	
+
+/////// footer bottom 
+$footer-bottom-outside-bg :			transparent !default;
+$footer-bottom-bg: 			 		$gray-dark !default;
+$footer-bottom-content-padding:		30px 0!default;
+$footer-bottom-color:				#999 !default;
+$footer-bottom-color-hover:			lighten($footer-bottom-color,5%);	
+
+// Powered By / Copyright
+// ========================================================================
+$power-bg:       					#2e2e2e !default;
+$power-color:                       $footer-color !default;
+$power-link-color:                  $link-hover-color !default;
+$power-padding:                     $padding-large-vertical * 3 !default;
+$power-font-family  : 				$font-family-base;
+$power-border-color:				#505862;
+
+ 
+// Responsive
+// ========================================================================
+$respon-topbar-icon:                $white !default;
+$respon-topbar-icon-font-size:      $font-size-base !default;
+$respon-topbar-search-bg:           $white !default;
+$respon-topbar-search-icon-color:   $black !default;

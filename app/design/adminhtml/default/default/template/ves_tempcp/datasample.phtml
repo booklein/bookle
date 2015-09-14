@@ -1,0 +1,69 @@
+<?php 
+	$themes = array();
+
+	if($themecontrol = $this->getThemeData()) {
+		$themes = $themecontrol->get("templates", array());
+	}
+	
+?>
+<div class="content-header">
+<table cellspacing="0">
+    <tr>
+        <td style="width:50%;"><h3 class="icon-head head-blog"><?php echo Mage::helper('ves_tempcp')->__('Ves Theme Control Panel - Install Data Sample') ?></h3></td>
+        <td class="a-right">
+            <?php echo $this->getBackButtonHtml() ?>
+        </td>
+    </tr>
+</table>
+</div>
+
+<div class="entry-edit">
+    <div class="entry-edit-head">
+    	<h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('ves_tempcp')->__("Install theme sample which you want"); ?></h4>
+    </div>
+    <div id="block_data" class="fieldset ">
+        <form id="edit_form" action="<?php echo $this->getFormActionUrl() ?>" method="post" id="theme_sample_form">
+            <input type="hidden" name="theme_group" id="theme_group" value=""/>
+            <input type="hidden" name="action" value="" id="action"/>
+
+        	<div class="hor-scroll">
+        		<h4><?php echo $this->__("<span style='color:#eb5e00'>Step 1:</span> Choose Default Store View"); ?></h4>
+        		<?php echo $this->getStoreSwitcherHtml() ?>
+        		<h4><?php echo $this->__("<span style='color:#eb5e00'>Step 2:</span> Install A Theme Sample"); ?></h4>
+                <span class="help">
+                    <?php echo $this->__("<b>Theme Layout</b> are folders name (of venus themes) were stored in the folder"); ?> <i style="color:#eb5e00"><?php echo Mage::getBaseDir('skin')."/frontend/" ;?> <b>PACKAGE/LAYOUT</b></i>
+                </span>
+                <br/> <br/>
+        		<table class="form-list" cellspacing="0">
+        			<thead>
+        				<tr>
+        				<th><?php echo $this->__("Theme Layout");?></th>
+        				<th><?php echo $this->__("Action");?></th>
+        				</tr>
+        			</thead>
+        			<tbody>
+        			<?php if($themes): ?>
+        			<?php foreach($themes as $theme): ?>
+        			<tr>
+        				<td class="label"><?php echo $theme; ?></td>
+        				<td class="value"><button class="button scalable save" onclick="setThemeGroup('<?php echo $theme; ?>');" type="button" title="<?php echo Mage::helper('ves_tempcp')->__("Install Sample"); ?>"><span><span><span><?php echo Mage::helper('ves_tempcp')->__("Install Sample"); ?></span></span></span></button></td>
+        			</tr>
+        			<?php endforeach; ?>
+        			<?php endif; ?>
+        			</tbody>
+        		</table>
+        	</div>
+            <?php echo $this->getBlockHtml('formkey')?>
+            <div style="display:none"></div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    editForm = new varienForm('edit_form', '<?php echo $this->getValidationUrl() ?>');
+</script>
+<script type="text/javascript">
+    function setThemeGroup(theme_group ) {
+        $('theme_group').value = theme_group;
+        editForm.submit();
+    }
+</script>

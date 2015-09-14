@@ -1,0 +1,75 @@
+<?php
+    $_item = $this->getItem();
+    $_product    = $this->getProduct();
+    $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
+?>
+<?php if ($_product->isSaleable() && count($_attributes)):?>
+<fieldset class="product-options" id="product-options-wrapper" style="border:0px; margin:0px; padding:0px; background-color:inherit; ">
+<script type="text/javascript">
+//<![CDATA[
+
+var optionTextCounter = {
+    count : function(field,cntfield,maxlimit){
+        if (field.value.length > maxlimit){
+            field.value = field.value.substring(0, maxlimit);
+        } else {
+            cntfield.innerHTML = maxlimit - field.value.length;
+        }
+    }
+}
+
+Product.Options<?php echo $_item->getId()?> = Class.create();
+Product.Options<?php echo $_item->getId()?>.prototype = {
+    initialize : function(config){
+        this.config = config;
+    },
+    reloadPrice : function(){
+        return '';
+    }
+}
+function validateOptionsCallback(elmId, result){
+    var container = $(elmId).up('ul.options-list');
+    if (result == 'failed') {
+        container.removeClassName('validation-passed');
+        container.addClassName('validation-failed');
+    } else {
+        container.removeClassName('validation-failed');
+        container.addClassName('validation-passed');
+    }
+}
+var opConfig<?php echo $_item->getId()?> = new Product.Options<?php echo $_item->getId()?>(<?php echo $this->getJsonConfig() ?>);
+//]]>
+
+
+
+/**************************** CONFIGURABLE PRODUCT **************************/
+Product.Config<?php echo $_item->getId()?> = Class.create(Product.Config,{
+    reloadPrice: function(){
+        return;
+    },
+
+    reloadOldPrice: function(){
+        return;
+    }
+});
+
+</script>
+<dl id="configurable-item-<?php echo $_item->getId()?>">
+    <?php foreach($_attributes as $_attribute): ?>
+    <dt><label class="required"><em>*</em><?php echo $_attribute->getLabel() ?></label></dt>
+    <dd<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
+        <div class="input-box">
+            <select name="cart[<?php echo $_item->getId()?>][super_attribute][<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+                <option><?php echo $this->__('Choose an Option...') ?></option>
+            </select>
+        </div>
+    </dd>
+    <?php endforeach; ?>
+</dl>
+<input type="hidden" name="cart[<?php echo $_item->getId()?>][product]" value="<?php echo $this->getProduct()->getId()?>"/>
+<input type="hidden" name="cart[<?php echo $_item->getId()?>][in_cart]" value="1"/>
+<script type="text/javascript">
+    var spConfig<?php echo $_item->getId()?> = new Product.Config<?php echo $_item->getId()?>(<?php echo $this->getJsonConfig() ?>);
+</script>
+</fieldset>
+<?php endif;?>

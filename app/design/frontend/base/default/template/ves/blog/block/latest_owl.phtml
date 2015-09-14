@@ -1,0 +1,243 @@
+<?php
+/**
+ * Venustheme
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Venustheme EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.venustheme.com/LICENSE-1.0.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.venustheme.com/ for more information
+ *
+ * @category   Ves
+ * @package    Ves_Blog
+ * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+
+/**
+ * Ves Blog Extension
+ *
+ * @category   Ves
+ * @package    Ves_Blog
+ * @author     Venustheme Dev Team <venustheme@gmail.com>
+ */
+$moduleId = rand().time();
+$cols =  (int)$this->getConfig( "columns" );
+$cols = !empty($cols)?$cols:3;
+$span = 12/$cols;
+$mobile_items = 1;
+$tablet_items = 2;
+$tablet_small_items = 2;
+$portrait_items = 3;
+if($cols == 1){
+	$tablet_items = $tablet_small_items = $portrait_items = 1;
+} elseif($cols == 2){
+	$portrait_items = 2;
+}
+
+$itemsperpage = (int)$this->getConfig( "max_items" );
+$itemsperpage = !empty($itemsperpage)?$itemsperpage:3;
+
+$auto_play_mode = $this->getConfig( "auto_play" );
+if ($auto_play_mode) {
+	$auto_play = 'true';
+} else{
+	$auto_play = 'false';
+}
+
+$interval  = (int)$this->getConfig( "interval" );
+//echo $interval;
+$interval = !empty($interval)?$interval:3000;
+
+$show_image = $this->getConfig( "latest_show_image", "module_setting", 1);
+$image_mode = $this->getConfig( 'latest_image_size');
+$sizes = Mage::helper("ves_blog")->getImageSizeModes();
+$key = "small_imagesize";
+$size = "s";
+foreach( $sizes as $k => $v ){
+	if($v == $image_mode) {
+		$key = $k;
+		$size = $v;
+		break;
+	}
+}
+
+$c = $this->getGeneralConfig($key, "");
+$tmp = explode( "x", $c );
+
+
+$thumb_width = $thumb_height = "";
+if( count($tmp) > 0 && (int)$tmp[0] ){
+	$thumb_width = (int)$tmp[0];
+	$thumb_height = (int)$tmp[1];
+}
+
+if($custom_width = $this->getConfig("custom_image_width",  "module_setting", "")) {
+	$thumb_width = (int)$custom_width;
+}
+
+if($custom_height = $this->getConfig("custom_image_height",  "module_setting", "")) {
+	$thumb_height = (int)$custom_height;
+}
+$modid = rand().time();
+?>
+<div class="block venus-latest-block owl-latest-blog" id="module<?php echo $moduleId; ?>">
+	<?php if( $this->getConfig("latestmod_title") ) : ?>
+		<div class="block-title">
+			<strong> <span><?php echo $this->getConfig( "latestmod_title" ); ?> </span> </strong>
+			<?php if( $this->getConfig("latestmod_desc") ) :?>
+				<div class="block-description">
+					<p><?php echo $this->getConfig("latestmod_desc"); ?></p>
+				</div>
+			<?php endif; ?>
+		</div>
+	<?php endif; ?>
+
+	<div class="block-content">
+		<div class="box-vesblog owl-carousel" id="vesblogowlcarousel<?php echo $moduleId;?>">
+			<?php $i = 0;?>
+			<?php foreach( $posts as $post ): $i++?>
+				<div class="item <?php if(($i-1) % $cols == 0){echo "first";}  if($i%$cols == 0){echo "last";} ?>">
+					<div class="post-block">
+						<?php
+						$image = "";
+						if($thumb_width && $thumb_height) {
+							$image = Mage::helper('ves_blog')->resizeImage($post->getFile(), "custom-s", $thumb_width, $thumb_height);
+						} else {
+							$image = $post->getImageURL( "s" );
+						}
+						if($image && $show_image){
+							?>
+							<div class="post-images">
+								<?php if($post->getTypeVideo() == 'youtube' ||  $post->getTypeVideo() == 'vimeo'){ ?>
+
+								<div id="videowrapp<?php echo $modid; ?>" class="lazyOwl video-widget-bg" onclick="playVideo<?php echo $modid; ?>()" style="height: <?php echo $thumb_height.'px' ?>; width: <?php echo $thumb_width.'px' ?>; background: black url('<?php echo $image ?>') no-repeat center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; overflow: hidden; cursor: pointer;"></div>
+
+
+								<script type="text/javascript">
+												// <![CDATA[
+												function playVideo<?php echo $modid; ?>(){
+													<?php if('vimeo' == $post->getTypeVideo()){ ?>
+														document.getElementById('videowrapp<?php echo $modid; ?>').innerHTML = '<iframe src="//player.vimeo.com/video/<?php echo $post->getVideoId(); ?>" width="<?php echo $thumb_width ?>" height="<?php echo $thumb_height ?>" style="border:0px solid" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen"></iframe>';
+														<?php }elseif('youtube' == $post->getTypeVideo() ){ ?>
+															document.getElementById('videowrapp<?php echo $modid; ?>').innerHTML = '<iframe width="<?php echo $thumb_width ?>" height="<?php echo $thumb_height ?>" src="http://www.youtube.com/embed/<?php echo $post->getVideoId(); ?>?autoplay=1&#038;showinfo=0" frameborder="0"></iframe>';
+															<?php } ?>
+														}
+
+														document.getElementById("videowrapp<?php echo $modid; ?>").addEventListener("click", playVideo<?php echo $modid; ?>);
+														// ]]>
+													</script>
+
+													<?php }else{ ?>
+													<a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>">
+														<img src="<?php echo $image;?>" class="lazyOwl post-image" alt="<?php echo $post->getTitle();?>"/>
+													</a>
+													<?php } ?>
+
+													<?php if($this->getConfig("latest_showcreated")) { ?>
+													<div class="created-date">
+														<?php 
+														$post_date = $post->getCreated();
+														$post_date = Mage::getModel('core/date')->date('d.m.Y', strtotime($post_date));
+														$_ct= new Zend_Date( $post_date);
+														?>
+														<span class="day"><?php echo $_ct->toString('dd');?></span>
+														<span class="month"><?php echo $_ct->toString('MMM, ');?></span>
+														<span class="year"><?php echo $_ct->toString('YYY');?></span>
+													</div>
+													<?php } ?>
+												</div>
+												<?php } ?>
+
+												<?php if($this->getConfig("latest_showtitle", "module_setting", 1)): ?>
+												<h4><a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>"><?php echo $post->getTitle(); ?></a></h4>
+												<?php endif; ?>
+
+												<?php if($this->getConfig("latest_showdescription", "module_setting", 1)): ?>
+												<div class="latest-description">
+													<?php
+													$max_chars = $this->getConfig("latest_maxdesc", "module_setting", 70);
+													$latest_stripdescription = $this->getConfig("latest_stripdescription", "module_setting", 0);
+
+													$description  = $post->getDescription();
+													if($latest_stripdescription) {
+														$description  = strip_tags($description);
+													}
+													if (strlen($description) > (int)$max_chars) :
+														echo substr($description,0, (int)$max_chars).'...';
+													else :
+														echo $description;
+													endif;
+													?>
+												</div>
+												<?php endif; ?>
+
+												<div class="blog-meta">
+													<?php if( $this->getConfig("latest_show_commentcouter") || $this->getConfig("latest_showcreated") || $this->getConfig("latest_show_hits")) :?>
+
+														<?php if($this->getConfig("latest_show_hits")) { ?>
+														<div class="blog-hits"><span><?php echo $this->__("Read");?></span> <strong><?php echo $post->getHits(); ?></strong> <?php echo $this->__("Times"); ?></div>
+														<?php } ?>
+
+														<?php if($this->getConfig("latest_show_commentcouter")) { ?>
+														<div class="blog-comment-count"><i class="fa fa-comments-o"></i> <?php  echo $this->__("Comment");?> <?php echo $this->getCountingComment($post->getId());?></div>
+														<?php } ?>
+													<?php endif; ?>
+												</div>
+
+												<span class="author hidden">
+													<i class="fa fa-pencil"></i>
+													<span><?php echo $this->__( "Writen By:" );?></span><a href="<?php echo $post->getAuthorURL();?>" title="<?php echo $post->getAuthor(); ?>">
+													<?php echo $post->getAuthor(); ?>
+												</a>
+											</span>
+
+											<?php if($this->getConfig("latest_showreadmore", "module_setting", 1)): ?>
+											<p class="blog-readmore">
+												<a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>">
+													<span><?php echo $this->__("Read more >");?></span>
+												</a>
+											</p>
+											<?php endif; ?>
+
+										</div>
+
+									</div>
+								<?php endforeach; ?>
+							</div>
+						</div>
+					</div>
+					<script type="text/javascript">
+						jQuery(window).load(function() {
+							var owl = jQuery('#vesblogowlcarousel<?php echo $moduleId;?>');
+							owl.owlCarousel({
+								autoPlay: <?php echo $auto_play_mode?'true':'false';?>,
+								slideSpeed: <?php echo $interval?(int)$interval:'500';?>,
+								autoplayHoverPause: true,
+								lazyLoad: false,
+								navigationText: ["<span class='fa fa-angle-left'></span>","<span class='fa fa-angle-right'></span>"],
+								slideBy: 1,
+								loop: true,
+								margin: 0,
+								navigation: <?php echo (1 == $this->getConfig("enable_blognavmodule"))?'true':'false'; ?>,
+								rtl: false,
+								mouseDrag: true,
+								touchDrag: true,
+								autoWidth: false,
+								responsive: true,
+								items: <?php echo $cols?(int)$cols:1; ?>,
+					            itemsDesktop : [1199,<?php echo $cols?(int)$cols:1; ?>], //4 items between 1199px and 980px
+					            itemsDesktopSmall : [979,<?php echo $portrait_items?(int)$portrait_items:3; ?>], //3 items betweem 979px and 769px
+					            itemsTablet: [768, <?php echo $tablet_items?(int)$tablet_items:2; ?>], //2 items between 768px and 641px
+					            itemsTabletSmall : [640, <?php echo $tablet_small_items?(int)$tablet_small_items:2; ?>], //2 items between 641px and 480px
+					            itemsMobile : [479, <?php echo $mobile_items?(int)$mobile_items:1; ?>] // itemsMobile disabled - inherit from itemsTablet option
+					        });
+});
+</script>

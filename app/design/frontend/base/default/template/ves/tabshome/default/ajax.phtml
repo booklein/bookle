@@ -1,0 +1,263 @@
+<?php
+/*Start copy at here*/
+/*framework: get current theme setting*/
+$list_image_width = (int)$this->getConfig("image_width", 300);
+$list_image_height = (int)$this->getConfig("image_height", 300);
+$swap_image_number = (int)$this->getConfig("swap_image_number", 0);
+
+$popup_quickview_width = $this->getConfig("popup_quickview_width", "60%");
+$popup_quickview_height = $this->getConfig("popup_quickview_height", "80%");
+
+$enable_pzoom = $this->getConfig("show_pzoom");
+$enable_new_icon = $this->getConfig("enable_new_icon");
+$enable_sale_icon = $this->getConfig("enable_sale_icon");
+$show_title = $this->getConfig('show_title', 1);
+$enable_short_desc = $this->getConfig('show_des');
+$show_review = $this->getConfig('review', 1);
+$show_price = $this->getConfig('show_price');
+$show_addcart = $this->getConfig("show_btn");
+$show_compare_wishlist = $this->getConfig("enable_wc") ;
+$quickview = $this->getConfig("enable_quickview");
+$swap_image = $this->getConfig("enable_swap");
+
+$moduleId = rand().time();
+$itemsperpage = (int)$this->getConfig("itemspage",4);
+$auto_play_mode = (int)$this->getConfig("auto_play");
+
+$title_maxchar = (int)$this->getConfig("title_maxchar", 100);
+$title_maxchar = $title_maxchar > 0 ?$title_maxchar: 100;
+$desc_maxchar = (int)$this->getConfig("desc_maxchar");
+$desc_maxchar = $desc_maxchar > 0 ?$desc_maxchar: 100;
+$interval = (int)$this->getConfig("interval");
+
+$auto_play = $auto_play_mode?"true":"false";
+$cols = (int)$this->getConfig("itemsrow",4);
+$cols = !empty($cols)?$cols:1;
+$span = floor(12/$cols);
+$active = 'news';
+
+/*end copy at here*/
+
+if(!isset($tabs)) {
+	$tabs = array( "news"		=> $this->__('New Arrival'),
+		"featured"	=> $this->__("Featured"),
+		"specical"	=> $this->__("Special"),
+		"bestseller"	=> $this->__("Best Seller"),
+		"mostview"	=> $this->__("Most Viewed"),
+		"related"	=> $this->__("Related Products"),
+		"upsell"		=> $this->__("Upsell Products")
+		);
+}
+$current = 0;
+$modid = rand(1,9)+rand();
+$is_related = false;
+$price_prefix = "_vestabshome_".$modid;
+
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+
+<div class="<?php echo $this->getConfig('prefix');?> box producttabs tabshome ajaxtabs" id="tabshome<?php echo $modid ?>">
+	<?php if($this->getConfig('title')) { ?>
+	<div class="block-heading">
+		<h2><?php echo $this->getConfig('title') ?></h2>
+		<?php if( ($pretext=$this->getConfig("pretext")) && !$cms ) { ?>
+		<div class="pretext"><?php echo $pretext; ?></div>
+		<?php } else {
+			?>
+			<div class="pretext"><?php echo $cms; ?></div>
+			<?php
+		} ?>
+	</div>
+	<?php } ?>
+	<div class="tab-nav">
+		<ul class="nav nav-tabs nav-theme" id="producttabs<?php echo $modid;?>">
+			<?php $x = 0; foreach( $tabs as $key => $value ) { ?>
+			<li class="tab-<?php echo $key;?>"><a href="#tab-<?php echo $key.$modid;?>" data-toggle="tab" data-source="<?php echo $key; ?>" <?php if($x!=0){ ?>class="btn-tab" <?php } $x++; ?> data-page="1"><span><?php echo $value; ?></span></a></li>
+			<?php } ?>
+		</ul>
+	</div>
+
+	<div class="tab-content">
+		<?php 
+		$tab_first = '';
+		$c = 0;
+
+		foreach( $tabs as $tab => $text ) {
+			if( $c == 0 ){ $tab_first = $tab; } $c++;
+			?>
+			<div class="tab-pane box-products slide products-grid no-margin" id="tab-<?php echo $tab.$modid;?>" style="min-height:300px;">
+			</div>
+			<?php } ?>
+
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		jQuery(function () {
+			jQuery('#producttabs<?php echo $modid;?> a:first').tab('show');
+		})
+	</script>
+		
+	<script type="text/javascript">
+
+		var curentModuleId = 0;
+		var status<?php echo $moduleId; ?> = 1;
+
+		function ajaxGetMoreProducts<?php echo $modid ?>(source_type, page, moduleid){
+			var url = "<?php echo Mage::getUrl('tabshome/index/ajax'); ?>";
+			var dataAjax = {source_type: source_type,
+				page: page,
+				moduleid: moduleid,
+				wg: "<?php echo isset($attributes)?$attributes:''; ?>",
+				<?php  if($_product = Mage::registry('current_product')){
+					echo 'product_id: '.$_product->getId().',';
+				} ?>
+			};
+			jQuery.ajax({
+				url: url,
+				dataType: 'json',
+				type: 'post',
+				data: dataAjax,
+				success: function(data_response){
+					status<?php echo $moduleId; ?> = 1;
+					jQuery('.tab-content #'+data_response.moduleId).find('script').remove();
+
+					if(typeof(data_response.row)!='undefined'){
+						jQuery('.tab-content #'+data_response.moduleId+' .products-row:last').append(data_response.row);
+					}
+
+					if(typeof(data_response.rows)!='undefined'){
+						jQuery('.tab-content #'+data_response.moduleId).append(data_response.rows);
+
+					}
+					jQuery('#'+data_response.moduleId+' .load-more').remove();
+
+					if(typeof(data_response.hasNextData)!=='undefined'){
+						var next_data_html = "";
+						var next_page = parseInt(page) + 1;
+						if(data_response.hasNextData == 1) {
+							next_data_html = '<div class="load-more hasClick"><a class="btn button btn-cart button-load-more" data-source="'+source_type+'" data-page="'+next_page+'" href="#'+moduleid+'"><?php echo $this->__('Load More');?></a></div>';
+						} else {
+							next_data_html = '<div class="load-more"><a href="javascript:void(0);" class="btn button btn-cart button-load-more"><?php echo $this->__('All Ready');?></a></div>';
+						}
+						jQuery('.tab-content #'+data_response.moduleId).append(next_data_html);
+					}
+				}
+			});
+}
+
+function ajaxGetProductsTabshome<?php echo $modid ?>(source_type, page, moduleid){
+
+	var url = "<?php echo Mage::getUrl('tabshome/index/ajax'); ?>";
+	var milliseconds = new Date().getTime();
+	var dataAjax = {source_type: source_type,
+		page: page,
+		itemspage: <?php echo $this->getConfig('itemspage',6); ?>,
+		limit_item: <?php echo $this->getConfig('limit_item',12); ?>,
+		moduleid: moduleid,
+		wg: "<?php echo isset($attributes)?$attributes:''; ?>",
+		<?php  if($_product = Mage::registry('current_product')){
+			echo 'product_id: '.$_product->getId().',';
+		} ?>
+	};
+
+	jQuery.ajax({
+		url: url,
+		dataType: 'json', 
+		type : 'post',
+		data : dataAjax,
+		cache: true,
+		beforeSend: function (){ jQuery('.tabshome .tab-content #'+moduleid).addClass('wait'); },
+		success: function (data_response) {
+			jQuery('.tabshome .tab-content #'+data_response.moduleId).removeClass('wait');
+			jQuery('.tabshome .tab-content #'+data_response.moduleId).append(data_response.rows);
+
+			if(typeof(data_response.hasNextData)!=='undefined'){
+				var next_data_html = "";
+				var next_page = parseInt(page) + 1;
+				if(data_response.hasNextData == 1) {
+					next_data_html = '<div class="load-more hasClick"><a class="btn button btn-cart button-load-more" data-source="'+source_type+'" data-page="'+next_page+'" href="#'+moduleid+'"><?php echo $this->__('Load More');?></a></div>';
+				} else {
+					next_data_html = '<div class="load-more"><a class="btn button  btn-cart button-load-more"><?php echo $this->__('All Ready');?> </a></div>';
+				}
+				jQuery('.tab-content #'+data_response.moduleId).append(next_data_html);
+			} 
+		}
+	});
+}
+
+jQuery(document).ready(function() {
+
+	ajaxGetProductsTabshome<?php echo $modid ?>("<?php echo $tab_first; ?>",1,jQuery('#tabshome<?php echo $modid ?> .tab-nav li:first a').attr("href").replace("#", ""));
+	jQuery(document).on('click','#tabshome<?php echo $modid ?> .load-more.hasClick a',function(){
+		if(status<?php echo $moduleId; ?> == 0){
+			return false;
+		}
+		status<?php echo $moduleId; ?> = 0;
+		var dataSource = jQuery(this).attr('data-source');
+		var page = jQuery(this).attr('data-page');
+		var moduleid = jQuery(this).attr("href").replace("#", "");
+		if(dataSource != "" || dataSource != null) {
+			jQuery(this).addClass('loading-more');
+			ajaxGetMoreProducts<?php echo $modid ?>(dataSource, page, moduleid, <?php echo $modid ?>);
+		}
+		return false;
+	});
+
+	jQuery(document).on('click','#tabshome<?php echo $modid ?> .nav-tabs .btn-tab',function(){
+		var $this = jQuery(this);
+		var page = $this.attr("data-page");	
+		var source_type = $this.attr("data-source");
+		var moduleid = $this.attr("href").replace("#", "");
+		if(source_type != "" || source_type != null) {
+			jQuery(this).removeAttr('class');
+			ajaxGetProductsTabshome<?php echo $modid ?>(source_type, page, moduleid);
+		}
+	});
+});
+</script>
+
+
+<?php
+if($is_related) {
+	?>
+	<script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+	<script type="text/javascript">
+		$$('.related-checkbox').each(function(elem){
+
+			Event.observe(elem, 'click', addRelatedToProduct)
+		});
+
+		var relatedProductsCheckFlag = false;
+		function selectAllRelated(txt){
+
+			if (relatedProductsCheckFlag == false) {
+				$$('.related-checkbox').each(function(elem){
+					elem.checked = true;
+				});
+				relatedProductsCheckFlag = true;
+				txt.innerHTML="<?php echo $this->__('unselect all') ?>";
+			} else {
+				$$('.related-checkbox').each(function(elem){
+					elem.checked = false;
+				});
+				relatedProductsCheckFlag = false;
+				txt.innerHTML="<?php echo $this->__('select all') ?>";
+			}
+			addRelatedToProduct();
+		}
+
+		function addRelatedToProduct(){
+			var checkboxes = $$('.related-checkbox');
+			var values = [];
+			for(var i=0;i<checkboxes.length;i++){
+				if(checkboxes[i].checked) values.push(checkboxes[i].value);
+			}
+			if($('related-products-field')){
+				$('related-products-field').value = values.join(',');
+			}
+		}
+	</script>
+	<?php
+}
+?>

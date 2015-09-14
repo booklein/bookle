@@ -1,0 +1,67 @@
+<?xml version="1.0"?> 
+<config>
+    <menu>
+            <vesextensions module="ves_autosearch">
+                <title>VenusTheme</title>
+                <sort_order>51</sort_order>
+                <children>
+                    <autosearch translate="title" module="ves_autosearch">
+                        <title>Ves Auto Search</title>
+                        <children>
+                             
+                            <configuration translate="title" module="ves_autosearch">
+                                <title>Configuration</title>
+                                <sort_order>2</sort_order>
+                                <action>adminhtml/system_config/edit/section/ves_autosearch</action>
+                            </configuration>
+                        </children>
+                    </autosearch>
+                </children>
+            </vesextensions>
+        </menu>
+		<acl>
+            <resources>
+                <admin>
+                    <children>
+                        <vesextensions module="ves_autosearch">
+                            <title>VenusTheme</title>
+                            <sort_order>51</sort_order>
+                            <children>
+                                <autosearch translate="title" module="ves_autosearch">
+                                    <title>Ves Auto Search</title>
+                                    <children>
+                                         
+                                        <configuration translate="title" module="ves_autosearch">
+                                            <title>Configuration</title>
+                                            <sort_order>2</sort_order>
+                                            <action>adminhtml/system_config/edit/section/ves_autosearch</action>
+                                        </configuration>
+                                    </children>
+                                </autosearch>
+                            </children>
+                        </vesextensions>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ves_autosearch>
+                                            <title>Ves Auto Search</title>
+                                        </ves_autosearch>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <translate>
+			<modules>
+				<Ves_Autosearch>
+					<files>
+						<default>Ves_Autosearch.csv</default>
+					</files>
+				</Ves_Autosearch>
+			</modules>
+		</translate>
+</config>

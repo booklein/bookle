@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <ves translate="label" module="ves_autosearch">
+            <label>Venus Theme</label>
+            <sort_order>211</sort_order>
+        </ves>
+    </tabs>
+	<sections>
+        <ves_autosearch>
+            <label>Ves Auto Search</label>
+            <tab>ves</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+				<ves_autosearch translate="label">
+                    <label>General Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<show translate="label" module="core">
+							<label>Enabled</label>
+							<sort_order>10</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_autosearch/system_config_backend_autosearch</backend_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show>
+
+                        <prefix translate="label">
+                            <label>Prefix Class</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>ves_autosearch/system_config_backend_autosearch</backend_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </prefix>
+
+                        <show_filter_category>
+                            <label>Show Filter Category</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_filter_category>
+
+                        <show_image>
+                            <label>Show Product Image</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_autosearch/system_config_backend_autosearch</backend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_image>
+
+						<thumbHeight translate="label">
+                            <label>Thumbnail Height</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>ves_autosearch/system_config_backend_autosearch</backend_model>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </thumbHeight>
+
+						<thumbWidth translate="label">
+                            <label>Thumbnail Width</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>ves_autosearch/system_config_backend_autosearch</backend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </thumbWidth>
+
+						<show_price>
+							<label>Show Price</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_autosearch/system_config_backend_autosearch</backend_model>
+                            <sort_order>58</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</show_price>
+						
+                        <limit translate="label">
+                            <label>Limit Results</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>ves_autosearch/system_config_backend_autosearch</backend_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </limit>
+
+					</fields>
+				</ves_autosearch>
+				
+                <!-- Information -->
+                <enable_search_terms>
+                    <label>Enable Keyword Terms</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>6000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields> 
+                        <enable_search_term translate="label" module="core">
+                            <label>Enabled</label>
+                            <sort_order>10</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_autosearch/system_config_backend_autosearch</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_search_term> 
+                        <limit translate="label">
+                            <label>Limit Terms</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>ves_autosearch/system_config_backend_autosearch</backend_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </limit>                       
+                    </fields>
+                </enable_search_terms>   
+				<!-- Information -->
+				<advanded_parameter>
+					<label>Information - Support</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>6001</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields> 
+						<module_information translate="label">
+							<label>Set Module Visable On Pages, Position</label>
+							<frontend_type>label</frontend_type>
+							<frontend_model>ves_autosearch/system_config_form_field_information</frontend_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</module_information>                        
+					</fields>
+				</advanded_parameter>	
+            </groups>
+        </ves_autosearch>
+    </sections>    
+</config>

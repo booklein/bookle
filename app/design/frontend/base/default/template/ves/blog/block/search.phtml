@@ -1,0 +1,42 @@
+<?php
+/**
+ * Venustheme
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Venustheme EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.venustheme.com/LICENSE-1.0.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.venustheme.com/ for more information
+ *
+ * @category   Ves
+ * @package    Ves_Blog
+ * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+
+/**
+ * Ves Blog Extension
+ *
+ * @category   Ves
+ * @package    Ves_Blog
+ * @author     Venustheme Dev Team <venustheme@gmail.com>
+ */
+?>
+<div id="ves_blog_search_block" class="block column_block">
+	<div class="block-title"><strong><span><?php echo $this->__("Blog search"); ?></span></strong></div>
+	<form method="get" action="<?php echo $this->getFormAction();?>" id="ves_block_searchbox">
+		<div class="block-content clearfix">
+			<input type="hidden" name="orderby" value="position">
+			<input type="hidden" name="orderway" value="desc">
+			<input class="search_query form-control" type="text" id="ves_search_query_block" name="search_query" value="<?php echo $keyword; ?>" placeholder="<?php echo $this->__('Search'); ?>">
+			<button type="submit" id="ves_search_button" class="btn btn-default"><?php echo $this->__('Search');?></button>
+		</div>
+	</form>
+</div>

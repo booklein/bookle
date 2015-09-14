@@ -1,0 +1,40 @@
+.pavcarousel{
+	margin:0 40px;
+}
+.pavcarousel .carousel-control{
+	top: 50%;
+	margin: -10px 0;	
+	background: transparent;
+}
+.pavcarousel .carousel-control.left{
+	left: -40px;
+}
+.pavcarousel .carousel-control.right{
+	right: -40px;
+}
+
+.ves-brandlist-page .brand-logo {
+    float: none;
+    margin-bottom: 5px;
+    min-height: 80px;
+    display: block;
+}
+
+.ves-brandlist-page .brand-title {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.ves-brandlist-page li,.ves-brandlist-page .brand-item{
+    min-height: 130px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #DDDDDD;
+    padding: 8px;
+    margin: 5px;
+}
+
+.ves-brandlist-page .layout-grid li, .ves-brandlist-page .layout-grid .brand-item{
+	float: left;
+}
+.ves-brandlist-page .pager .pages {display: block; margin-left: 10px	;}

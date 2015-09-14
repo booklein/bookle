@@ -1,0 +1,508 @@
+<?php 
+/******************************************************
+ * @package Ves Magento Theme Framework for Magento 1.9.x
+ * @version 2.0
+ * @author http://www.Venustheme.com
+ * @copyright	Copyright (C) October 2013 Venustheme.com <@emai:venustheme@gmail.com>.All rights reserved.
+ * @license		GNU General Public License version 2
+*******************************************************/
+
+$helper = Mage::helper("ves_tempcp/framework")->getFramework( );
+$themeConfig = $helper->getConfig();
+
+$themeName =  Mage::getDesign()->getTheme('frontend');
+ 
+$patterns =  $themeConfig->getPattern( );
+
+$header_layouts = $themeConfig->get("header_layouts", array());
+
+/*Footer Profiles*/
+$footer_profiles = null;
+if(Mage::helper("ves_tempcp/exportSample")->checkModuleInstalled("Ves_BlockBuilder")) {
+    $collection = Mage::getModel("ves_blockbuilder/block")->getCollection();
+    $collection = $collection->addFooterFilter();
+
+    if(0 < $collection->count() ) {
+        $footer_profiles = $collection;
+    }
+}
+
+$backgroundImageURL = $helper->getThemeURL().'/images/pattern/';
+$backgroundImageURL_default = $helper->getThemeDefaultURL().'/images/pattern/';
+$directories = glob( $helper->getThemeSassDir() . 'skins/*' );
+$directories_default = glob( $helper->getThemeDefaultSassDir() . 'skins/*' );
+
+$directions = array("ltr" => "Left To Right",
+ 						"rtl" => "Right To Left");
+
+$border_styles = array("hidden", "dotted", "dashed", "solid", "double", "double", "groove", "ridge", "inset", "outset", "initial", "inherit");
+
+$skins = array();
+foreach( $directories_default as $skin) {
+	$skin = basename($skin) ; 
+	$skins[$skin] = str_replace(".scss", "", $skin);
+}
+foreach( $directories as $skin) {
+	$skin = basename($skin) ;
+	if(!isset($skins[$skin]) && $skin) {
+		$skins[$skin] = str_replace(".scss", "", $skin);
+	}
+	
+}
+
+$layouts = array( 'fullwidth' => 'Full Width', 'boxed-lg' => 'Boxed Desktop Large', 'boxed-md'=>'Boxed Desktop Mediumn' );
+
+$allow_save_editor = Mage::getStoreConfig("ves_tempcp/ves_tempcp/allow_save_editor");;
+ 
+?>
+
+<script type="text/javascript">
+jQuery(document).ready( function (){
+	jQuery(".paneltool .panelbutton").click( function(){	
+		jQuery(this).parent().toggleClass("active");
+	} );
+} );
+
+</script>
+
+<div id="ves-paneltool" class="hidden-md hidden-sm hidden-xs">
+	<div class="paneltool themetool">
+		<div class="panelbutton">
+			<i class="glyphicon glyphicon-cog"></i>
+		</div>
+		<div class="panelcontent ">
+			<div class="panelinner">
+				<h4><?php echo Mage::helper("ves_tempcp")->__("Panel Tool");?></h4>
+				<form action="<?php echo Mage::getBaseUrl(); ?>" enctype="multipart/form-data" method="post" class="clearfix" id="paneltool_form">
+					<?php if(isset($store_switcher)): ?>
+					<div class="group-input">
+						<?php echo $store_switcher; ?>
+					</div>
+					<?php endif; ?>
+					<p class="group-input">
+						<label>Theme Skins</label>
+						<select name="userparams[skin]">
+							<option value=""><?php echo Mage::helper("ves_tempcp")->__('default');?></option>
+							<?php foreach( $skins as $skin ) { ?>
+							<option value="<?php echo ($skin);?>" <?php if( $helper->getParam('skin') == $skin ) { ?> selected="selected" <?php } ?>><?php echo ($skin);?></option>
+							<?php } ?>
+						</select>
+					</p>
+					<p class="group-input">
+						<label>Direction</label>
+						<select name="userparams[direction]">
+							<?php foreach( $directions as $k=>$direction ) {  $direction = basename($direction) ; ?>
+							<option value="<?php echo ($k);?>" <?php if( $helper->getParam('direction') == $k ) { ?> selected="selected" <?php } ?>><?php echo ($direction);?></option>
+							<?php } ?>
+						</select>
+					</p>
+					<p class="group-input">
+						<label>Layout</label>
+						<select name="userparams[layout]">
+							<?php foreach( $layouts as $k=>$layout ) {  $layout = basename($layout) ; ?>
+							<option value="<?php echo ($k);?>" <?php if( $helper->getParam('layout') == $k ) { ?> selected="selected" <?php } ?>><?php echo ($layout);?></option>
+							<?php } ?>
+						</select>
+					</p>
+					<?php if($header_layouts) { ?>
+					<p class="group-input">
+						<label>Header Layout</label>
+						<select name="userparams[header_layout]">
+							<?php foreach( $header_layouts as $k=>$layout ) {  $layout = basename($layout) ; ?>
+							<option value="<?php echo ($k);?>" <?php if( $helper->getParam('header_layout') == $k ) { ?> selected="selected" <?php } ?>><?php echo ($layout);?></option>
+							<?php } ?>
+						</select>
+					</p>
+					<?php } ?>
+					<?php if($footer_profiles) : ?>
+					<p class="group-input" style="clear:both;">Footer Layout</p>
+					<p class="group-input">
+						<label>Footer Top Layout</label>
+						<select name="userparams[footertop_profile]">
+							<option value=""><?php echo Mage::helper('ves_tempcp')->__('- Select A Profile -'); ?></option>
+							<?php
+	                            foreach($footer_profiles as $item){
+	                                if($item->getId() == $helper->getParam("footertop_profile", "")){
+	                                    ?>
+	                                    <option value="<?php echo $item->getId(); ?>" selected="selected"><?php echo $item->getTitle(); ?></option>
+	                                    <?php
+	                                }else{
+	                                    ?>
+	                                    <option value="<?php echo $item->getId(); ?>"><?php echo $item->getTitle(); ?></option>
+	                                    <?php
+	                                }
+	                            }
+	                        ?>
+						</select>
+					</p>
+					<p class="group-input">
+						<label>Footer Center Layout</label>
+						<select name="userparams[footercenter_profile]">
+							<option value=""><?php echo Mage::helper('ves_tempcp')->__('- Select A Profile -'); ?></option>
+							<?php
+	                            foreach($footer_profiles as $item){
+	                                if($item->getId() == $helper->getParam("footercenter_profile", "")){
+	                                    ?>
+	                                    <option value="<?php echo $item->getId(); ?>" selected="selected"><?php echo $item->getTitle(); ?></option>
+	                                    <?php
+	                                }else{
+	                                    ?>
+	                                    <option value="<?php echo $item->getId(); ?>"><?php echo $item->getTitle(); ?></option>
+	                                    <?php
+	                                }
+	                            }
+	                        ?>
+						</select>
+					</p>
+					<p class="group-input">
+						<label>Footer Bottom Layout</label>
+						<select name="userparams[footer_profile]">
+							<option value=""><?php echo Mage::helper('ves_tempcp')->__('- Select A Profile -'); ?></option>
+							<?php
+	                            foreach($footer_profiles as $item){
+	                                if($item->getId() == $helper->getParam("footer_profile", "")){
+	                                    ?>
+	                                    <option value="<?php echo $item->getId(); ?>" selected="selected"><?php echo $item->getTitle(); ?></option>
+	                                    <?php
+	                                }else{
+	                                    ?>
+	                                    <option value="<?php echo $item->getId(); ?>"><?php echo $item->getTitle(); ?></option>
+	                                    <?php
+	                                }
+	                            }
+	                        ?>
+						</select>
+					</p>	
+					<?php endif; ?>
+					<p style="clear:both">
+						<input type="hidden" value="0" id="vesreset" name="vesreset"/>
+						<button value="Apply" class="btn btn-small" name="btn-save" type="submit">Apply</button>
+						<a class="btn btn-small" href="javascript:;" onclick="jQuery('#vesreset').val(1);jQuery('#paneltool_form').submit() "><span>Reset</span></a>
+					</p>
+				</form>
+			</div>	
+		</div>
+	</div>
+	
+	<div class="paneltool editortool">
+		<div class="panelbutton">
+			<i class="glyphicon glyphicon-adjust"></i>
+		</div>
+
+		<div class="panelcontent editortool">
+			<div class="panelinner">
+				<form action="<?php echo Mage::helper("ves_tempcp")->getLiveEditLink( $themeConfig->get("theme_id")); ?>" enctype="multipart/form-data" method="post" class="clearfix" id="paneltool_livecss_form">
+					<h4><?php echo Mage::helper('ves_tempcp')->__( 'Live Theme Editor' ); ?></h4>					
+					<?php $xmlselectors = $helper->renderEdtiorThemeForm( $themeName );?>
+					<?php if(Mage::helper("ves_tempcp")->isAdminLogged() || $allow_save_editor): ?>
+						<?php
+					 	$themeCustomizePath = $helper->getThemeDir().'/css/customize/';
+
+					 	$files = Mage::helper("ves_tempcp")->getFileList( $themeCustomizePath , '.css' );
+						?>
+						<p>
+							<span class="badge"><?php echo Mage::helper("ves_tempcp")->__("Theme: ");?>: <?php echo $themeName; ?></span>   
+							<a  href="<?php echo Mage::helper("ves_tempcp")->getBackLink($themeConfig->get('theme_id'));?>" class="label label-default pull-right"><?php echo Mage::helper("ves_tempcp")->__("Back");?></a> 
+						</p>	 	
+
+						<div class="buttons-group">
+							<input type="hidden" name="action-mode" id="action-mode" >
+							<input type="hidden" name="liveeditor" value="1">
+							<a href="#" class="btn btn-primary btn-xs" onclick="jQuery('#action-mode').val('save-edit');jQuery('#paneltool_livecss_form').submit();"><?php echo Mage::helper("ves_tempcp")->__('Save Profile');?></a>
+							<a href="#" class="btn btn-danger btn-xs" onclick="jQuery('#action-mode').val('save-delete');jQuery('#paneltool_livecss_form').submit();"><?php echo Mage::helper("ves_tempcp")->__('Delete');?></a>
+						</div>
+
+						<div class="groups form-fluid" style="width: 100%">
+							<div class="form-group pull-left" style="width:45%">
+								<label><?php echo Mage::helper("ves_tempcp")->__('Css Profiles: '); ?></label>	
+								<select name="saved_file" id="saved-files">
+									<option value=""> ------------- </option>
+									<?php foreach( $files as $file ){ $file = str_replace( ".css","", $file); ?>
+										<option value="<?php echo $file;?>"><?php echo $file; ?></option>
+									<?php } ?>
+								</select> 
+							</div>
+
+							<div class="form-group pull-left" style="width:45%">
+								<label class="show-for-notexisted"><?php echo Mage::helper("ves_tempcp")->__('And Named This:'); ?></label>
+								<label class="show-for-existed"><?php echo Mage::helper("ves_tempcp")->__('Rename This'); ?></label>
+								<input type="text" name="newfile" />
+								
+							</div>	
+					    </div>
+					<?php endif; ?>
+
+				    <div class="clearfix" id="customize-body">
+						<ul class="nav nav-tabs" id="myTab">
+							<?php foreach( $xmlselectors as $for => $output ) { ?>
+							<li><a href="#tab-<?php echo $for ?>"><?php echo Mage::helper('ves_tempcp')->__( "Layout ".ucfirst($for) );?></a></li>		
+							<?php } ?>
+						</ul>
+
+						<div class="tab-content" > 
+						<?php foreach( $xmlselectors as $for => $output ) { ?>
+							<div class="tab-pane" id="tab-<?php echo $for; ?>">
+								<?php if( !empty( $output) ){?>
+								<div class="accordion">
+								<?php $i=0; foreach ( $output as $group ) { ?>
+								    <div class="accordion-group  panel panel-default clearfix">
+										<div class="accordion-heading panel-heading">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#custom-accordion" href="#collapse<?php echo $group['match'];?>">
+												<?php echo $group['header']; ?>	 
+											</a>
+										</div>
+
+										<div id="collapse<?php echo $group['match'];?>" class="accordion-body panel-collapse collapse <?php if( $i++ ==0) { ?> in <?php } ?>">
+											<div class="accordion-inner panel-body clearfix">
+												<?php foreach ($group['selector'] as $item ) {  ?>
+												<?php  if (isset($item['type'])&&$item['type']=="image") { ?>
+												<div class="form-group background-images"> 
+													<label><?php echo $item['label']?></label>
+													<a class="clear-bg label label-success" href="#">Clear</a>
+													<input value="" name="customize[<?php echo $group['match'];?>][]" data-match="<?php echo $group['match'];?>" type="text" class="input-setting" data-selector="<?php echo $item['selector']?>" data-attrs="background-image">
+													<div class="clearfix"></div>
+													<p><em style="font-size:10px">Those Images in folder YOURTHEME/images/patterns/</em></p>
+													<div class="bi-wrapper clearfix">
+														<?php foreach ( $patterns as $pattern ){ ?>
+														<div style="background:url('<?php echo $backgroundImageURL.$pattern;?>') no-repeat center center;" class="pull-left" data-image="<?php echo $backgroundImageURL.$pattern;?>" data-val="../../img/patterns/<?php echo $pattern; ?>"></div>
+														<?php } ?>
+													</div>
+												</div>
+											
+												<?php } elseif( $item['type'] == "fontsize" ) { ?>
+												<div class="form-group">
+													<label><?php echo $item['label']?></label>
+													<select name="customize[<?php echo $group['match'];?>][]" data-match="<?php echo $group['match']?>" class="input-setting" data-selector="<?php echo $item['selector']?>" data-attrs="<?php echo $item['attrs']?>">
+														<option value="">Inherit</option>
+
+
+														<?php for( $fs=9; $fs<=16; $fs++ ) { ?>
+														<option value="<?php echo $fs; ?>"><?php echo $fs; ?></option>
+														<?php } ?>
+													</select>	
+													<a href="#" class="clear-bg label label-success">Clear</a>
+												</div>
+
+										  		<?php } elseif( $item['type'] == "borderstyle" ) { ?>
+				                                   <div class="form-group">
+					                                   <label><?php echo $item['label']?></label>
+					                                  	<select name="customize[<?php echo $group['match'];?>][]" data-match="<?php echo $group['match']?>" class="input-setting" data-selector="<?php echo $item['selector']?>" data-attrs="<?php echo $item['attrs']?>">
+															<option value="">None</option>
+															<?php foreach ( $border_styles as $item ){ ?>
+															<option value="<?php echo $item; ?>"><?php echo $item; ?></option>
+															<?php } ?>
+														</select>	
+														<a href="#" class="clear-bg label label-success">Clear</a>
+				                                    </div>
+
+				                                    <?php } elseif( $item['type'] == "text" ) { ?>
+				                                    <div class="form-group">
+														<label><?php echo $item['label']?></label>
+														<input value="" size="10" name="customize[<?php echo $group['match']?>][]" data-match="<?php echo $group['match']?>" type="text" class="input-setting color-selector" data-selector="<?php echo $item['selector']?>" data-attrs="<?php echo $item['attrs']?>">
+														<a href="#" class="clear-bg label label-success">Clear</a>
+												    </div>
+
+				                                    <?php } elseif( $item['type'] == "raw-text" ) { ?>
+					                                <div class="form-group">
+														<label><?php echo $item['label']?></label>
+														<input value="" size="10" name="customize[<?php echo $group['match']?>][]" data-match="<?php echo $group['match']?>" type="text" style="color:#000" class="input-setting input-text" data-selector="<?php echo $item['selector']?>" data-attrs="<?php echo $item['attrs']?>">
+														<a href="#" class="clear-bg label label-success">Clear</a>
+													</div>
+
+													<?php } else { ?>
+													<div class="form-group">
+														<label><?php echo $item['label']?></label>
+														<input value="" size="10" name="customize[<?php echo $group['match']?>][]" data-match="<?php echo $group['match']?>" type="text" class="input-setting color-selector" data-selector="<?php echo $item['selector']?>" data-attrs="<?php echo $item['attrs']?>">
+														<a href="#" class="clear-bg label label-success">Clear</a>
+													</div>
+													<?php } ?>
+											 	<?php } ?>
+										    </div>
+										</div>
+									</div>          	
+								<?php } ?>
+								</div>
+							<?php } ?>
+						</div>
+					    <?php } /* endforeach  */?>
+						</div>   
+					</div>
+				</form>		    
+			</div>		
+		</div>
+		<div class="panelbutton label-customize"></div>
+	</div>
+</div> 
+<!--
+ <script type="text/javascript">
+	jQuery(function() {
+	    jQuery('#ves-paneltool .panelcontent').perfectScrollbar();
+	});
+</script>
+-->
+<!--
+<script type="text/javascript">
+	jQuery(function() {
+	    jQuery('#pav-customize').perfectScrollbar();
+	});
+</script>
+-->
+<script type="text/javascript">
+jQuery('#myTab a').click(function (e) {
+	e.preventDefault();
+	jQuery(this).tab('show');
+})
+jQuery('#myTab a:first').tab('show'); 
+ 
+
+var $MAINCONTAINER = jQuery("html");
+
+/**
+ * BACKGROUND-IMAGE SELECTION
+ */
+jQuery(".background-images").each( function(){
+	var $parent = this;
+	var $input  = jQuery(".input-setting", $parent ); 
+	jQuery(".bi-wrapper > div",this).click( function(){
+		 $input.val( jQuery(this).data('val') ); 
+		 jQuery('.bi-wrapper > div', $parent).removeClass('active');
+		 jQuery(this).addClass('active');
+
+		 if( $input.data('selector') ){  
+			jQuery($input.data('selector'), jQuery($MAINCONTAINER) ).css( $input.data('attrs'),'url('+ jQuery(this).data('image') +')', 'important' );
+		 }
+	} );
+} ); 
+
+jQuery(".clear-bg").click( function(){
+	var $parent = jQuery(this).parent();
+	var $input  = jQuery(".input-setting", $parent ); 
+	if( $input.val('') ) {
+		if( $parent.hasClass("background-images") ) {
+			jQuery('.bi-wrapper > div',$parent).removeClass('active');	
+			jQuery($input.data('selector'),jQuery("#main-preview iframe").contents()).css( $input.data('attrs'),'none' );
+		}else {
+			$input.attr( 'style','' )	
+		}
+		jQuery($input.data('selector'), jQuery($MAINCONTAINER) ).css( $input.data('attrs'),'inherit' );
+
+	}	
+	$input.val('');
+
+	return false;
+} );
+
+
+ jQuery('.accordion-group input.color-selector').each( function(){
+	 	 var input = this;
+	 	 jQuery(input).attr('readonly','readonly');
+	 	 jQuery(input).ColorPicker({
+	 	 	onChange:function (hsb, hex, rgb) {
+	 	 		jQuery(input).css('backgroundColor', '#' + hex);
+	 	 		jQuery(input).val( hex );
+
+	 	 		if( jQuery(input).data('selector') ){
+	 	 			if("body" == jQuery(input).data('selector') ) {
+	 	 				jQuery($MAINCONTAINER).find(jQuery(input).data('selector')).css( jQuery(input).data('attrs'),"#"+jQuery(input).val())
+	 	 			} else {
+	 	 				jQuery($MAINCONTAINER).contents().find(jQuery(input).data('selector')).css( jQuery(input).data('attrs'),"#"+jQuery(input).val())
+	 	 			}
+					
+				}
+	 	 	}
+	 	 });
+ 	} );
+	jQuery('.accordion-group input.input-text').keyup( function() {
+		var input = this;
+		if( jQuery(input).data('selector') ){   
+			jQuery($MAINCONTAINER).contents().find(jQuery(input).data('selector')).css( jQuery(input).data('attrs'),"#"+jQuery(input).val() )
+		}
+})
+
+ jQuery('.accordion-group select.input-setting').change( function(){
+	var input = this; 
+		if( jQuery(input).data('selector') ){  
+		var ex = jQuery(input).data('attrs')=='font-size'?'px':"";
+		jQuery( $MAINCONTAINER ).find(jQuery(input).data('selector')).css( jQuery(input).data('attrs'), jQuery(input).val() + ex);
+	}
+ } );
+
+<?php if(Mage::helper("ves_tempcp")->isAdminLogged() || $allow_save_editor): ?>
+/**
+ *  FORM SUBMIT
+ */
+ jQuery( "#paneltool_livecss_form" ).submit( function(){ 
+	jQuery('.input-setting').each( function(){
+		if( jQuery(this).data("match") ) {
+			var val = jQuery(this).data('selector')+"|"+jQuery(this).data('attrs');
+			jQuery(this).parent().append('<input type="hidden" name="customize_match['+jQuery(this).data("match")+'][]" value="'+val+'"/>');
+		}	 
+	} );
+	return true; 
+} );
+
+jQuery(".show-for-existed").hide();
+jQuery("#saved-files").change( function() {
+
+	if( jQuery(this).val() ){  
+		jQuery(".show-for-notexisted").hide();
+		jQuery(".show-for-existed").show();
+	}else {
+		jQuery(".show-for-notexisted").show();
+		jQuery(".show-for-existed").hide();
+	}
+
+	var url  = '<?php echo Mage::helper("ves_tempcp")->getCustomizeFolderURL(); ?>'+jQuery(this).val()+".json?rand"+Math.random();
+
+	jQuery.getJSON( url, function(data) {
+		var items = data;
+			if( items ){
+				jQuery('#customize-body .accordion-group').each( function(){
+					var i = 0;
+					jQuery("input, select", this).each( function(){
+						if( jQuery(this).data('match') ){
+							if( items[jQuery(this).data('match')] && items[jQuery(this).data('match')][i] ){ 
+								var el = items[jQuery(this).data('match')][i];
+							 	jQuery(this).val( el.val );
+							 	if( el.val== '') {
+							 		jQuery(this).css('background',"inherit");
+							 	}
+							 	else { 
+							 		jQuery(this).css('background',"#"+el.val);
+							 	}
+							 	jQuery(this).ColorPickerSetColor(el.val );
+							 	/*Set css property for elements*/
+							 	if( jQuery(this).data('selector') ){
+							 		if(jQuery(this).hasClass("color-selector")) {
+
+							 			jQuery($MAINCONTAINER).contents().find(jQuery(this).data('selector')).css( jQuery(this).data('attrs'),"#"+jQuery(this).val());
+
+							 		} else if(jQuery(this).hasClass("input-text")) {
+
+							 			jQuery($MAINCONTAINER).contents().find(jQuery(this).data('selector')).css( jQuery(this).data('attrs'),"#"+jQuery(this).val() );
+
+							 		} else if(jQuery(this).hasClass("input-setting")) {
+
+							 			var ex = jQuery(this).data('attrs')=='font-size'?'px':"";
+										jQuery( $MAINCONTAINER ).find(jQuery(this).data('selector')).css( jQuery(this).data('attrs'), jQuery(this).val() + ex);
+
+							 		}
+								}
+							}
+
+							i++;
+						}
+					} );
+					 
+				});
+			}
+		})
+	/*
+	if( jQuery(this).val() ){
+		var _link = jQuery('<link rel="stylesheet" href="" id="customize-theme">');
+		_link.attr('href', '<?php echo Mage::helper("ves_tempcp")->getCustomizeFolderURL(); ?>'+jQuery(this).val()+".css?rand="+Math.random() );
+		jQuery("head").append( _link );
+	}*/
+});
+<?php endif; ?>
+</script>

@@ -1,0 +1,51 @@
+.thumbs_list {
+    height: 178px;
+    margin-top: 10px;
+    overflow: hidden;
+    width: 85px;
+}
+.thumbs_list_frame li {
+    margin-bottom: 10px;
+}
+
+.product-block {
+    background-color: #ffffff;
+    border-radius: 3px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
+    left: 0;
+    margin-bottom: 20px;
+    margin-top: 0;
+    position: relative;
+    transition: all 0.4s ease 0s;
+    width: 100%;
+}
+
+.thumb_more_info {
+    background-color: #fff;
+    height: auto;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    transition: all 0.4s ease 0s;
+    width: 0;
+    z-index: 4000;
+}
+.product-block:hover .thumb_more_info {
+    opacity: 1;
+    padding: 20px 5px;
+    right: -85px;
+    width: 85px;
+}
+
+.thumb_more_info .view_scroll_left {
+    left: 33px;
+    position: absolute;
+    top: 0;
+}
+.thumb_more_info .view_scroll_right {
+    bottom: 0;
+    left: 33px;
+    position: absolute;
+}

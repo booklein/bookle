@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <default>
+
+    	<reference name="head">
+    		<action method="addItem" ifconfig="ves_tempcp/ves_tempcp/show"><type>skin_css</type><name>venustheme/ves_tempcp/style.css</name></action>
+            <action method="addItem" ifconfig="ves_tempcp/ves_tempcp/show"><type>skin_css</type><name>venustheme/ves_tempcp/owlcarousel/owl.carousel.css</name></action>
+            <action method="addJs" ifconfig="ves_tempcp/ves_tempcp/show"><script>venustheme/ves_tempcp/jquery/owl.carousel.min.js</script></action>
+
+            <action method="addItem" ifconfig="ves_tempcp/ves_tempcp/show"><type>skin_css</type><name>venustheme/ves_tempcp/lib/perfect-scrollbar/css/perfect-scrollbar.min.css</name></action>
+            <action method="addItem" ifconfig="ves_tempcp/ves_tempcp/show"><type>skin_js</type><name>venustheme/ves_tempcp/lib/perfect-scrollbar/js/min/perfect-scrollbar.min.js</name></action>
+            
+    	</reference>
+    </default>
+
+    <tempcp_quickview_view>
+		<update handle="catalog_product_view"/>
+	</tempcp_quickview_view>
+	
+	<tempcp_quickview_view_FINAL>
+		<reference name="root">
+            <action method="setTemplate"><template>venustheme/tempcp/quickview/product.phtml</template></action>
+			<action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+
+        <reference name="content">
+			<remove name="product.info.upsell"/>
+			<remove name="product.info.additional"/>
+			<remove name="product.description"/>
+			<remove name="product.attributes"/>
+        </reference>
+
+        <block type="catalog/product_price_template" name="catalog_product_price_template" />
+	</tempcp_quickview_view_FINAL>
+
+	<checkout_cart_index>
+        <reference name="head">
+            <action method="addJs"><script>varien/product.js</script></action>
+            <action method="addJs"><script>varien/configurable.js</script></action>
+
+            <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+        </reference>
+        
+        <reference name="checkout.cart">
+            <action method="addItemRender"><type>configurable</type><block>ves_tempcp/checkout_cart_item_renderer_configurable</block><template>venustheme/tempcp/cartedit/checkout/cart/item/default.phtml</template></action>
+            <action method="addItemRender"><type>bundle</type><block>ves_tempcp/checkout_cart_item_renderer_bundle</block><template>venustheme/tempcp/cartedit/checkout/cart/item/default.phtml</template></action>
+            <action method="addItemRender"><type>simple</type><block>ves_tempcp/checkout_cart_item_renderer_default</block><template>venustheme/tempcp/cartedit/checkout/cart/item/default.phtml</template></action>
+            <action method="addItemRender"><type>virtual</type><block>ves_tempcp/checkout_cart_item_renderer_default</block><template>venustheme/tempcp/cartedit/checkout/cart/item/default.phtml</template></action>
+        </reference>
+    </checkout_cart_index>
+</layout>

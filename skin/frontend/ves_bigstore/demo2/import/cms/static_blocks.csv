@@ -1,0 +1,98 @@
+Block_Id,Title,Content,Identifier,Creation_Time,Update_Time,Is_Active,Stores
+1,"Footer Links","
+<ul>
+    <li><a href=""{{store direct_url=""about-magento-demo-store""}}"">About Us</a></li>
+    <li><a href=""{{store direct_url=""customer-service""}}"">Customer Service</a></li>
+<li class=""last privacy""><a href=""{{store direct_url=""privacy-policy-cookie-restriction-mode""}}"">Privacy Policy</a></li>
+</ul>",footer_links,"2014-09-19 07:14:00","2014-09-19 07:14:02",1,0
+2,"Footer Links Company","
+<div class=""links"">
+    <div class=""block-title"">
+        <strong><span>Company</span></strong>
+    </div>
+    <ul>
+        <li><a href=""{{store url=""""}}about-magento-demo-store/"">About Us</a></li>
+        <li><a href=""{{store url=""""}}contacts/"">Contact Us</a></li>
+        <li><a href=""{{store url=""""}}customer-service/"">Customer Service</a></li>
+        <li><a href=""{{store url=""""}}privacy-policy-cookie-restriction-mode/"">Privacy Policy</a></li>
+    </ul>
+</div>",footer_links_company,"2014-09-19 07:14:02","2014-09-19 07:14:02",1,0
+3,"Cookie restriction notice","<p>This website requires cookies to provide all of its features. For more information on what data is contained in the cookies, please see our <a href=""{{store direct_url=""privacy-policy-cookie-restriction-mode""}}"">Privacy Policy page</a>. To accept cookies from this site, please click the Allow button below.</p>",cookie_restriction_notice_block,"2014-01-23 15:18:19","2015-05-13 20:05:36",1,0
+8,"footer map","{{block type=""core/template"" name=""footer.map"" before=""-"" template=""contacts/form_location.phtml""/ }}",footer-map,"2015-01-08 10:48:15","2015-01-08 10:48:15",1,0
+9,Social,"<ul class=""social"">
+<li class=""over social-facebook""><a title=""Facebook"" href=""#""> <em class=""rhb fa fa-facebook""> </em> <span>Facebook</span> </a></li>
+<li class=""over social-twitter""><a title=""Twitter"" href=""#""> <em class=""rhb fa fa-twitter""> </em> <span>Twitter</span> </a></li>
+<li class=""over social-google""><a title=""Google"" href=""#""> <em class=""rhb fa fa-google-plus""> </em> <span>Google+</span> </a></li>
+<li class=""over social-pin""><a title=""Pinterest"" href=""#""> <em class=""rhb fa fa-pinterest""> </em> <span>Pinterest</span></a></li>
+<li class=""over social-rss""><a title=""Twitter"" href=""#""> <em class=""rhb fa fa-rss""> </em> <span>RSS</span> </a></li>
+</ul>",social,"2015-01-08 12:53:48","2015-03-09 22:41:07",1,0
+10,"Footer Links","<ul class=""footer-links"">
+<li><a title=""Privacy Policy"" href=""privacy-policy-cookie-restriction-mode"">Privacy Policy</a></li>
+<li><a title=""Site Map"" href=""#"">Site Map</a></li>
+</ul>",footer-links,"2015-01-08 12:56:40","2015-03-09 23:33:18",1,0
+11,"Content Showcase","<div class=""row no-margin"">
+<div class=""col-lg-6 col-md-6 col-sm-6 col-xs-12 no-padding a-right""><img alt="""" src=""{{media url=""wysiwyg/showcase/default_banner4.jpg""}}"" />
+<div class=""abs-left"">
+<h3>Investigationes demons tra-verunt lectores claritas est</h3>
+<div class=""line""> </div>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut</p>
+<a class=""see-more"" href=""about-magento-demo-store""><span>SEE MORE</span><i class=""rhb fa fa-long-arrow-right""> </i></a></div>
+</div>
+<div class=""col-lg-6 col-md-6 col-sm-6 col-xs-12 no-padding a-left""><img alt="""" src=""{{media url=""wysiwyg/showcase/default_banner3.jpg""}}"" />
+<div class=""abs-right"">
+<h3>Lorem ipsum dolor sit amet consectetuer</h3>
+<div class=""line""> </div>
+<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea</p>
+<a class=""see-more"" href=""about-magento-demo-store""><span>SEE MORE</span><i class=""rhb fa fa-long-arrow-right""> </i></a></div>
+</div>
+</div>",content-showcase,"2015-01-12 06:30:16","2015-02-09 20:39:10",1,0
+12,"Block Showcase","<div class=""row custom-text no-margin"">
+<div class=""col-xs-12 col-lg-4 col-sm-4 col-4"">
+<div class=""item""><span class=""icon pull-left""><img alt="""" src=""{{media url=""wysiwyg/showcase/icon-gold.png""}}"" /></span>
+<h3>SHIPPING WORLDWIDE</h3>
+<p>On orders over $399.0</p>
+</div>
+</div>
+<div class=""col-xs-12 col-lg-4 col-sm-4 col-4"">
+<div class=""item""><span class=""icon pull-left""><img alt="""" src=""{{media url=""wysiwyg/showcase/icon-box.png""}}"" /></span>
+<h3>FREE RETURN</h3>
+<p>On orders over $399.0</p>
+</div>
+</div>
+<div class=""col-xs-12 col-lg-4 col-sm-4 col-4"">
+<div class=""item""><span class=""icon pull-left""><img alt="""" src=""{{media url=""wysiwyg/showcase/icon-support.png""}}"" /></span>
+<h3>SUPPORT 24/7</h3>
+<p>Hotline: (+91) 0123 456 789</p>
+</div>
+</div>
+</div>",block-showcase,"2015-01-21 07:18:56","2015-01-21 09:58:36",1,0
+13,"Footer Contact","{{block type=""core/template"" name=""footer.contact"" before=""-"" template=""contacts/form_contact.phtml""/ }}",footer-contact,"2015-01-21 12:31:12","2015-01-21 12:31:12",1,0
+14,Hotline,"<div class=""a-right""><img src=""{{media url=""wysiwyg/showcase/phone.png""}}"" alt="""" /> Hotline: (+01) - <b>000 222 666</b> / (+01) <b>000 111 999</b></div>",hotline,"2015-01-21 12:40:00","2015-01-21 13:27:42",1,0
+15,"Langding Page","<div>{{block type=""ves_landingpage/list"" name=""ves_landingpage.list"" before=""-"" /}}</div>",langding-page,"2015-01-24 13:01:22","2015-02-10 22:05:44",1,0
+16,"Call Us","<p><i class=""fa fa-phone""> </i><span>CALL US: (+01) - </span>222 000 666 . Free shipping on order over $99 !.</p>",call-us,"2015-01-26 05:57:30","2015-03-13 22:15:36",1,0
+17,"Newletter Module","{{block type=""newsletter/subscribe"" template=""newsletter/subscribe.phtml""}}",newletter,"2015-01-27 05:37:49","2015-01-27 05:37:49",1,0
+18,"Customer Service","<div class=""block-title""><span>Customer Service</span></div>
+<div class=""block-content"">
+<ul class=""links"">
+<li><a title=""Site Map"" href=""catalog/seo_sitemap/category/"">Site Map</a></li>
+<li><a title=""Search Terms"" href=""catalogsearch/term/popular/"">Search Terms</a></li>
+<li><a title=""Advanced Search"" href=""catalogsearch/advanced/"">Advanced Search</a></li>
+<li><a title=""Orders and Returns"" href=""sales/guest/form/"">Orders and Returns</a></li>
+<li><a title=""Contact Us"" href=""contacts/"">Contact Us</a></li>
+</ul>
+</div>",customer-service,"2015-05-13 20:05:37","2015-05-13 20:05:37",1,0
+19,"About Us","<div class=""block-title""><span>About Us</span></div>
+<div class=""block-content"">
+<ul class=""links"">
+<li><a href=""#"">Responsive</a></li>
+<li><a href=""#"">Magento themes</a></li>
+<li><a href=""#"">E-commerce</a></li>
+<li><a href=""#"">The company</a></li>
+<li><a href=""#"">Terms</a></li>
+</ul>
+</div>",about-us,"2015-05-13 20:05:37","2015-05-13 20:05:37",1,0
+20,icon-pay-footer,"<a href=""#"">
+<img src=""{{media url=""wysiwyg/banner/payment.png""}}"" alt="""" />
+</a>",icon-pay-footer,"2015-05-13 20:05:37","2015-06-26 16:34:48",1,0
+21,block-custom-header,"<h4 class=""fa fa-phone""> </h4>
+<div class=""pull-left text-left""><strong>Call us now</strong> <br /> Toll free : <a href=""#""> 0123-456-789</a></div>",block-custom-header,"2015-05-13 20:05:38","2015-06-28 14:58:22",1,0

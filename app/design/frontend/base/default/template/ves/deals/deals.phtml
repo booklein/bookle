@@ -1,0 +1,30 @@
+<?php   
+/*------------------------------------------------------------------------
+ # VenusTheme Brand Module 
+ # ------------------------------------------------------------------------
+ # author:    VenusTheme.Com
+ # copyright: Copyright (C) 2012 http://www.venustheme.com. All Rights Reserved.
+ # @license: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ # Websites: http://www.venustheme.com
+ # Technical Support:  http://www.venustheme.com/
+-------------------------------------------------------------------------*/
+?>
+
+<div class="ves-deals clearfix">
+	<div class="page-title deal-title">
+		<h1><?php echo $this->__( "Deals" ); ?></h1>
+	</div>
+	<ul class="box-heading nav nav-tabs">
+		<li class="<?php $filter_deal = $this->getFilterdeal(); if($this->getFilterdeal() == 1 or empty($filter_deal)) { echo "active"; } ?> first"><a href="<?php echo Mage::helper("ves_deals")->getFilterUrl(1); ?>"><?php echo $this->__("Today deals");?></a></li>
+		<li class="<?php if($this->getFilterdeal() == 2) { echo "active"; } ?>"><a href="<?php echo Mage::helper("ves_deals")->getFilterUrl(2); ?>"><?php echo $this->__("Available deals");?></a></li>
+		<li class="<?php if($this->getFilterdeal() == 3) { echo "active"; } ?> last"><a href="<?php echo Mage::helper("ves_deals")->getFilterUrl(3); ?>"><?php echo $this->__("Pass deals"); ?></a></li>
+	</ul>
+<div class="deal-products">
+<?php
+	//Pass
+	$this->getChild('products')->assign("enable_deals", true)
+							  ->assign("default_layout", "deals.phtml");
+?>
+<?php echo $this->getChildHtml('products') ?>
+</div>
+</div>

@@ -1,0 +1,92 @@
+==================================== ADMIN =======================================
+    Edit the file "skin/frontend/venus theme package/child layout/config.xml"
+    
+	<custom_settings>
+		<tab name="tab name">
+			<sub_tab name="sub tab name">
+				<field name="field name" type="input" label="field label" id="" default=""></field>
+				...
+			</sub_tab>
+			...
+			Or
+			<field name="field name" type="input" label="field label" id="" default=""></field>
+			...
+		</tab>
+	</custom_settings>
+	
+	+ Avaiable tab name:
+		-- general: tab general in admin
+		-- pages_setting: tab pages setting in admin
+		-- font: tab font in admin
+		-- internal_modules: tab internal modules in admin
+		-- compression: tab compression in admin
+		-- customization: tab customization in admin
+		-- information: tab information in admin
+
+	+ Avaiable sub tab name:
+		-- category: 
+		-- product:
+		-- contact:
+
+
+	For example code:
+
+
+	<custom_settings>
+		<!-- Add new custom settings for tab general-->
+		<tab name="general">
+			<field name="custom_label" type="label"><![CDATA[Default Theme Name]]></field>
+			<field name="custom_theme_name" type="input" label="Theme Name" id="" default=""></field>
+		</tab>
+		<!-- Add new custom settings for tab Pages Setting-->
+		<tab name="pages_setting">
+			<sub_tab name="product">
+				<field name="enable_mouse_zoom" type="list" label="Enable Mouse Zooming" default="0" description="Enable Mouse Zooming">
+					<option value="1">Yes</option>		
+					<option value="0">No</option>
+				</field>
+			</sub_tab>
+			<sub_tab name="category">
+				<field name="enable_wishlist" type="list" label="Enable Wishlist" default="0" description="Enable Wish List Button">
+					<option value="1">Yes</option>		
+					<option value="0">No</option>
+				</field>
+			</sub_tab>
+			<sub_tab name="contact">
+				<field name="enable_goolge_map" type="list" label="Enable Map" default="0" description="Enable Map">
+					<option value="1">Yes</option>		
+					<option value="0">No</option>
+				</field>
+			</sub_tab>
+		</tab>
+		<!-- Add new custom settings for tab font-->
+		<tab name="font">
+			<field name="custom_body_selector" type="textarea" label="Custom Body Selector" id="" default=""></field>
+		</tab>
+		<!-- Add new custom settings for tab information-->
+		<tab name="information">
+			<field name="custom_information_label" type="label"><![CDATA[Sample Venus BestShop]]></field>
+		</tab>
+	</custom_settings>
+
+==================================== CALL PARAMS ON FRONTEND =======================================
+
+	On frontend you can call the custom theme setting by code:
+	//Init theme setting object before call param:
+	<?php
+
+		$helper = Mage::helper("ves_tempcp/framework")->getFramework( );
+
+		if(!$helper || !is_object($helper)) {
+			$themeConfig = Mage::helper('ves_tempcp/theme')->getCurrentTheme();
+
+		} else {
+			$themeConfig = $helper->getConfig();
+		}
+		
+	 ?>
+
+	 //Call theme setting params
+
+	 <?php echo $themeConfig->get("enable_addtocart", 0);/* get(custom field name, default value) */ ?>
+-->

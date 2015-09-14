@@ -1,0 +1,101 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+<div id="topbar">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 hidden-xs welcome-msg text-left">
+				<?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getAdditionalHtml() ?> 
+				<?php if($this->helper('customer')->isLoggedIn()){?>
+					<a class="logout" href="<?php echo Mage::getBaseUrl() ?>customer/account/logout">
+					  	<?php echo $this->__(' Logout'); ?>
+					</a>
+				<?php } else{ ?>
+					Please 
+					<a href="<?php echo Mage::getBaseUrl();?>customer/account/login/"><strong><?php echo $this->__(' Login'); ?></strong></a> 
+					or 
+					<a href="<?php echo Mage::getBaseUrl();?>customer/account/create/"><?php echo $this->__(' Create an account'); ?></a>
+				<?php } ?>
+			</div>
+
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
+	            <div class="topLinks inner"><?php echo $this->getChildHtml('topLinks') ?> </div>
+
+         		<div class="top-currency inner"><?php echo $this->getChildHtml('top_currency') ?> </div>
+
+				<div class="store-language inner"><?php echo $this->getChildHtml('store_language') ?> </div>
+
+			</div>
+		</div>	
+	</div>
+</div>
+
+<div id="header-main">
+	<div class="container">
+	    <div class="row">
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 logo-style">
+	        	<?php if ($this->getIsHomePage()):?>
+	            <div id="logo-theme" class="logo-store">
+	            	<strong class="logo-title"><?php echo $this->getLogoAlt() ?></strong>
+	            	<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo">
+	 					<img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="large" />
+	            		<img src="<?php echo $this->getLogoSrcSmall() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="small" />
+            		</a>
+            	</div>
+	            <?php else:?>
+	            <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo">
+	            	<strong class="logo-title"><?php echo $this->getLogoAlt() ?></strong>
+	            	<img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="large" />
+            		<img src="<?php echo $this->getLogoSrcSmall() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="small" />
+            	</a>
+	            <?php endif?>   
+	        </div>  
+
+			<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 top-search ves-autosearch">
+				<?php echo $this->getChildHtml('topSearch') ?>
+			</div>
+
+		    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 header-links text-right pull-right">
+	            <?php echo $this->getChildHtml('venusMinicart'); ?>
+	        </div>
+		</div>
+	</div>
+</div>
+
+<div id="ves-mainnav">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<?php if($topmenu = $this->getChildHtml('topMenu')){ ?>	    
+					<?php echo $topmenu; ?>	    
+				<?php } ?>
+			</div>
+		</div>
+	</div>
+</div>

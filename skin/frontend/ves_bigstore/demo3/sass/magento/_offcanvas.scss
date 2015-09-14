@@ -1,0 +1,323 @@
+/******************************************************
+ * @package Ves Theme Framework for Magento
+ * @version 1.0
+ * @author http://www.venustheme.com
+ * @copyright Copyright (C) Augus 2013 Venustheme.com <@emai:venustheme@gmail.com>.All rights reserved.
+ * @license   GNU General Public License version 2
+*******************************************************/
+/* RESPONSIVE */
+#menu-offcanvas {
+	.button-close-menu {
+	    cursor: pointer;
+	    position: absolute;
+	    @include rtl-right(10px);
+	    top: 5px;
+	    background: url("#{$image-theme-path}btn_window_close.gif") no-repeat;
+	    @include size(15px, 15px);
+	    i{ display:none;}
+	}
+	.menu-offcanvas-inner{
+	}
+	
+	.dropdown .dropdown-menu{
+		border: medium none;
+	    box-shadow: none;
+	    display: block;
+	    float: none;
+	    position: relative;
+	    width: 100% !important;
+	    min-width: 100%;
+	    @include border-top-radius( 0 );
+	    @include border-bottom-radius( 0 );
+	    .dropdown-menu-inner {
+	    	padding: 0 20px;
+	    	ul li  {
+	    		border-bottom: 1px solid $border-color;
+	    		a {
+	    			color: $theme-color-default;
+					padding: 3px 0 3px 0;
+					line-height: 30px;
+					@include transition ( all 0.3s ease 0s);
+					display: block;
+					&:hover {
+						@include transition ( all 0.3s ease 0s);
+						color: $theme-color-secondary;
+						text-decoration: none;
+					}
+				}
+				.level2 {
+					li { border-bottom:0}
+				}
+	    	}
+	    }
+	}
+	.mega-col {
+		width: 100% !important; 
+		div.menu-title {
+		    font-size: 16px;
+		    font-weight: bold;
+		    padding: 10px 0;
+		}		
+	}
+}	
+ 
+html,
+body,
+.offcanvas-container,
+.offcanvas-pusher,
+.offcanvas-content {
+	 overflow-x: hidden;
+}
+
+.offcanvas-content {
+	overflow-y: scroll;
+	background: #f3efe0;
+}
+	
+.offcanvas-container {
+	
+	
+}
+.offcanvas-content,
+.offcanvas-content-inner {
+
+}
+
+
+.offcanvas-pusher {
+	left: 0;
+	@include rtl-left(0);
+	z-index: 99;
+	//@include translate3d (0, 0, 0);
+	//-webkit-transition: -webkit-transform 0.5s;
+	//transition: transform 0.5s;
+}
+
+.offcanvas-pusher::after {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 0;
+	height: 0;
+	background: rgba(0,0,0,0.2);
+	content: '';
+	opacity: 0;
+	-webkit-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+	transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+	z-index: 99;
+}
+ 
+.offcanvas-menu-open .offcanvas-pusher::after {
+	height: 100%;
+	width: 100%;
+	opacity: 1;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+
+.offcanvas-menu {
+	position: absolute;
+	top: 0;
+	@include rtl-left(0);
+	z-index: 999999;
+	visibility: hidden;
+	width: 300px;
+	height: 100%;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+	background: $text-color;
+}
+.offcanvas-menu #search_offsidebar_mini_form .input-box{
+	position: relative;
+	.search-button{
+		position: absolute;
+		@include rtl-right(0);
+		top: 5px;
+		padding: 0 10px;
+	}
+}
+.offcanvas-menu::after {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.2);
+	content: '';
+	opacity: 1;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+
+.offcanvas-menu-open .offcanvas-menu::after {
+	width: 0;
+	height: 0;
+	opacity: 0;
+	-webkit-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+	transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+}
+
+/* content style */
+
+.offcanvas-menu ul {
+	margin: 0;
+	padding: 0;
+}
+
+.offcanvas-menu h2 {
+	margin: 0;
+	padding: 1em;
+	color: rgba(0,0,0,0.4);
+	text-shadow: 0 0 1px rgba(0,0,0,0.1);
+	font-weight: 300;
+	font-size: 2em;
+}
+
+.offcanvas-menu ul.megamenu  > li > a {
+	color: $theme-color-secondary;
+	display: block;
+	@include rtl-padding(0.8em, 1em, 0.8em, 1.2em);
+	outline: none;
+	text-transform: uppercase;
+	@include transition(all 0.3s);
+
+}
+
+.offcanvas-menu ul li:firoffcanvas-child a {
+	@include box-shadow(inset 0 -1px rgba(0,0,0,0.2), inset 0 1px rgba(0,0,0,0.2));
+}
+
+.offcanvas-menu ul li a:hover {
+}
+
+.offcanvas-menu ul.megamenu > li > a {
+	background: $text-color;
+	color: $white;
+	border-bottom: 1px solid #53585f;
+	
+}
+.offcanvas-menu ul.megamenu > li > a .caret:before{position: static;}
+/* Individual effects */
+
+/* Effect 1: Slide in on top */
+.offcanvas-effect-1.offcanvas-menu {
+	visibility: visible;
+	@include translate3d(-100%, 0, 0);
+}
+
+.offcanvas-effect-1.offcanvas-menu-open .offcanvas-effect-1.offcanvas-menu {
+	visibility: visible;
+	@include translate3d(0, 0, 0);
+}
+
+.offcanvas-effect-1.offcanvas-menu::after {
+	display: none;
+}
+
+/* Effect 2: Reveal */
+.offcanvas-effect-2.offcanvas-menu-open .offcanvas-pusher {
+	@include translate3d(300px, 0, 0);
+}
+
+.offcanvas-effect-2.offcanvas-menu {
+	z-index: 1;
+}
+
+.offcanvas-effect-2.offcanvas-menu-open .offcanvas-effect-2.offcanvas-menu {
+	visibility: visible;
+	@include transition-transform (0.5s) ;
+	@include translate3d (0, 0, 0);
+}
+
+.offcanvas-effect-2.offcanvas-menu::after {
+
+}
+
+/* Effect 3: Push*/
+.offcanvas-effect-3.offcanvas-menu-open .offcanvas-pusher {
+	@include translate3d(300px, 0, 0);
+	@include rtl-translate3d(300px, 0, 0);
+	position: fixed;
+}
+
+.offcanvas-effect-3.offcanvas-menu {
+	@include translate3d(-100%, 0, 0);
+	@include rtl-translate3d(-100%, 0, 0);
+	z-index: 1;
+}
+
+.offcanvas-effect-3.offcanvas-menu-open .offcanvas-effect-3.offcanvas-menu {
+	visibility: visible;
+	@include transition-transform (0.5s) ;
+	@include translate3d (0, 0, 0);
+}
+
+.offcanvas-effect-3.offcanvas-menu::after {
+}
+ 
+/* Effect 5: Reverse slide out */
+.offcanvas-effect-5.offcanvas-menu-open .offcanvas-pusher {
+	@include translate3d (300px, 0, 0);
+}
+
+.offcanvas-effect-5.offcanvas-menu {
+	z-index: 1;
+	@include translate3d (50%, 0, 0);
+}
+
+.offcanvas-effect-5.offcanvas-menu-open .offcanvas-effect-5.offcanvas-menu {
+	visibility: visible;
+	@include transition-transform (0.5s) ;
+	@include translate3d (0, 0, 0);
+}
+
+.offcanvas-sidebars-buttons{
+	.btn-danger{margin-bottom: 10px}
+}
+
+
+/* RESPONSIVE */
+@media (max-width: $screen-tablet) {
+	#ves-mainnav{
+		.navbar-collapse.collapse{
+			display: none !important;
+		}
+		.navbar-toggle{
+			display: block;
+		}
+	}
+
+	/*** OFFCANVAS SIDEBAR ***/
+	#ves-paneltool{display: none;}
+}
+
+@media (max-width: 991px){
+	.offcanvas-siderbars, .offcanvas-widget-siderbars{ 
+		position: relative; 
+		#ves-columns-left,
+		#ves-columns-right,
+		.offcanvas-widget-sidebar,
+		.widget-sidebar{
+			display: none;
+			width: 100%;
+		}
+
+		&.column-left-active #ves-columns-left{
+			display: block;
+		}
+		&.column-right-active #ves-columns-right{
+			display: block;
+		}
+
+		&.column-right-active .canvas-show{
+			display: block;
+		}
+		&.column-left-active .main-column,
+		&.column-right-active .main-column{
+			display: none;
+		}
+	}
+}
+.offcanvas-menu .widget-image img {
+	@include img-responsive();
+}

@@ -1,0 +1,183 @@
+<?php
+	/*framework: get current theme setting*/
+	$cms = isset($cms)?$cms:"";
+	$list_image_width = (int)$this->getEffectConfig("image_width", 300);
+	$list_image_height = (int)$this->getEffectConfig("image_height", 300);
+	$swap_image_number = (int)$this->getEffectConfig("swap_image_number", 0);
+
+	$popup_quickview_width = $this->getEffectConfig("popup_quickview_width", "60%");
+	$popup_quickview_height = $this->getEffectConfig("popup_quickview_height", "80%");
+
+	$enable_pzoom = $this->getConfig("show_pzoom");
+	$enable_new_icon = $this->getConfig("enable_new_icon");
+	$enable_sale_icon = $this->getConfig("enable_sale_icon");
+	$show_title = $this->getConfig('show_title');
+	$enable_short_desc = $this->getConfig('show_desc');
+	$show_review = $this->getConfig('show_review');
+	$show_price = $this->getConfig('show_price');
+	$show_addcart = $this->getConfig("show_addcart");
+	$show_compare_wishlist = $this->getConfig("show_wc") ;
+	/*end get setting*/
+
+	/*quickview was enabled?*/
+	$quickview = $this->getEffectConfig('enable_quickview');
+	$quickview = $quickview ? $quickview : 0;
+	/*Swap images was enabled?*/
+	$swap_image = $this->getEffectConfig('enable_swap');
+	$swap_image = $swap_image ? $swap_image : 0;
+
+	$moduleId = rand().time();
+	$itemsperpage = (int)$this->getEffectConfig("max_items");
+
+
+	$title_maxchar = (int)$this->getEffectConfig("title_maxchar");
+	$title_maxchar = $title_maxchar > 0 ?$title_maxchar: 100;
+	$desc_maxchar = (int)$this->getEffectConfig("desc_maxchar");
+	$desc_maxchar = $desc_maxchar > 0 ?$desc_maxchar: 100;
+	
+
+	/*Owl Carousel Setting*/
+
+	$auto_play_mode = (int)$this->getCarouselConfig("auto_play");
+	$interval = (int)$this->getCarouselConfig("interval");
+	$lazy_load_image = $this->getCarouselConfig("lazy_load_image", 0);
+	$loop = (int)$this->getCarouselConfig("loop", 1);
+	$slide_by = (int)$this->getCarouselConfig("slide_by", 1);
+	$margin_item = $this->getCarouselConfig("margin_item", 0);
+	$show_nav = (int)$this->getCarouselConfig("show_navigator", 1);
+	$rtl = (int)$this->getCarouselConfig("rtl", 0);
+	$mouse_drag = (int)$this->getCarouselConfig("mouse_drag", 1);
+	$touch_drag = (int)$this->getCarouselConfig("touch_drag", 1);
+	$mobile_items = (int)$this->getCarouselConfig("mobile_items", 1);
+	$tablet_items = (int)$this->getCarouselConfig("tablet_items", 2);
+	$tablet_small_items = (int)$this->getCarouselConfig("tablet_small_items", 2);
+	$portrait_items = (int)$this->getCarouselConfig("portrait_items", 3);
+	$large_items = (int)$this->getCarouselConfig("large_items", 5);
+	$custom_items = $this->getCarouselConfig("custom_items", "");
+
+	$carousel_responsive = (int)$this->getCarouselConfig("carousel_responsive", 1);
+	$cols = (int)$this->getCarouselConfig("default_items", 4);
+	$cols = !empty($cols)?(int)$cols:4;
+	$itemsperpage = (int)$this->getCarouselConfig("max_items_column", (int)$cols);
+
+	$auto_play = $auto_play_mode?"true":"false";
+	
+	$default_items = $cols;
+	$cols = 1;
+	$span = 12/$cols;
+	$active = 'latest';
+
+	if($items){
+		$items = $items->getItems();
+	}			
+
+	$price_prefix = '_deals_owl_'.rand(1,9)+rand().time();
+	$common_layout = $this->getConfig('common_layout');
+
+	if(isset($common_layout) && !empty($common_layout)){
+		$default_layout = $common_layout;
+	} else {
+		$default_layout = "deals.phtml";
+	}
+
+	$enable_deals = true;
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php if($this->getSourceConfig('show_left_carousel')) { ?>
+<div class="deals-left">
+	<div class="deals-bg" 
+			style="background: url('<?php echo $background ?>') no-repeat" >
+		<?php $first_targetDate = date('m/d/Y \2\3\:\5\9\:\0\0', strtotime($to_date)); ?>
+		<div class="deals-title"><?php echo $this->__('Countdown to') ?><br>
+		<?php if($this->getSourceConfig('left_carousel_title')){?>
+			<h2><?php echo $this->getSourceConfig('left_carousel_title')?></h2>
+		<?php } ?>
+	</div>
+	  <div class="productdeals">
+	  	<div id="item<?php echo $module; ?>countdown_<?php echo $module ?>" class="item-countdown"></div>
+	  </div>
+	</div>
+</div><!-- /End .deals-left -->
+<div class="deals-right">
+<?php } ?>
+<div class="<?php echo $this->getConfig('prefix');?> block productcarousel owlproductcarousel" id="module<?php echo $moduleId; ?>">
+	<?php if($this->getConfig('title')){?>
+	<div class="block-title">
+		<h2><?php echo $this->getConfig('title')?></h2>
+		<?php if( ($pretext=$this->getConfig("pretext")) && !$cms) { ?>
+			<div class="pretext"><?php echo $pretext;?></div>
+		<?php } else {
+			?>
+			<div class="pretext"><?php echo isset($cms)?$cms:"";?></div>
+			<?php
+		} ?>
+	</div>
+	<?php }?>
+	<div class="block-content">
+		<div class="box-products carousel slide">
+			<div id="owldealscarousel<?php echo $moduleId;?>" class="owl-carousel">		
+				<?php
+				$pages = array_chunk( $items, $itemsperpage);
+
+				?>
+				<?php foreach ($pages as  $k => $_productCollection ) {  ?>
+
+						<div class="item <?php if($k==0) {?>first<?php } elseif($k == (count($pages) -1 )) {?>last<?php } ?> products-grid no-margin">
+
+							<?php if($product_module_path = Mage::helper("ves_tempcp/framework")->getLayoutPath("product_module.phtml")) { ?>
+						   	 	<?php require ($product_module_path); ?>
+
+						    <?php } ?>
+						</div>
+					<?php } ?>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<?php if($this->getSourceConfig('show_left_carousel')) { ?>
+</div><!-- /End .deals-right -->
+
+<script type="text/javascript">
+    jQuery(document).ready(function($){
+      $("#item<?php echo $module; ?>countdown_<?php echo $module; ?>").lofCountDown({
+        formatStyle:2,
+        TargetDate:"<?php echo $first_targetDate; ?>",
+        DisplayFormat:"<ul><li>%%D%% <div><?php echo $this->__('Day');?></div></li><li> %%H%% <div><?php echo $this->__('Hours');?></div></li><li> %%M%% <div><?php echo $this->__('Mins');?></div></li><li> %%S%% <div><?php echo $this->__('Secs');?></div></li></ul>",
+        FinishMessage:"<?php echo $this->__('Expired');?>",
+        });
+    });
+ </script>
+
+<?php } ?>
+<script type="text/javascript">
+jQuery(window).load(function() {
+	var owl = jQuery('#owldealscarousel<?php echo $moduleId;?>');
+        owl.owlCarousel({
+            autoPlay: <?php echo $auto_play_mode?'true':'false';?>,
+            slideSpeed: <?php echo $interval?(int)$interval:'500';?>,
+            autoplayHoverPause: true,
+            <?php if($lazy_load_image) { ?>
+            lazyLoad:true,
+            <?php } ?>
+            navigationText: ["<span class='fa fa-angle-left'></span>","<span class='fa fa-angle-right'></span>"],
+            slideBy: <?php echo (isset($slide_by) && $slide_by)?(int)$slide_by:1; ?>,
+            loop: <?php echo $loop == 1?'true':'false'; ?>,
+            margin: <?php echo $margin_item?(int)$margin_item:'0'; ?>,
+            navigation: <?php echo $show_nav == 1?'true':'false'; ?>,
+            rtl: <?php echo $rtl == 1?'true':'false'; ?>,
+            mouseDrag: <?php echo $mouse_drag == 1?'true':'false'; ?>,
+            touchDrag: <?php echo $touch_drag == 1?'true':'false'; ?>,
+            autoWidth: false,
+            responsive: <?php echo $carousel_responsive == 1?'true':'false'; ?>,
+            items: <?php echo $default_items?(int)$default_items:4; ?>,
+            itemsDesktop : [1199,<?php echo $default_items?(int)$default_items:4; ?>], //4 items between 1199px and 980px
+            itemsDesktopSmall : [979,<?php echo $portrait_items?(int)$portrait_items:3; ?>], //3 items betweem 979px and 769px
+            itemsTablet: [768, <?php echo $tablet_items?(int)$tablet_items:2; ?>], //2 items between 768px and 641px
+            itemsTabletSmall : [640, <?php echo $tablet_small_items?(int)$tablet_small_items:2; ?>], //2 items between 641px and 480px
+            itemsMobile : [479, <?php echo $mobile_items?(int)$mobile_items:1; ?>], // itemsMobile disabled - inherit from itemsTablet option
+            itemsCustom: <?php echo isset($custom_items)?'['.$custom_items.']':'false';?> // custom numbers item view on screen
+        });
+});
+
+</script>

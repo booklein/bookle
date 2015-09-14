@@ -1,0 +1,21 @@
+/*** widgets using inside megamenu ***/
+.#{$app-brand-prefix}-widget{
+	.menu-title,
+	.widget-title{
+		font-size: 12px;
+		color: $theme-color-default;
+		text-transform:uppercase;
+		font-family: $megamenu-font-family;
+		font-weight: 700;
+		@include rtl-text-align-right();
+		margin-bottom: 15px;
+	}
+	img { @include img-responsive ();}
+
+	.widget-product-list {
+		.product-block {
+			@include inline-block();
+			width: auto;
+		}
+	}
+}

@@ -1,0 +1,53 @@
+<?php
+/*
+* Ves Magento Theme Framework for Prestashop 1.6.x
+*
+* @package   vesblockbuilder
+* @version   5.0
+* @author    http://www.venustheme.com
+* @copyright Copyright (C) October 2013 venustheme.com <@emai:venustheme@gmail.com>
+*               <info@venustheme.com>.All rights reserved.
+* @license   GNU General Public License version 2
+*/
+$id=rand().time();
+if(isset($description)) {
+	$description = str_replace(array("\r", "\n"), "", $description);
+} else {
+	$description = "";
+}
+
+?>
+<div id="map-canvas<?php echo $id; ?>" style="width:<?php echo $width; ?>; height:<?php echo $height; ?>;"></div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;language=en&amp;callback=initialize"></script>
+<script type="text/javascript">
+	var map;
+    function initialize() {
+		try{
+			if(typeof(google) != "undefined"){ 
+				var myLatlng = new google.maps.LatLng( <?php echo (float)$latitude; ?>, <?php echo (float)$longitude; ?> );
+				var mapOptions = {
+					zoom: <?php echo $zoom; ?>,
+					center: myLatlng,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+
+				map = new google.maps.Map(document.getElementById('map-canvas<?php echo $id; ?>'), mapOptions);
+				var marker = new google.maps.Marker({
+				            position: myLatlng,
+				            map: map,
+				            title: " "
+				           });
+				var infowindow = new google.maps.InfoWindow();
+			  	infowindow.setContent('<?php echo $description; ?>');
+			  	google.maps.event.addListener(marker, 'click', function() {
+			      infowindow.open(map, marker);
+			  	});
+
+			}
+		}catch(e){
+
+		}	
+    }
+    window.onload = initialize();
+</script>
+

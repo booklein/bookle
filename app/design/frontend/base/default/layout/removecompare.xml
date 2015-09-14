@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <default>
+        <remove name="catalog.compare.sidebar"/>
+        <remove name="right.reports.product.compared"/>
+    </default>   
+</layout>

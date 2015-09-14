@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<widgets>
+    <blockbuilder type="ves_blockbuilder/widget_builder"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Block Builder : Generate Block Builder Profile</name>
+        <description type="desc">Generate Block Builder Profile</description>
+        <parameters>
+        	<block_id translate="label" module="core">
+				<label>Block Id</label>
+				<sort_order>20</sort_order>
+				<type>select</type>
+                <source_model>ves_blockbuilder/system_config_source_listBlock</source_model>
+				<comment>Choose Block Builder Item</comment>
+                <visible>1</visible>
+				<required>1</required>
+				<value></value>
+			</block_id>
+            <code translate="label" module="core">
+				<label>Block Builder Code</label>
+				<sort_order>10</sort_order>
+				<comment>The code of block builder</comment>
+				<type>text</type>
+				<visible>1</visible>
+				<required>0</required>
+				<value></value>
+			</code>
+			<show_title translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Title</label>
+                <sort_order>20</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </show_title>
+            <template translate="label">
+                <visible>1</visible>
+                <label>Block Template</label>
+                <description>Input custom module template file path. For example: ves/blockbuilder/default.phtml Empty for default</description>
+                <type>text</type>
+                <sort_order>250</sort_order>
+            </template>
+        </parameters>
+    </blockbuilder>
+    <pagebuilder type="ves_blockbuilder/widget_page"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Block Builder : Generate Page Builder Profile</name>
+        <description type="desc">Generate a page builder profile</description>
+        <parameters>
+            <block_id translate="label" module="core">
+                <label>Page Profile Id</label>
+                <sort_order>20</sort_order>
+                <type>select</type>
+                <source_model>ves_blockbuilder/system_config_source_listPage</source_model>
+                <comment>Choose A Profile Of Page Builder</comment>
+                <visible>1</visible>
+                <required>1</required>
+                <value></value>
+            </block_id>
+            <code translate="label" module="core">
+                <label>Page Builder Code</label>
+                <sort_order>10</sort_order>
+                <comment>The code of page builder</comment>
+                <type>text</type>
+                <visible>1</visible>
+                <required>0</required>
+                <value></value>
+            </code>
+            <show_title translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Title</label>
+                <sort_order>20</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </show_title>
+            <template translate="label">
+                <visible>1</visible>
+                <label>Page Builder Template</label>
+                <description>Input custom module template file path. For example: ves/blockbuilder/row.phtml Empty for default</description>
+                <type>text</type>
+                <sort_order>250</sort_order>
+            </template>
+        </parameters>
+    </pagebuilder>   
+</widgets>

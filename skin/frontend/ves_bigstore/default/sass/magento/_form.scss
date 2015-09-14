@@ -1,0 +1,219 @@
+/******************************************************
+ * @package Ves Theme Framework for Magento
+ * @version 1.0
+ * @author http://www.venustheme.com
+ * @copyright Copyright (C) Augus 2013 Venustheme.com <@emai:venustheme@gmail.com>.All rights reserved.
+ * @license   GNU General Public License version 2
+*******************************************************/
+
+/* Forms */
+form          { display:inline; }
+fieldset      { border:0; }
+legend        { display:none; }
+
+/* Table */
+table         { border:0; border-spacing:0; empty-cells:show; font-size:100%; width: 100%; }
+caption,th,td { vertical-align:top; @include rtl-text-align-left(); font-weight:normal; }
+
+/* Global Styles ========================================================================= */
+/* Form Elements */
+input,select,textarea,button {
+   font-size: $font-size-base;
+   color: $input-color;
+   background-color: $input-bg;
+   border: 1px solid $input-border;
+   border-radius: $border-radius-small;
+   padding-left: 10px;
+   padding-right: 10px;
+}
+.button, input {
+   height: $input-height-base;
+   line-height:$line-height-base ;
+}
+
+input,select,textarea {
+  width: 100%;
+}
+
+.button, input.button {
+  background-color: $theme-color-default;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  @include transition (all 0.4s ease 0s);
+  @include border-radius(0);
+  color: $white;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  font-family:  $font-family-three;
+  font-weight: 600;
+  padding:0 28px;
+  &:hover {
+    background-color: $theme-color-primary;
+    color: $white;
+    @include transition (all 0.4s ease 0s);        
+  }
+}
+
+select,textarea {
+    padding: 9px;
+}
+
+option {
+    padding: 0 10px;
+}
+
+input.qty,input[title="Qty"] {
+    display: inline;
+    text-align: center;
+    width: 60px;
+    @include border-top-radius (0);
+    @include border-bottom-radius (0);
+}
+input[type="radio"], input[type="checkbox"] {
+    @include rtl-float-left();
+    margin: 0;
+    width: auto;
+    border:0;
+    background-color: transparent;
+}
+select[multiple], select[size] {
+    width: 300px;
+}
+label {
+    font-weight: normal;
+    color: $gray;
+    em { @include rtl-padding-right(5px);}
+}
+.label {
+    display: table-cell;
+    font-size: 100%!important;
+}
+
+/* Data Table */
+table { 
+  width:100%; 
+  border:1px solid #d9dde3;
+  margin:10px 0;
+  .odd  {}
+  .even {  }
+  td.last, th.last { border-right:0; }
+  tr.last th,tr.last td { }
+  th { padding:3px 8px; font-weight:bold; 
+    @include rtl-border-right (1px solid #d9dde3);}
+  td { padding:10px; }
+
+  tbody {
+    th,td { border-bottom:1px solid #d9dde3; 
+      border-left:1px solid #d9dde3; }
+  }
+/* Bundle products tables */
+  tbody.odd tr { }
+  tbody.even tr {  }
+  tbody.odd tr td,
+  tbody.even tr td { border-bottom:0; }
+  tbody.odd tr.border td,
+  tbody.even tr.border td { border-bottom:1px solid #d9dde3; }
+
+  tbody td .option-label { font-weight:bold; font-style:italic; }
+  tbody td .option-value { @include rtl-padding-left(10px); }
+ 
+}
+
+.data-table {
+    width: 100%;
+    h2.product-name {
+        font-size: $font-size-base + 1;
+        line-height: normal;
+    }
+  th, td {
+      padding: 10px;
+  }
+  thead {
+      background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+      border-bottom: 1px solid #E5E5E5;
+    th {
+        font-weight: bold;
+        vertical-align: bottom;
+        &.wrap {
+          white-space: normal;
+      }
+    }
+  }
+   tr.even td,  tr.even th,
+  tr.odd td, tr.odd th {
+      @include rtl-border-right(1px solid #d9dde3);
+      color: #777;
+      padding: 10px;
+      font-size: 13px;
+  }
+   tr.even td.last,
+  tr.odd td.last {
+      @include rtl-border-right (medium none);
+  }
+  tr.odd.last {
+      border-bottom: 1px solid #EEEEEE;
+  }
+  tr.even {
+  }
+  tbody {
+    tr.product-shop-row:hover {
+      background-color: #FFFFFF;
+    }
+    &.odd td {
+        border-width: 0 1px;
+    }
+    &.odd tr.last {
+        border-bottom: 1px solid #E5E5E5;
+    }
+    &.even {
+        background-color: #fff;
+    }
+    &.even td {
+        border-width: 0 1px;
+    }
+  }
+  th .tax-flag {
+      font-weight: normal;
+  }
+  .cell-label {
+      display: none;
+  }
+  .value {
+    input {
+      float: none;
+      text-align: center;
+      margin:0 auto;
+    }
+  }
+}
+
+.form-list {
+ .field {
+  width: 300px;
+  @include rtl-margin-right(10px);
+  @include rtl-float-left();
+ }
+  input.input-text {
+    width: 300px;
+  }
+}
+.back-link {
+  //@include rtl-text-align-right();
+  margin: 10px 0;
+  //@include rtl-float-left();
+}
+
+.cart .shipping input.input-text, .cart .shipping select {
+    width: 100%;
+}
+
+.multiple-checkout select {
+    width: auto
+}
+
+.box-sp-methods .radio, 
+.box-sp-methods .checkbox { height:51px !important;}
+
+.control .radio, 
+.control .checkbox { height:31px; border:0;}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+			<block type="ves_blockbuilder/media" name="pagebuilder.custom.media" alias="pagebuilderMedia" template="ves/blockbuilder/page_head.phtml"/>
+	  	</reference>
+	  	<reference name="before_body_end">
+			<block type="ves_blockbuilder/livecss" name="livecss.paneltool" alias="livecss_panel"/>
+	  	</reference>
+	</default>
+</layout>

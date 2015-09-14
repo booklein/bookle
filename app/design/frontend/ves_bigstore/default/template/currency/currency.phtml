@@ -1,0 +1,12 @@
+<?php if($this->getCurrencyCount() > 1): ?>
+<div class="form-currency">
+    <label for="custom-currency-selector"><?php echo $this->__('Your Currency:') ?></label>
+    <?php foreach ($this->getCurrencies() as $_code => $_name): ?>
+     <?php $_active = ($_code == $this->getCurrentCurrencyCode()) ? 'active' : '' ?>
+      <a class="currency-item <?php echo $_active; ?>" href="<?php echo $this->getSwitchCurrencyUrl($_code)?>" >
+          <?php echo Mage::app()->getLocale()->currency($_code)->getSymbol(); ?>
+      </a>
+    <?php endforeach; ?>
+    
+</div>
+<?php endif; ?>

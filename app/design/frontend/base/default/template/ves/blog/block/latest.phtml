@@ -1,0 +1,213 @@
+<?php
+/**
+ * Venustheme
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Venustheme EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.venustheme.com/LICENSE-1.0.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.venustheme.com/ for more information
+ *
+ * @category   Ves
+ * @package    Ves_Blog
+ * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+
+/**
+ * Ves Blog Extension
+ *
+ * @category   Ves
+ * @package    Ves_Blog
+ * @author     Venustheme Dev Team <venustheme@gmail.com>
+ */
+
+$moduleId = rand().time();
+$cols =  (int)$this->getConfig( "columns" );
+$cols = !empty($cols)?$cols:3;
+$span = 12/$cols;
+$itemsperpage = (int)$this->getConfig( "max_items" );
+$itemsperpage = !empty($itemsperpage)?$itemsperpage:3;
+
+$auto_play = $this->getConfig( "auto_play", "module_setting", 0 );
+if ($auto_play) {
+	$auto_play = 'true';
+} else {
+	$auto_play = 'false';
+}
+
+$interval  = $this->getConfig( "interval", "module_setting", 5000 );
+$show_image = $this->getConfig( "latest_show_image", "module_setting", 1);
+$image_mode = $this->getConfig( 'latest_image_size');
+$sizes = Mage::helper("ves_blog")->getImageSizeModes();
+$key = "small_imagesize";
+$size = "s";
+foreach( $sizes as $k => $v ){
+	if($v == $image_mode) {
+		$key = $k;
+		$size = $v;
+		break;
+	}
+}
+
+$c = $this->getGeneralConfig($key, "");
+$tmp = explode( "x", $c );
+
+$thumb_width = $thumb_height = "";
+if( count($tmp) > 0 && (int)$tmp[0] ){
+	$thumb_width = (int)$tmp[0];
+	$thumb_height = (int)$tmp[1];
+}
+
+if($custom_width = $this->getConfig("custom_image_width",  "module_setting", "")) {
+	$thumb_width = (int)$custom_width;
+}
+
+if($custom_height = $this->getConfig("custom_image_height",  "module_setting", "")) {
+	$thumb_height = (int)$custom_height;
+}
+$modid = rand().time();
+?>
+<div class="block productcarousel venus-latest-block" id="module<?php echo $moduleId; ?>">
+	<?php if( $this->getConfig("latestmod_title") ) : ?>
+		<div class="block-title">
+			<strong> <span><?php echo $this->getConfig( "latestmod_title" ); ?> </span> </strong>
+		</div>
+	<?php endif; ?>
+
+	<div class="block-content">
+		<div class="box-vesblog carousel slide" id="vesblogcarousel<?php echo $moduleId;?>">
+			<?php if( count($posts) > $itemsperpage) { ?>
+			<?php if( $this->getConfig("enable_blognavmodule") ){ ?>
+			<div class="carousel-controls">
+				<a class="carousel-control left fa fa-angle-left" href="#vesblogcarousel<?php echo $moduleId;?>" data-slide="prev"></a>
+				<a class="carousel-control right fa fa-angle-right" href="#vesblogcarousel<?php echo $moduleId;?>" data-slide="next"></a>
+			</div>
+			<?php } ?>
+			<?php } ?>
+			<div class="carousel-inner no-margin">
+				<?php if( $this->getConfig("latestmod_desc") ) :?>
+					<div class="block-description">
+						<p><?php echo $this->getConfig("latestmod_desc"); ?></p>
+					</div>
+				<?php endif; ?>
+				<?php $i = 0;?>
+
+				<?php foreach( $posts as $post ): $i++?>
+					<?php $modid = rand().time(); ?>
+					<?php if($i == 1 || ($i-1) % $itemsperpage == 0) { ?>
+					<div class="item row clearfix <?php if(($i-1)==0) {?>active<?php } ?>">
+						<?php } ?>
+						<div class="col-lg-<?php echo $span;?> col-sm-<?php echo $span;?> col-xs-12 <?php if(($i-1) % $cols == 0){echo "first";}  if($i%$cols == 0){echo "last";} ?>"    >
+							<div class="post-block">
+								<?php
+								$image = "";
+								if($thumb_width && $thumb_height) {
+									$image = Mage::helper('ves_blog')->resizeImage($post->getFile(), "custom-".$size, $thumb_width, $thumb_height);
+								} else {
+									$image = $post->getImageURL( "s" );
+								}
+								if($image && $show_image):
+									?>
+								<div class="post-image">
+									<?php if($post->getVideoType() == 'youtube' ||  $post->getVideoType() == 'vimeo'){ ?>
+
+									<div id="videowrapp<?php echo $modid; ?>" class="video-widget-bg" onclick="playVideo<?php echo $modid; ?>()" style="height: <?php echo $thumb_height.'px' ?>; width: <?php echo $thumb_width.'px' ?>; background: black url('<?php echo $image ?>') no-repeat center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; overflow: hidden; cursor: pointer;"></div>
+
+
+									<script type="text/javascript">
+												// <![CDATA[
+												function playVideo<?php echo $modid; ?>(){
+													<?php if('vimeo' == $post->getVideoType()){ ?>
+														document.getElementById('videowrapp<?php echo $modid; ?>').innerHTML = '<iframe src="//player.vimeo.com/video/<?php echo $post->getVideoId(); ?>" width="<?php echo $thumb_width ?>" height="<?php echo $thumb_height ?>" style="border:0px solid" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen"></iframe>';
+														<?php }elseif('youtube' == $post->getVideoType() ){ ?>
+															document.getElementById('videowrapp<?php echo $modid; ?>').innerHTML = '<iframe width="<?php echo $thumb_width ?>" height="<?php echo $thumb_height ?>" src="http://www.youtube.com/embed/<?php echo $post->getVideoId(); ?>?autoplay=1&#038;showinfo=0" frameborder="0"></iframe>';
+															<?php } ?>
+														}
+
+														document.getElementById("videowrapp<?php echo $modid; ?>").addEventListener("click", playVideo<?php echo $modid; ?>);
+														// ]]>
+													</script>
+
+													<?php }else{ ?>
+													<a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>">
+														<img src="<?php echo $image;?>" class="post-image" alt="<?php echo $post->getTitle();?>"/>
+													</a>
+													<?php } ?>
+
+
+												</div>
+											<?php endif; ?>
+
+											<?php if($this->getConfig("latest_showtitle", "module_setting", 1)): ?>
+											<h4><a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>"><?php echo $post->getTitle(); ?></a></h4>
+											<?php endif; ?>
+
+											<?php if($this->getConfig("latest_showdescription", "module_setting", 1)): ?>
+											<div class="latest-description">
+												<?php
+													$max_chars = $this->getConfig("latest_maxdesc", "module_setting", 70);
+													$latest_stripdescription = $this->getConfig("latest_stripdescription", "module_setting", 0);
+
+													$description  = $post->getDescription();
+													if($latest_stripdescription) {
+														$description  = strip_tags($description);
+													}
+													if (strlen($description) > (int)$max_chars) :
+														echo substr($description,0, (int)$max_chars).'...';
+													else :
+														echo $description;
+													endif;
+												?>
+											</div>
+											<?php endif; ?>
+
+											<?php if( $this->getConfig("latest_show_commentcouter") || $this->getConfig("latest_showcreated") || $this->getConfig("latest_show_hits")) :?>
+												<div class="blog-meta">
+
+													<?php if($this->getConfig("latest_showcreated")) { ?>
+													<div class="blog-updated">
+														<span><?php echo $this->__("Last Update");?></span>
+														<?php echo $post->getUpdated(); ?>
+													</div>
+													<?php } ?>
+
+													<?php if($this->getConfig("latest_show_hits")) { ?>
+													<div class="blog-hits"><span><?php echo $this->__("Read");?></span> <strong><?php echo $post->getHits(); ?></strong> <?php echo $this->__("Times"); ?></div>
+													<?php } ?>
+
+													<?php if($this->getConfig("latest_show_commentcouter")) { ?>
+													<div class="blog-comment-count"><?php echo $this->getCountingComment($post->getId());?> <?php  echo $this->__("Comment");?></div>
+													<?php } ?>
+
+												</div>
+
+											<?php endif; ?>
+
+											<?php if($this->getConfig("latest_showreadmore", "module_setting", 1)): ?>
+											<p class="blog-readmore">
+												<a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>">
+													<?php echo $this->__("Read more...");?>
+												</a>
+											</p>
+											<?php endif; ?>
+										</div>
+									</div>
+									<?php if( $i%$itemsperpage == 0 || $i==count($posts) ) { ?>
+								</div>
+								<?php } ?>
+							<?php endforeach; ?>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+				jQuery('#vesblogcarousel<?php echo $moduleId;?>').carousel({interval:<?php echo $auto_play=='true'?(int)$interval:'false'; ?>,auto:<?php echo $auto_play ?>,pause:'hover', cycle: true});
+			</script>

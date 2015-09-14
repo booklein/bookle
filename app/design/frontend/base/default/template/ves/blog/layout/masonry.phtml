@@ -1,0 +1,209 @@
+<?php
+/**
+ * Venustheme
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Venustheme EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.venustheme.com/LICENSE-1.0.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.venustheme.com/ for more information
+ *
+ * @category   Ves
+ * @package    Ves_Blog
+ * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+
+/**
+ * Ves Blog Extension
+ *
+ * @category   Ves
+ * @package    Ves_Blog
+ * @author     Venustheme Dev Team <venustheme@gmail.com>
+ */
+
+$leadingCols = 	(int)$this->getListConfig("list_leadingcols");
+$leadingItems = (int)$this->getListConfig("list_leadinglimit");
+
+
+$secondItems = (int)$this->getListConfig("list_secondlimit");
+$secondCols = (int)$this->getListConfig("list_secondcols");
+$childheight = $this->getCategoryConfig("chidlrentheight");
+$childheight = (trim($childheight) == 'auto')?'auto':(int)$childheight."px";
+$cols = (int)$this->getCategoryConfig("chidlrentcols");
+
+$span_large = floor(12/$grid_col_ls);
+$span_medium = floor(12/$grid_col_ms);
+$span_small = floor(12/$grid_col_ss);
+$span_mini = floor(12/$grid_col_mss);
+
+$layout_mode = $this->getLayoutMode();
+if("list" == $layout_mode ) {
+	$span_large = $span_medium = $span_small = $span_mini = 12;
+}
+$modid = '';
+
+?>
+<div class="blog-list blogs-<?php echo $layout_mode; ?>">
+	<div class="blog-wrapper">
+
+		<div class="page-title">
+			<h1><?php echo $this->getPageTitle(); ?></h1>
+		</div>
+
+		<?php  if( $this->getType() == 'category' && $category = $this->getCategory() ) : ?>
+			<?php if( $this->getCategoryConfig("show_childrent") && ($childrent = $this->getChildrent()) && count($childrent) ): ?>
+				<div class="blog-childrent vesclear">
+					<h3><?php echo $this->__("Childrent"); ?></h3>
+
+					<div class="childrent-wrapper colswrapper cols<?php echo $cols;?>">
+						<?php $i=0; foreach( $childrent as $sub ): ?>
+						<?php $class="";
+						if( $i%$cols==0 ){
+							$class .="itemlast";
+						}
+						?>
+						<div class="childrent-item itemcol <?php echo $class;?>" style="height:<?php echo $childheight;?>">
+							<h2>
+								<a href="<?php echo $sub->getCategoryLink();?>" title="<?php echo $category->getTitle();?>"><?php echo $sub->getTitle(); ?></a>
+
+								(<?php echo $this->countPosts( $sub->getId() ); ?>)</h2>
+
+								<a href="<?php echo $sub->getCategoryLink(); ?>">
+									<img src="<?php echo $sub->getImageURL('l');?>"/>
+								</a>
+								<div class="ves-description">
+									<?php echo $sub->getDescription(); ?>
+								</div>
+								<div class="sub-viewblogs">
+									<a href="<?php echo $sub->getCategoryLink();?>" title="<?php echo $category->getTitle();?>"><?php echo $this->__("View Posts"); ?></a>
+								</div>
+							</div>
+							<?php $i++; endforeach; ?>
+						</div>
+					</div>
+				<?php endif ; ?>
+			<?php endif; ?>
+
+			<?php if( ($posts = $this->getPosts()) && count($posts) ): ?>
+				<div class="posts-masonry">
+					<?php
+					$_collectionSize = count($posts);
+					$_columnCount = !empty($grid_col_ls)?$grid_col_ls:$_collectionSize;
+					foreach( $posts as $post ):
+						?>
+					<?php $modid = rand().time(); ?>
+					<div class="wrap-item item-masonry">
+						<div class="post-block">
+							<?php if( $post->getFile() ): ?>
+								<?php
+								$image_info = $this->getPostImage($post, $layout_mode);
+								$image_file = isset($image_info['url'])?$image_info['url']:"";
+								$image_width = isset($image_info['width'])?$image_info['width']:"0";
+								$image_height = isset($image_info['height'])?$image_info['height']:"0";
+								$image_attribute = "";
+								if($image_width) {
+									$image_attribute .= ' width="'.$image_width.'"';
+								}
+								if($image_height) {
+									$image_attribute .= ' height="'.$image_height.'"';
+								}
+								if($image_file):
+									?>
+								<div class="blog-image">
+									<?php if($post->getVideoType() == 'youtube' ||  $post->getVideoType() == 'vimeo'){?>
+
+									<div id="videowrapp<?php echo $modid; ?>" class="video-widget-bg" onclick="playVideo<?php echo $modid; ?>()" style="height: <?php echo $image_height.'px' ?>; width: <?php echo $image_width.'px' ?>; background: black url('<?php echo $image_file ?>') no-repeat center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; overflow: hidden; cursor: pointer;"></div>
+
+									<script type="text/javascript">
+												// <![CDATA[
+												function playVideo<?php echo $modid; ?>(){
+													<?php if('vimeo' == $post->getVideoType()){ ?>
+														document.getElementById('videowrapp<?php echo $modid; ?>').innerHTML = '<iframe src="//player.vimeo.com/video/<?php echo $post->getVideoId(); ?>" width="<?php echo $image_width ?>" height="<?php echo $image_height ?>" style="border:0px solid" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen"></iframe>';
+														<?php }elseif('youtube' == $post->getVideoType() ){ ?>
+															document.getElementById('videowrapp<?php echo $modid; ?>').innerHTML = '<iframe width="<?php echo $image_width ?>" height="<?php echo $image_height ?>" src="http://www.youtube.com/embed/<?php echo $post->getVideoId(); ?>?autoplay=1&#038;showinfo=0" frameborder="0"></iframe>';
+															<?php } ?>
+														}
+
+														document.getElementById("videowrapp<?php echo $modid; ?>").addEventListener("click", playVideo<?php echo $modid; ?>);
+														// ]]>
+													</script>
+
+													<?php }else{ ?>
+													<a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>">
+														<img src="<?php echo $image_file;?>" <?php echo $image_attribute; ?> alt="<?php echo $post->getTitle();?>"/>
+													</a>
+													<?php } ?>
+												</div>
+
+											<?php endif; ?>
+										<?php endif; ?>
+										<!-- <img src="http://placekitten.com/400/700?image=1" /> -->
+										<div class="blog-meta-block">
+											<h3 class="blog-title"><a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>"><?php echo $post->getTitle(); ?></a></h3>
+											<div class="ves-description">
+												<?php echo $post->getDescription(); ?>
+												<p class="blog-readmore"><a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>">
+													<?php echo $this->__("Read more...");?>
+												</a></p>
+											</div>
+											<div class="blog-meta">
+												<?php if($this->getListConfig("list_showcreated")) { ?>
+												<span class="created-date">
+													<?php
+													$post_date = $post->getCreated();
+													$post_date = Mage::getModel('core/date')->date('d.m.Y', strtotime($post_date));
+													$_ct= new Zend_Date( $post_date);
+													?>
+													<span class="month"><?php echo $_ct->toString('MMM');?></span>
+													<span class="day"><?php echo $_ct->toString('dd');?></span>
+													<span class="year">,<?php echo $_ct->toString('yyyy');?></span>
+												</span>
+												<?php } ?>
+												<?php if( $this->getType() !="category" && $this->getListConfig("list_category_title") ): ?>
+													<span class="blog-category">
+														<span><?php echo $this->__("Pubslished In");?></span>
+														<a href="<?php echo $post->getCategoryLink();?>" title="<?php echo $post->getCatTitle();?>"><?php echo $post->getCatTitle();?></a>
+													</span>
+												<?php endif; ?>
+
+												<?php if($this->getListConfig("list_show_hits")) { ?>
+												<span class="blog-hits"><span><?php echo $this->__("Read");?></span> <strong><?php echo $post->getHits(); ?></strong> <?php echo $this->__("Times"); ?></span>
+												<?php } ?>
+
+												<?php if($this->getListConfig("list_show_commentcouter")) { ?>
+												<span class="blog-comment-count"><?php echo $this->getCountingComment($post->getId());?> <?php  echo $this->__("Comment");?></span>
+												<?php } ?>
+											</div>
+											<div class="blog-bottom">
+												<?php if( $tags = $post->getTags() ) :$tags = explode( ",",$tags );	?>
+													<div class="blog-tags">
+														<span><?php echo $this->__("Tags :");?> </span>
+														<?php foreach( $tags as $tag ): ?>
+															<a href="<?php echo Mage::helper('ves_blog')->getTagUrl(trim($tag));?>" title="<?php echo $tag;?>"><span><?php echo $tag; ?></span></a>,
+														<?php endforeach; ?>
+													</div>
+												<?php endif; ?>
+											</div>
+										</div>
+									</div>
+								</div>
+							<?php endforeach; ?>
+						</div>
+
+					<?php elseif( count($posts) <= 0 ): ?>
+						<div class="ves-message">
+							<?php echo $this->__( "We are updating data, please come back in near time!!!" ); ?>
+						</div>
+					<?php endif; ?>
+
+				</div>
+				<?php echo $this->getChildHtml('list.toolbar'); ?>
+			</div>

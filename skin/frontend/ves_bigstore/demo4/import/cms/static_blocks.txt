@@ -1,0 +1,265 @@
+----------------------------------------------------------
+Static Block 1
+----------------------------------------------------------
+Block Title:    Footer Links
+Identifier:     footer_links
+Store View:     All
+Status:         enabled
+Content: 
+
+<ul>
+    <li><a href="{{store direct_url="about-magento-demo-store"}}">About Us</a></li>
+    <li><a href="{{store direct_url="customer-service"}}">Customer Service</a></li>
+<li class="last privacy"><a href="{{store direct_url="privacy-policy-cookie-restriction-mode"}}">Privacy Policy</a></li>
+</ul>
+
+
+----------------------------------------------------------
+Static Block 2
+----------------------------------------------------------
+Block Title:    Footer Links Company
+Identifier:     footer_links_company
+Store View:     All
+Status:         enabled
+Content: 
+
+<div class="links">
+    <div class="block-title">
+        <strong><span>Company</span></strong>
+    </div>
+    <ul>
+        <li><a href="{{store url=""}}about-magento-demo-store/">About Us</a></li>
+        <li><a href="{{store url=""}}contacts/">Contact Us</a></li>
+        <li><a href="{{store url=""}}customer-service/">Customer Service</a></li>
+        <li><a href="{{store url=""}}privacy-policy-cookie-restriction-mode/">Privacy Policy</a></li>
+    </ul>
+</div>
+
+
+----------------------------------------------------------
+Static Block 3
+----------------------------------------------------------
+Block Title:    Cookie restriction notice
+Identifier:     cookie_restriction_notice_block
+Store View:     All
+Status:         enabled
+Content: 
+<p>This website requires cookies to provide all of its features. For more information on what data is contained in the cookies, please see our <a href="{{store direct_url="privacy-policy-cookie-restriction-mode"}}">Privacy Policy page</a>. To accept cookies from this site, please click the Allow button below.</p>
+
+
+----------------------------------------------------------
+Static Block 4
+----------------------------------------------------------
+Block Title:    footer map
+Identifier:     footer-map
+Store View:     All
+Status:         enabled
+Content: 
+{{block type="core/template" name="footer.map" before="-" template="contacts/form_location.phtml"/ }}
+
+
+----------------------------------------------------------
+Static Block 5
+----------------------------------------------------------
+Block Title:    Social
+Identifier:     social
+Store View:     All
+Status:         enabled
+Content: 
+<ul class="social">
+<li class="over social-facebook"><a title="Facebook" href="#"> <em class="rhb fa fa-facebook">&nbsp;</em> <span>Facebook</span> </a></li>
+<li class="over social-twitter"><a title="Twitter" href="#"> <em class="rhb fa fa-twitter">&nbsp;</em> <span>Twitter</span> </a></li>
+<li class="over social-google"><a title="Google" href="#"> <em class="rhb fa fa-google-plus">&nbsp;</em> <span>Google+</span> </a></li>
+<li class="over social-pin"><a title="Pinterest" href="#"> <em class="rhb fa fa-pinterest">&nbsp;</em> <span>Pinterest</span></a></li>
+<li class="over social-rss"><a title="Twitter" href="#"> <em class="rhb fa fa-rss">&nbsp;</em> <span>RSS</span> </a></li>
+</ul>
+
+
+----------------------------------------------------------
+Static Block 6
+----------------------------------------------------------
+Block Title:    Footer Links
+Identifier:     footer-links
+Store View:     All
+Status:         enabled
+Content: 
+<ul class="footer-links">
+<li><a title="Privacy Policy" href="privacy-policy-cookie-restriction-mode">Privacy Policy</a></li>
+<li><a title="Site Map" href="#">Site Map</a></li>
+</ul>
+
+
+----------------------------------------------------------
+Static Block 7
+----------------------------------------------------------
+Block Title:    Content Showcase
+Identifier:     content-showcase
+Store View:     All
+Status:         enabled
+Content: 
+<div class="row no-margin">
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-padding a-right"><img alt="" src="{{media url="wysiwyg/showcase/default_banner4.jpg"}}" />
+<div class="abs-left">
+<h3>Investigationes demons tra-verunt lectores claritas est</h3>
+<div class="line">&nbsp;</div>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut</p>
+<a class="see-more" href="about-magento-demo-store"><span>SEE MORE</span><i class="rhb fa fa-long-arrow-right">&nbsp;</i></a></div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-padding a-left"><img alt="" src="{{media url="wysiwyg/showcase/default_banner3.jpg"}}" />
+<div class="abs-right">
+<h3>Lorem ipsum dolor sit amet consectetuer</h3>
+<div class="line">&nbsp;</div>
+<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea</p>
+<a class="see-more" href="about-magento-demo-store"><span>SEE MORE</span><i class="rhb fa fa-long-arrow-right">&nbsp;</i></a></div>
+</div>
+</div>
+
+
+----------------------------------------------------------
+Static Block 8
+----------------------------------------------------------
+Block Title:    Block Showcase
+Identifier:     block-showcase
+Store View:     All
+Status:         enabled
+Content: 
+<div class="row custom-text no-margin">
+<div class="col-xs-12 col-lg-4 col-sm-4 col-4">
+<div class="item"><span class="icon pull-left"><img alt="" src="{{media url="wysiwyg/showcase/icon-gold.png"}}" /></span>
+<h3>SHIPPING WORLDWIDE</h3>
+<p>On orders over $399.0</p>
+</div>
+</div>
+<div class="col-xs-12 col-lg-4 col-sm-4 col-4">
+<div class="item"><span class="icon pull-left"><img alt="" src="{{media url="wysiwyg/showcase/icon-box.png"}}" /></span>
+<h3>FREE RETURN</h3>
+<p>On orders over $399.0</p>
+</div>
+</div>
+<div class="col-xs-12 col-lg-4 col-sm-4 col-4">
+<div class="item"><span class="icon pull-left"><img alt="" src="{{media url="wysiwyg/showcase/icon-support.png"}}" /></span>
+<h3>SUPPORT 24/7</h3>
+<p>Hotline: (+91) 0123 456 789</p>
+</div>
+</div>
+</div>
+
+
+----------------------------------------------------------
+Static Block 9
+----------------------------------------------------------
+Block Title:    Footer Contact
+Identifier:     footer-contact
+Store View:     All
+Status:         enabled
+Content: 
+{{block type="core/template" name="footer.contact" before="-" template="contacts/form_contact.phtml"/ }}
+
+
+----------------------------------------------------------
+Static Block 10
+----------------------------------------------------------
+Block Title:    Hotline
+Identifier:     hotline
+Store View:     All
+Status:         enabled
+Content: 
+<div class="a-right"><img src="{{media url="wysiwyg/showcase/phone.png"}}" alt="" /> Hotline: (+01) - <b>000 222 666</b> / (+01) <b>000 111 999</b></div>
+
+
+----------------------------------------------------------
+Static Block 11
+----------------------------------------------------------
+Block Title:    Langding Page
+Identifier:     langding-page
+Store View:     All
+Status:         enabled
+Content: 
+<div>{{block type="ves_landingpage/list" name="ves_landingpage.list" before="-" /}}</div>
+
+
+----------------------------------------------------------
+Static Block 12
+----------------------------------------------------------
+Block Title:    Call Us
+Identifier:     call-us
+Store View:     All
+Status:         enabled
+Content: 
+<p><i class="fa fa-phone">&nbsp;</i><span>CALL US: (+01) - </span>222 000 666 . Free shipping on order over $99 !.</p>
+
+
+----------------------------------------------------------
+Static Block 13
+----------------------------------------------------------
+Block Title:    Newletter Module
+Identifier:     newletter
+Store View:     All
+Status:         enabled
+Content: 
+{{block type="newsletter/subscribe" template="newsletter/subscribe.phtml"}}
+
+
+----------------------------------------------------------
+Static Block 14
+----------------------------------------------------------
+Block Title:    Customer Service
+Identifier:     customer-service
+Store View:     All
+Status:         enabled
+Content: 
+<div class="block-title"><span>Customer Service</span></div>
+<div class="block-content">
+<ul class="links">
+<li><a title="Site Map" href="catalog/seo_sitemap/category/">Site Map</a></li>
+<li><a title="Search Terms" href="catalogsearch/term/popular/">Search Terms</a></li>
+<li><a title="Advanced Search" href="catalogsearch/advanced/">Advanced Search</a></li>
+<li><a title="Orders and Returns" href="sales/guest/form/">Orders and Returns</a></li>
+<li><a title="Contact Us" href="contacts/">Contact Us</a></li>
+</ul>
+</div>
+
+
+----------------------------------------------------------
+Static Block 15
+----------------------------------------------------------
+Block Title:    About Us
+Identifier:     about-us
+Store View:     All
+Status:         enabled
+Content: 
+<div class="block-title"><span>About Us</span></div>
+<div class="block-content">
+<ul class="links">
+<li><a href="#">Responsive</a></li>
+<li><a href="#">Magento themes</a></li>
+<li><a href="#">E-commerce</a></li>
+<li><a href="#">The company</a></li>
+<li><a href="#">Terms</a></li>
+</ul>
+</div>
+
+
+----------------------------------------------------------
+Static Block 16
+----------------------------------------------------------
+Block Title:    icon-pay-footer
+Identifier:     icon-pay-footer
+Store View:     All
+Status:         enabled
+Content: 
+<a href="#">
+<img src="{{media url="wysiwyg/banner/payment.png"}}" alt="" />
+</a>
+
+
+----------------------------------------------------------
+Static Block 17
+----------------------------------------------------------
+Block Title:    block-custom-header
+Identifier:     block-custom-header
+Store View:     All
+Status:         enabled
+Content: 
+<h4 class="fa fa-phone">&nbsp;</h4>
+<div class="pull-left text-left"><strong>Call us now</strong> <br /> Toll free : <a href="#"> 0123-456-789</a></div>

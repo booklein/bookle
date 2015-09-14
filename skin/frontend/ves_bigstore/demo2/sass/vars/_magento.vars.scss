@@ -1,0 +1,130 @@
+/******************************************************
+ * @package Ves Theme Framework for Magento
+ * @version 1.0
+ * @author http://www.venustheme.com
+ * @copyright Copyright (C) Augus 2013 Venustheme.com <$emai:venustheme@gmail.com>.All rights reserved.
+ * @license   GNU General Public License version 2
+*******************************************************/
+$image-theme-path-base: 	   "../images/" !default; //image default of magento
+
+/*------------------ User ------------------*/
+$base-color: 						#999 !default;
+
+// Global values
+// --------------------------------------------------
+$rtl-left : left;
+$rtl-right : right;
+
+$theme-padding           : $line-height-computed - 5;
+$theme-margin            : $line-height-computed - 5;
+$theme-line-height       : 30px;
+
+$theme-padding           : $line-height-computed - 5;
+$theme-margin            : $line-height-computed - 5;
+$theme-line-height       : 30px;
+
+// themes colors
+// -------------------------
+
+$brown:					#ff0000;
+$browndark: 			#e4dcd2;
+$lightbrown:			#f6eee3;	
+$blue:                  #049cdb;
+$bluedark:              #0064cd;
+$yellow:                #ffc40d;
+$orange:                #f89406;
+$pink:                  #c3325f;
+$purple:                #7a43b6;
+$white :			 	#FFFFFF;
+$black :				#000000;
+$cyandark:   			#4e4d49;
+$green:                 #7db641;
+$red:                   #c83a3a;
+
+$font-family-custom-light: 'tahoma' !default;
+
+
+$theme-color 			 : $theme-color-default;
+$theme-color-hover       : $theme-color-secondary;
+
+$btn-theme-primary       : $theme-color ;
+$btn-theme-primary-hover : $theme-color-hover ;
+
+$text-primary-theme      : $theme-color;
+$text-danger-theme       : $theme-color-secondary;
+ 
+
+/* 
+ * product block
+ */
+
+$product-name-font-size		        : 14px;
+$product-name-color  		        : #000;
+$product-name-color-hover  		    : $theme-color-default;
+$product-name-font-family			: $font-family-secondary;
+$product-price-old-size				: 16px;
+$product-price-font-size    		: 24px;
+$product-price-color				: $link-hover-color;
+$product-price-tax                  : #bbb;
+
+$list-product-name-font-size		: $font-size-large;
+$list-product-name-color  		    : #000;
+$list-product-name-color-hover  	: $theme-color-default;
+$list-product-name-font-family		: $font-family-custom-light;
+$list-product-price-font-size    	: $font-size-large;
+
+/* Icons */
+$product-sale-bg 					: #F5EA32;
+$product-sale-color 				: #000;
+
+/* buttons */
+$btn-wrap-border:   #CCC ;
+$btn-wrap-bg    : $white; 
+
+
+
+/* 
+ * Block Modules 
+ */
+$block-module-title-font   	 	: $font-headding-family;
+$block-module-title-color    	: #3a3d41;
+$block-module-title-bg			: $brown;
+$block-module-title-border   	: $gray-lighter;
+$block-module-title-fontsize 	: 24px;
+$block-module-title-lineheight  : 34px;
+$block-module-content-bg        : #fff;
+$block-module-padding           : $theme-padding;
+$block-module-margin	        : 20px;
+$block-module-border     		: 1px solid #e7e7e7;
+$block-module-badge            : $theme-color;
+ 
+
+
+// Brand
+// ========================================================================
+$brand-border:                     1px solid $border-color !default;
+$brand-radius:                     0px !default;
+
+// Search
+// ========================================================================
+$search-position-top: 				-61px !default;
+$search-position-right:             42px !default;
+$search-text-color: 			    #cfcfcf !default;
+$search-border:                     #dcdcdc !default;
+$search-bg-color:                   $white !default;
+$search-icon-color:                 $theme-color !default;
+$search-padding:                    10px !default;
+$search-margin:                     30px;
+$search-icon-font-size:             $font-size-base !default;
+$search-font-size:                  $font-size-base - 1 !default;
+$search-font-style:                 normal !default;
+$search-width:                      285px !default;
+$search-min-height:                 30px !default;
+$search-button-border:              1px solid transparent !default;
+$search-button-bg:                  #fff !default;
+$search-button-color:               #999;
+
+
+@import "vars/layout.vars";
+@import "vars/product.vars";
+@import "vars/modules.vars";

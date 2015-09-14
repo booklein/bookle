@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<themeeditor>
+	<version value="1.4">
+	<ccc available="true" />
+	<guest_checkout available="true" />
+	<one_page_checkout available="true" />
+	<store_locator available="true" />
+	</version>
+	<author>VenusTheme</author>
+<name>Live Theme Editor</name>	
+<selectors>
+	<items>
+			<header>Body Content</header>
+			<match>body</match>
+			
+			<item>
+				<type>text</type>
+				<label>Background Color</label>
+				<selector>body</selector>
+				<attrs>background-color</attrs>
+			</item>
+
+			<item>
+			<type>image</type>
+				<label>Background Image</label>
+				<selector>body</selector>
+				<attrs>background-image</attrs>
+			</item> 
+
+		 <item>
+			<type>text</type>
+			<label>Background Content</label>
+			<selector>body #page</selector>
+			<attrs>background-color</attrs>
+		</item> 
+			<item>
+				<type>image</type>
+				<label>Background Image</label>
+				<selector>body #page</selector>
+				<attrs>background-image</attrs>
+			</item> 
+
+	 	<item>
+			<type>fontsize</type>
+			<label>Font-Size</label>
+			<selector>body #page</selector>
+			<attrs>font-size</attrs>
+		</item> 
+
+
+		<item>
+			<type>text</type>
+			<label>Color Text</label>
+			<selector>body #page</selector>
+			<attrs>color</attrs>
+		</item> 
+		<item>
+			<type>text</type>
+			<label>Link Color</label>
+			<selector>body #page a</selector>
+			<attrs>color</attrs>
+		</item> 
+
+		<item>
+			<type>text</type>
+			<label>Link Hover Color</label>
+			<selector>a:hover</selector>
+			<attrs>color</attrs>
+		</item> 
+		
+	</items>
+ 
+	<items>
+		<header>TopBar</header>
+		<match>topbar</match>
+		<item>
+			<type>text</type>
+			<label>Background Color</label>
+			<selector>#topbar</selector>
+			<attrs>background-color</attrs>
+		</item> 
+	 	<item>
+			<type>text</type>
+			<label>Color Text</label>
+			<selector>#topbar</selector>
+			<attrs>color</attrs>
+		</item> 
+		
+		<item>
+			<type>text</type>
+			<label>Border Color</label>
+			<selector>#topbar</selector>
+			<attrs>border-color</attrs>
+		</item> 
+		
+	 	<item>
+			<type>text</type>
+			<label>Color Link</label>
+			<selector>#topbar a</selector>
+			<attrs>color</attrs>
+		</item> 
+		<item>
+			<type>text</type>
+			<label>Color Link Hover</label>
+			<selector>#topbar a:hover</selector>
+			<attrs>color</attrs>
+		</item> 
+		
+		<item>
+			<type>text</type>
+			<label>Background Icon</label>
+			<selector>.cart-inner .fa</selector>
+			<attrs>background-color</attrs>
+		</item> 
+		
+		<item>
+			<type>text</type>
+			<label>Background Input Search</label>
+			<selector>#topbar .form-search #search</selector>
+			<attrs>background-color</attrs>
+		</item>
+		
+		<item>
+			<type>text</type>
+			<label>Color Text Input Search</label>
+			<selector>#topbar .form-search #search</selector>
+			<attrs>color</attrs>
+		</item>	
+
+	</items>
+	<items>
+		<header>Header</header>
+		<match>header-main</match>
+		<item>
+			<type>text</type>
+			<label>Background Color</label>
+			<selector>#header-main</selector>
+			<attrs>background-color</attrs>
+		</item> 
+	 	<item>
+			<type>text</type>
+			<label>Color Text</label>
+			<selector>#header-main</selector>
+			<attrs>color</attrs>
+		</item> 
+
+	 	<item>
+			<type>text</type>
+			<label>Color Link</label>
+			<selector>#header-main a</selector>
+			<attrs>color</attrs>
+		</item> 
+		<item>
+			<type>text</type>
+			<label>Color Link Hover</label>
+			<selector>#header-main a:hover</selector>
+			<attrs>color</attrs>
+		</item> 
+
+	</items>
+	<items>
+		<header>MainMenu</header>
+		<match>ves-mainnav</match>
+		<item>
+			<type>text</type>
+			<label>Background Color</label>
+			<selector>#ves-mainnav</selector>
+			<attrs>background-color</attrs>
+		</item> 
+
+	 	<item>
+			<type>text</type>
+			<label>Color Link</label>
+			<selector>#ves-mainnav .navbar-nav > li > a</selector>
+			<attrs>color</attrs>
+		</item> 
+		<item>
+			<type>text</type>
+			<label>Color Link Hover</label>
+			<selector>#ves-mainnav .navbar-nav > li > a:hover</selector>
+			<attrs>color</attrs>
+		</item> 
+		
+		<item>
+			<type>text</type>
+			<label>Border Color</label>
+			<selector>#ves-mainnav .navbar-inverse</selector>
+			<attrs>border-color</attrs>
+		</item>
+		
+		<item>
+			<type>text</type>
+			<label>Dropdow - Background Color</label>
+			<selector>#ves-mainnav .navbar-nav > li .dropdown-menu</selector>
+			<attrs>background-color</attrs>
+		</item>
+
+	</items>
+
+	<items>
+		<header>Footer</header>
+		<match>ves-footer</match>
+			<item>
+				<type>text</type>
+				<label>Background Color</label>
+				<selector>#ves-footer</selector>
+				<attrs>background-color</attrs>
+			</item> 
+			<item>
+				<type>text</type>
+				<label>Color Text</label>
+				<selector>#ves-footer, #ves-footer span</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Color Icon Social</label>
+				<selector>.social .fa</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Color Title</label>
+				<selector>#ves-footer .block-title, #ves-footer h3</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Color Link</label>
+				<selector>#ves-footer a, .custom-links a</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Color Link Hover</label>
+				<selector>#ves-footer a:hover, .custom-links a:hover</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>image</type>
+				<label>Background Image</label>
+				<selector>#ves-footer</selector>
+				<attrs>background-image</attrs>
+			</item>
+	</items>
+	<items>
+		<header>Footer Top</header>
+		<match>footer-top</match>
+			<item>
+				<type>text</type>
+				<label>Background Color</label>
+				<selector>#ves-footer .footer-top</selector>
+				<attrs>background-color</attrs>
+			</item> 
+			<item>
+				<type>text</type>
+				<label>Color Text</label>
+				<selector>#ves-footer .footer-top, #ves-footer .footer-top span</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Color Icon Social</label>
+				<selector>#ves-footer .footer-top .social .fa</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Color Title</label>
+				<selector>#ves-footer .footer-top .block-title,#ves-footer .footer-top h3</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Color Link</label>
+				<selector>#ves-footer .footer-top a,#ves-footer .footer-top .custom-links a</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Color Link Hover</label>
+				<selector>#ves-footer .footer-top a:hover,#ves-footer .footer-top .custom-links a:hover</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>image</type>
+				<label>Background Image</label>
+				<selector>#ves-footer .footer-top</selector>
+				<attrs>background-image</attrs>
+			</item>
+	</items>
+	<items>
+		<header>Footer Center</header>
+		<match>footer-center</match>
+			<item>
+				<type>text</type>
+				<label>Background Color</label>
+				<selector>#ves-footer .footer-center</selector>
+				<attrs>background-color</attrs>
+			</item> 
+			<item>
+				<type>text</type>
+				<label>Color Text</label>
+				<selector>#ves-footer .footer-center, #ves-footer .footer-center span</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Color Icon Social</label>
+				<selector>#ves-footer .footer-center .social .fa</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Color Title</label>
+				<selector>#ves-footer .footer-center .block-title,#ves-footer .footer-center h3</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Color Link</label>
+				<selector>#ves-footer .footer-center a,#ves-footer .footer-center .custom-links a</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Color Link Hover</label>
+				<selector>#ves-footer .footer-center a:hover,#ves-footer .footer-center .custom-links a:hover</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>image</type>
+				<label>Background Image</label>
+				<selector>#ves-footer .footer-center</selector>
+				<attrs>background-image</attrs>
+			</item>
+	</items>
+	<items>
+		<header>Footer Bottom</header>
+		<match>footer-bottom</match>
+			<item>
+				<type>text</type>
+				<label>Background Color</label>
+				<selector>#ves-footer .footer-bottom</selector>
+				<attrs>background-color</attrs>
+			</item> 
+			<item>
+				<type>text</type>
+				<label>Color Text</label>
+				<selector>#ves-footer .footer-bottom, #ves-footer .footer-bottom span</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Color Icon Social</label>
+				<selector>#ves-footer .footer-bottom .social .fa</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Color Title</label>
+				<selector>#ves-footer .footer-bottom .block-title,#ves-footer .footer-bottom h3</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Color Link</label>
+				<selector>#ves-footer .footer-bottom a,#ves-footer .footer-bottom .custom-links a</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Color Link Hover</label>
+				<selector>#ves-footer .footer-bottom a:hover,#ves-footer .footer-bottom .custom-links a:hover</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>image</type>
+				<label>Background Image</label>
+				<selector>#ves-footer .footer-bottom</selector>
+				<attrs>background-image</attrs>
+			</item>
+	</items>
+	<items>
+		<header>Powered</header>
+		<match>powered</match>
+		<item>
+			<type>text</type>
+			<label>Background Color</label>
+			<selector>#powered</selector>
+			<attrs>background-color</attrs>
+		</item> 
+		<item>
+			<type>text</type>
+			<label>Color Text</label>
+			<selector>#powered</selector>
+			<attrs>color</attrs>
+		</item> 
+
+	 	<item>
+			<type>text</type>
+			<label>Color Link</label>
+			<selector>#powered a</selector>
+			<attrs>color</attrs>
+		</item> 
+		<item>
+			<type>text</type>
+			<label>Color Link Hover</label>
+			<selector>#powered a:hover</selector>
+			<attrs>color</attrs>
+		</item> 
+		<item>
+			<type>image</type>
+			<label>Background Image</label>
+			<selector>#powered</selector>
+			<attrs>background-image</attrs>
+		</item> 
+
+	</items>
+</selectors>
+
+<elements>
+	<items>
+		<header>Products</header>
+		<match>product</match>
+		<item>
+			<type>text</type>
+			<label>Color Price</label>
+			<selector>.product-block .price</selector>
+			<attrs>color</attrs>
+		</item> 
+		<item>
+			<type>text</type>
+			<label>Color Special Price</label>
+			<selector>.special-price .price</selector>
+			<attrs>color</attrs>
+		</item> 
+ 		
+ 		<item>
+			<type>text</type>
+			<label>Color Price Old</label>
+			<selector>.old-price .price</selector>
+			<attrs>color</attrs>
+		</item> 
+
+		<item>
+			<type>text</type>
+			<label>Color Price Tax</label>
+			<selector>.price .price-tax</selector>
+			<attrs>color</attrs>
+		</item>
+		
+		<item>
+			<type>text</type>
+			<label>BgColor Cart</label>
+			<selector>.product-block .actions button.btn-cart</selector>
+			<attrs>background-color</attrs>
+		</item>
+		
+		<item>
+			<type>text</type>
+			<label>Color Cart</label>
+			<selector>.product-block .actions button.btn-cart</selector>
+			<attrs>color</attrs>
+		</item> 
+		
+		<item>
+			<type>text</type>
+			<label>BgColor Wishlist</label>
+			<selector>.product-block .actions .add-to-links li.wishlist</selector>
+			<attrs>background-color</attrs>
+		</item>
+		
+		<item>
+			<type>text</type>
+			<label>Color Wishlist Icon</label>
+			<selector>.product-block .actions .add-to-links li.wishlist .fa</selector>
+			<attrs>color</attrs>
+		</item> 
+		
+		<item>
+			<type>text</type>
+			<label>BgColor Compare</label>
+			<selector>.product-block .actions .add-to-links li.compare</selector>
+			<attrs>background-color</attrs>
+		</item>	
+		
+		<item>
+			<type>text</type>
+			<label>Color Compare Icon</label>
+			<selector>.product-block .actions .add-to-links li.compare .fa</selector>
+			<attrs>color</attrs>
+		</item> 
+		
+	</items>
+	<items>
+		<header>Modules in Sidebar</header>
+		<match>modules</match>
+			<item>
+				<type>text</type>
+				<label>Heading Background</label>
+				<selector>.sidebar .block-title</selector>
+				<attrs>background-color</attrs>
+			</item> 
+			<item>
+				<type>text</type>
+				<label>Heading Color</label>
+				<selector>.sidebar .block-title strong span</selector>
+				<attrs>color</attrs>
+			</item> 
+			<item>
+				<type>text</type>
+				<label>Content Background</label>
+				<selector>.sidebar .block-content</selector>
+				<attrs>background-color</attrs>
+			</item>  
+
+			<item>
+				<type>text</type>
+				<label>Content Color</label>
+				<selector>.sidebar .block-content</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Link Color</label>
+				<selector>.block-layered-nav dd a</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Title Color</label>
+				<selector>.block-layered-nav dt, #ves-accordion > li > a</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>text</type>
+				<label>Border Color</label>
+				<selector>.sidebar .block</selector>
+				<attrs>border</attrs>
+			</item> 
+	</items>
+	<items>
+		<header>Module Blocks</header>
+		<match>module-blocks</match>
+			<item>
+				<type>text</type>
+				<label>Heading Background</label>
+				<selector>.block-title, .block-title h3</selector>
+				<attrs>background-color</attrs>
+			</item> 
+			<item>
+				<type>text</type>
+				<label>Heading Color</label>
+				<selector>.block-title, .block-title h3, .block-title strong span</selector>
+				<attrs>color</attrs>
+			</item> 
+			<item>
+				<type>color</type>
+				<label>Content Background</label>
+				<selector>.block-content</selector>
+				<attrs>background-color</attrs>
+			</item>  
+
+			<item>
+				<type>color</type>
+				<label>Content Color</label>
+				<selector>.block-content</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>color</type>
+				<label>Link Color</label>
+				<selector>.block-content a</selector>
+				<attrs>color</attrs>
+			</item> 
+			
+			<item>
+				<type>color</type>
+				<label>Link Hover Color</label>
+				<selector>.block-content a:hover</selector>
+				<attrs>color</attrs>
+			</item>
+			
+			<item>
+				<type>color</type>
+				<label>Border Color</label>
+				<selector>.block</selector>
+				<attrs>border</attrs>
+			</item> 
+	</items>
+</elements>
+</themeeditor>

@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<widgets>
+<!-- Widget single image-->
+	<widget_autosearch type="ves_autosearch/widget_search">
+		<name>Ves Base : Autosearch</name>
+		<description>Create Auto Suggestion Search Widget</description>
+		<parameters>
+            <title translate="label" module="core">
+                <visible>1</visible>
+                <label>Widget Title</label>
+                <description>This tile will be showed as header of widget block. Empty to disable </description>
+                <type>text</type>
+                <sort_order>0</sort_order>
+                <value>Autosearch</value>
+            </title>
+            <addition_cls translate="label" module="core">
+                <visible>1</visible>
+                <label>Addition Class</label>
+                <description>This class is used to make owner style for the widget. </description>
+                <type>text</type>
+                <sort_order>1</sort_order>
+            </addition_cls>
+            <stylecls translate="label" module="core">
+                <visible>1</visible>
+                <label>Widget Box Style</label>
+                <description>These classes are automatic loaded in file style.css in module or actived theme </description>
+                <type>select</type>
+                <source_model>ves_autosearch/system_config_listStyles</source_model>
+                <sort_order>2</sort_order>
+            </stylecls>
+
+			<show translate="label" module="core">
+                <label>Enabled</label>
+                <sort_order>10</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </show>
+
+            <prefix translate="label">
+                <label>Prefix Class</label>
+                <type>text</type>
+                <sort_order>30</sort_order>
+                <visible>1</visible>
+                <value></value>
+                
+            </prefix>
+
+            <show_filter_category>
+                <label>Show Filter Category</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>35</sort_order>
+                <visible>1</visible>
+                <value>true</value>
+                
+            </show_filter_category>
+
+            <show_image>
+                <label>Show Product Image</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>40</sort_order>
+                <visible>1</visible>
+                <value>true</value>
+                
+            </show_image>
+
+            <thumb_height translate="label">
+                <label>Thumbnail Height</label>
+                <type>text</type>
+                <sort_order>45</sort_order>
+                <visible>1</visible>
+                <value>100</value>
+                
+            </thumb_height>
+
+            <thumb_width translate="label">
+                <label>Thumbnail Width</label>
+                <type>text</type>
+                <sort_order>50</sort_order>
+                <visible>1</visible>
+                <value>100</value>
+                
+            </thumb_width>
+
+            <show_price>
+                <label>Show Price</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>58</sort_order>
+                <visible>1</visible>
+                <value>true</value>
+                
+            </show_price>
+            
+            <limit translate="label">
+                <label>Limit Results</label>
+                <type>text</type>
+                <sort_order>70</sort_order>
+                <visible>1</visible>
+                <value>10</value>
+                
+            </limit>
+
+            <enable_search_term translate="label" module="core">
+                <label>Enable Term</label>
+                <sort_order>80</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+                <value>false</value>
+                
+            </enable_search_term> 
+            <limit_term translate="label">
+                <label>Limit Terms</label>
+                <type>text</type>
+                <sort_order>90</sort_order>
+                <visible>1</visible>
+                <value>10</value>
+                
+            </limit_term>                       
+
+            <template translate="label">
+				<visible>1</visible>
+                <label>Module Template</label>
+                <description>Input custom module template file path. For example: ves/autosearch/default.phtml Empty for default</description>
+                <type>text</type>
+                <sort_order>250</sort_order>
+            </template> 
+		</parameters>
+	</widget_autosearch>
+</widgets>

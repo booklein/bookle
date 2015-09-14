@@ -1,0 +1,173 @@
+<?xml version="1.0"?> 
+<config>
+    <menu>
+            <vesextensions module="ves_blockbuilder">
+                <title>VenusTheme</title>
+                <sort_order>53</sort_order>
+                <children>
+                    <blockbuilder translate="title" module="ves_blockbuilder">
+                        <title>Ves Block Builder</title>
+                        <children>
+                            <add translate="title" module="ves_blockbuilder">
+                                <title>Add Block Profile</title>
+                                <sort_order>2</sort_order>
+                                <action>blockbuilder/adminhtml_blockbuilder/new</action>
+                            </add>
+                            <blockbuilder translate="title" module="ves_blockbuilder">
+                                <title>Manage Block Profiles</title>
+                                <sort_order>4</sort_order>
+                                <action>blockbuilder/adminhtml_blockbuilder/index</action>
+                            </blockbuilder>
+                            <blockbuilder_import translate="title" module="ves_blockbuilder">
+                                <title>Install Sample Profile</title>
+                                <sort_order>5</sort_order>
+                                <action>blockbuilder/adminhtml_blockbuilder/sample</action>
+                            </blockbuilder_import>
+                            <configuration translate="title" module="ves_blockbuilder">
+                                <title>Configuration</title>
+                                <sort_order>15</sort_order>
+                                <action>adminhtml/system_config/edit/section/ves_blockbuilder</action>
+                            </configuration>
+                        </children>
+                    </blockbuilder>
+                    <pagebuilder translate="title" module="ves_blockbuilder">
+                        <title>Ves Page Builder</title>
+                        <children>
+                            <add_page translate="title" module="ves_blockbuilder">
+                                <title>Add Page Profile</title>
+                                <sort_order>2</sort_order>
+                                <action>blockbuilder/adminhtml_page/new</action>
+                            </add_page>
+                            <page translate="title" module="ves_blockbuilder">
+                                <title>Manage Page Profiles</title>
+                                <sort_order>4</sort_order>
+                                <action>blockbuilder/adminhtml_page/index</action>
+                            </page>
+                            <page_import translate="title" module="ves_blockbuilder">
+                                <title>Install Sample Profile</title>
+                                <sort_order>5</sort_order>
+                                <action>blockbuilder/adminhtml_page/sample</action>
+                            </page_import>
+                            <configuration translate="title" module="ves_blockbuilder">
+                                <title>Configuration</title>
+                                <sort_order>15</sort_order>
+                                <action>adminhtml/system_config/edit/section/ves_blockbuilder</action>
+                            </configuration>
+                        </children>
+                    </pagebuilder>
+                    <livecss translate="title" module="ves_blockbuilder">
+                        <title>Ves Live CSS Editor</title>
+                        <children>
+                            <selector_elements translate="title" module="ves_blockbuilder">
+                                <title>Manage Css Selectors</title>
+                                <sort_order>2</sort_order>
+                                <action>blockbuilder/adminhtml_selector/index</action>
+                            </selector_elements>
+                            <configuration translate="title" module="ves_blockbuilder">
+                                <title>Enable Live Css Tool</title>
+                                <sort_order>15</sort_order>
+                                <action>adminhtml/system_config/edit/section/ves_livecss</action>
+                            </configuration>
+                        </children>
+                    </livecss>
+                </children>
+            </vesextensions>
+    </menu>
+    <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <vesextensions module="ves_blockbuilder">
+                            <title>VenusTheme</title>
+                            <sort_order>53</sort_order>
+                            <children>
+                                 <blockbuilder translate="title" module="ves_blockbuilder">
+                                    <title>Ves Block Builder</title>
+                                    <children>
+                                        <add translate="title" module="ves_blockbuilder">
+                                            <title>Add Block Profile</title>
+                                            <sort_order>2</sort_order>
+                                            <action>blockbuilder/adminhtml_blockbuilder/new</action>
+                                        </add>
+                                        <blockbuilder_import translate="title" module="ves_blockbuilder">
+                                            <title>Install Sample</title>
+                                            <sort_order>3</sort_order>
+                                            <action>blockbuilder/adminhtml_blockbuilder/sample</action>
+                                        </blockbuilder_import>
+                                        <blockbuilder translate="title" module="ves_blockbuilder">
+                                            <title>Manage Block Profiles</title>
+                                            <sort_order>4</sort_order>
+                                            <action>blockbuilder/adminhtml_blockbuilder/index</action>
+                                        </blockbuilder>
+                                        <configuration translate="title" module="ves_blockbuilder">
+                                            <title>Configuration</title>
+                                            <sort_order>15</sort_order>
+                                            <action>adminhtml/system_config/edit/section/ves_blockbuilder</action>
+                                        </configuration>
+                                    </children>
+                                </blockbuilder>
+                                <pagebuilder translate="title" module="ves_blockbuilder">
+                                    <title>Ves Page Builder</title>
+                                    <children>
+                                        <add_page translate="title" module="ves_blockbuilder">
+                                            <title>Add Page Profile</title>
+                                            <sort_order>2</sort_order>
+                                            <action>blockbuilder/adminhtml_page/new</action>
+                                        </add_page>
+                                        <page_import translate="title" module="ves_blockbuilder">
+                                            <title>Install Sample</title>
+                                            <sort_order>3</sort_order>
+                                            <action>blockbuilder/adminhtml_page/sample</action>
+                                        </page_import>
+                                        <page translate="title" module="ves_blockbuilder">
+                                            <title>Manage Page Profiles</title>
+                                            <sort_order>4</sort_order>
+                                            <action>blockbuilder/adminhtml_page/index</action>
+                                        </page>
+                                        <configuration translate="title" module="ves_blockbuilder">
+                                            <title>Configuration</title>
+                                            <sort_order>15</sort_order>
+                                            <action>adminhtml/system_config/edit/section/ves_blockbuilder</action>
+                                        </configuration>
+                                    </children>
+                                </pagebuilder>
+                                <livecss translate="title" module="ves_blockbuilder">
+                                    <title>Ves Live CSS Editor</title>
+                                    <children>
+                                        <selector_elements translate="title" module="ves_blockbuilder">
+                                            <title>Manage Css Selectors</title>
+                                            <sort_order>2</sort_order>
+                                            <action>blockbuilder/adminhtml_selector/index</action>
+                                        </selector_elements>
+                                        <configuration translate="title" module="ves_blockbuilder">
+                                            <title>Enable Live Css Tool</title>
+                                            <sort_order>15</sort_order>
+                                            <action>adminhtml/system_config/edit/section/ves_livecss</action>
+                                        </configuration>
+                                    </children>
+                                </livecss>
+                            </children>
+                        </vesextensions>
+                         <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ves_blockbuilder>
+                                            <title>Ves Pages Builder</title>
+                                        </ves_blockbuilder>
+                                        <ves_livecss>
+                                            <title>Ves Live Css Editor</title>
+                                        </ves_livecss>
+                                        <ves_feed>
+                                            <title>Ves Pages Builder Plugin Market</title>
+                                        </ves_feed>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+</config>

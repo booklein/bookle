@@ -1,0 +1,327 @@
+<?xml version="1.0"?>
+<widgets>
+    <blog_latest type="ves_blog/widget_latest"  translate="label description" module="ves_blog" >
+        <name>Ves Blog : Latest articles</name>
+        <description type="desc">show list latest news</description>
+        <parameters>
+            <enable_latestmodule translate="label">
+				<label>Enable Latest Module</label>
+
+				<comment>Show related post by tag</comment>
+				<type>select</type>
+				<values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+				<visible>1</visible>
+				<required>1</required>
+				<value>true</value>
+			</enable_latestmodule>
+			<latestmod_title translate="label">
+				<label>Module Title</label>
+
+				<description>Maximum blog show in module</description>
+				<type>text</type>
+				<visible>1</visible>
+			</latestmod_title>
+
+			<latestmod_desc translate="label">
+				<label>Module Description</label>
+
+				<description>Maximum blog show in module</description>
+				<type>ves_blog/widget_wysiwyg</type>
+				<visible>1</visible>
+				<required>0</required>
+			</latestmod_desc>
+
+             <catsid translate="label">
+                <label>Select Categories</label>
+                <type>multiselect</type>
+                <source_model>ves_blog/system_config_source_ListCategories</source_model>
+                <description>Eg: 22,23. Empty for all categories.</description>
+                <visible>1</visible>
+            </catsid>
+
+			<latest_typesource translate="label">
+                <label>Source Type</label>
+                <type>select</type>
+                <source_model>ves_blog/system_config_source_ListSourceType</source_model>
+
+				<description>Which pages does the module show...</description>
+                <visible>1</visible>
+				<required>0</required>
+				<value>latest</value>
+            </latest_typesource>
+
+            <latest_image_size translate="label"  >
+                <label>Image Size</label>
+                <description>Select A Image Size For Latest Block </description>
+
+                <type>select</type>
+                <source_model>ves_blog/system_config_source_imagetypes</source_model>
+                <visible>1</visible>
+                <required>0</required>
+                <value>s</value>
+            </latest_image_size>
+
+            <custom_image_width translate="label">
+                <label>Custom Image Width</label>
+
+                <description>Custom Image Width</description>
+                <type>text</type>
+                <visible>1</visible>
+                <required>0</required>
+            </custom_image_width>
+
+             <custom_image_height translate="label">
+                <label>Custom Image Height</label>
+
+                <description>Custom Image Height</description>
+                <type>text</type>
+                <visible>1</visible>
+                <required>0</required>
+            </custom_image_height>
+
+            <enable_blognavmodule translate="label">
+                <label>Enable Navigator Module</label>
+
+                <description>Show Navigator Carosel</description>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+                <visible>1</visible>
+                <required>0</required>
+                <value>0</value>
+            </enable_blognavmodule>
+
+            <auto_play>
+                <label>Auto Play</label>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+
+                <visible>1</visible>
+                <required>0</required>
+                <value>0</value>
+            </auto_play>
+
+            <interval>
+                <label>Speed</label>
+                <type>text</type>
+
+                <visible>1</visible>
+                <required>0</required>
+                <value>500</value>
+            </interval>
+
+			<limit_items translate="label">
+				<label>Limit Post</label>
+
+				<description>Maximum blog show in module</description>
+				<type>text</type>
+				<visible>1</visible>
+				<required>0</required>
+				<value>6</value>
+			</limit_items>
+
+			<columns translate="label">
+				<label>Columns</label>
+
+				<type>text</type>
+				<visible>1</visible>
+				<required>0</required>
+				<value>2</value>
+			</columns>
+
+            <max_items>
+                <label>Max items on a page</label>
+
+                <type>text</type>
+                <visible>1</visible>
+                <required>0</required>
+                <value>2</value>
+            </max_items>
+
+			<latest_show_commentcouter translate="label">
+                <label>Show Comment Counter</label>
+
+                <description>Whethere to show Comment Counter</description>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+            </latest_show_commentcouter>
+
+            <latest_showcreated translate="label">
+                <label>Show Created Time</label>
+
+                <description>Whethere to show Created Time</description>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+				<required>0</required>
+				<value>true</value>
+            </latest_showcreated>
+
+            <latest_showtitle translate="label">
+                <label>Show Title</label>
+
+                <description>Whethere to show title</description>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+                <required>0</required>
+                <value>true</value>
+            </latest_showtitle>
+
+            <latest_showreadmore translate="label">
+                <label>Show Readmore Link</label>
+
+                <description>Strip Html Tags In Short Description</description>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                   
+                    
+                </values>
+                <visible>1</visible>
+                <required>0</required>
+                <value>true</value>
+            </latest_showreadmore>
+
+            <latest_showdescription translate="label">
+                <label>Show Description</label>
+
+                <description>Whethere to show Blog Short Description</description>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+                <required>0</required>
+                <value>true</value>
+            </latest_showdescription>
+
+            <latest_stripdescription translate="label">
+                <label>Strip Html Tags Description</label>
+
+                <description>Strip Html Tags In Short Description</description>
+                <type>select</type>
+                <values>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    
+                </values>
+                <visible>1</visible>
+                <required>0</required>
+                <value>false</value>
+            </latest_stripdescription>
+
+            <latest_maxdesc>
+                <label>Max chars of description</label>
+                <description>Input maximum number chars of short description. Empty to show all.</description>
+
+                <type>text</type>
+                <visible>1</visible>
+                <required>0</required>
+                <value></value>
+            </latest_maxdesc>
+
+            <latest_show_hits translate="label">
+                <label>Show Hits</label>
+
+                <description>Whethere to show number view</description>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+				<required>0</required>
+				<value>true</value>
+            </latest_show_hits>
+            <latest_show_image translate="label">
+                <label>Show Image</label>
+
+                <description>Show/Hide Blog Image</description>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+                <required>0</required>
+                <value>true</value>
+            </latest_show_image>
+            <template translate="label">
+                <visible>1</visible>
+                <label>Module Template</label>
+                <description>Input custom module template file path. For example: ves/blog/block/latest_carousel.phtml or ves/blog/block/latest.phtml Empty for default</description>
+                <type>text</type>
+
+            </template>
+        </parameters>
+    </blog_latest>
+</widgets>

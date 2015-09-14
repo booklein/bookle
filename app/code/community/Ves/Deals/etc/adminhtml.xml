@@ -1,0 +1,65 @@
+<?xml version="1.0"?> 
+<config>
+    <menu>
+            <vesextensions module="ves_deals">
+                <title>VenusTheme</title>
+                <sort_order>50</sort_order>
+                <children>
+                    <ves_deals translate="title" module="ves_deals">
+                        <title>Ves Deals</title>
+                        <children>
+                            <configuration translate="title" module="ves_deals">
+                                <title>Configuration</title>
+                                <sort_order>2</sort_order>
+                                <action>adminhtml/system_config/edit/section/ves_deals</action>
+                            </configuration>
+                        </children>
+                    </ves_deals>
+                </children>
+            </vesextensions>
+        </menu>
+		<acl>
+            <resources>
+                <admin>
+                    <children>
+                        <vesextensions module="ves_deals">
+                            <title>VenusTheme</title>
+                            <sort_order>50</sort_order>
+                            <children>
+                                <ves_deals translate="title" module="ves_deals">
+                                    <title>Ves Deals</title>
+                                    <children>
+                                        <configuration translate="title" module="ves_deals">
+                                            <title>Configuration</title>
+                                            <sort_order>2</sort_order>
+                                            <action>adminhtml/system_config/edit/section/ves_deals</action>
+                                        </configuration>
+                                    </children>
+                                </ves_deals>
+                            </children>
+                        </vesextensions>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ves_deals>
+                                            <title>Ves Deals</title>
+                                        </ves_deals>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <translate>
+			<modules>
+				<Ves_Deals>
+					<files>
+						<default>ves_deals.csv</default>
+					</files>
+				</Ves_Deals>
+			</modules>
+		</translate>
+</config>

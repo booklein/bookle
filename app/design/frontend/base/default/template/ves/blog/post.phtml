@@ -1,0 +1,157 @@
+<?php
+/**
+ * Venustheme
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Venustheme EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.venustheme.com/LICENSE-1.0.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.venustheme.com/ for more information
+ *
+ * @category   Ves
+ * @package    Ves_Blog
+ * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+
+/**
+ * Ves Blog Extension
+ *
+ * @category   Ves
+ * @package    Ves_Blog
+ * @author     Venustheme Dev Team <venustheme@gmail.com>
+ */
+?>
+<div class="blog-post">
+	<div class="blog-wrapper">
+		<?php if( $post = $this->getPost() ): ?>
+			<div class="blog-content">
+				<div class="blog-container">
+
+					<?php if(($post->getVideoType() == 'youtube' ||  $post->getVideoType() == 'vimeo') && $post->getVideoId()){ ?>
+					<div class="blog-video">
+						<?php if($post->getVideoType() == 'youtube' && $post->getVideoId()){ ?>
+						<iframe width="<?php echo isset($width)?$width:800; ?>" height="<?php echo isset($height)?$height:400; ?>" src="//www.youtube.com/embed/<?php echo $post->getVideoId(); ?>" frameborder="0" allowfullscreen></iframe>
+						<?php } ?>
+
+						<?php if($post->getVideoType() == 'vimeo' && $post->getVideoId()){ ?>
+						<iframe src="//player.vimeo.com/video/<?php echo $post->getVideoId() ?>" width="<?php echo isset($width)?$width:800; ?>" height="<?php echo isset($height)?$height:400; ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+						<?php } ?>
+					</div>
+					<?php }else{ ?>
+					<div class="blog-image">
+						<a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>">
+							<img src="<?php echo $post->getImageURL( $this->getPostConfig("post_imagetype") );?>" title="<?php echo $post->getTitle();?>"/>
+						</a>
+					</div>
+					<?php } ?>
+
+					<div class="blog-meta">
+						<span class="created-date">
+							<?php
+	 							$post_date = $post->getCreated();
+								$post_date = Mage::getModel('core/date')->date('d.m.Y', strtotime($post_date));
+								$_ct= new Zend_Date( $post_date);
+							?>
+							<span class="month"><?php echo $_ct->toString('MMM');?></span>
+							<span class="day"><?php echo $_ct->toString('dd');?></span>
+							<span class="year">,<?php echo $_ct->toString('yyyy');?></span>
+						</span>
+						<?php if( $this->getPostConfig("post_show_author") ): ?>
+							<span class="author">
+								<span><?php echo $this->__( "Writen By:" );?></span><a href="<?php echo $post->getAuthorURL();?>" title="<?php echo $post->getAuthor(); ?>">
+								<?php echo $post->getAuthor(); ?>
+							</a>
+						</span>
+					<?php endif; ?>
+
+					<?php if( $this->getPostConfig("post_showtitle") ): ?>
+						<h2 class="blog-title"><?php echo $post->getTitle(); ?></h2>
+					<?php endif; ?>
+				</div>
+				<?php if( $this->getPostConfig("post_showdescription") ): ?>
+					<div class="blog-description ves-description">
+						<?php echo $post->getDescription(); ?>
+					</div>
+				<?php endif; ?>
+				<div class="blog-detail">
+					<?php echo $post->getDetailContent(); ?>
+				</div>
+			</div>
+
+			<div class="blog-bottom vesclear">
+				<?php if( $this->getPostConfig("post_showupdated") ): ?>
+					<div class="blog-updated">
+						<span><?php echo $this->__("Last Update");?></span>
+						<?php echo $post->getUpdated(); ?>
+					</div>
+				<?php endif; ?>
+				<div class="blog-hits"><span><?php echo $this->__("Read");?></span> <strong><?php echo $post->getHits(); ?></strong> <?php echo $this->__("Times"); ?></div>
+				<?php if( $this->getPostConfig("post_show_category_title") ): ?>
+					<div class="blog-category">
+						<span><?php echo $this->__("Published In");?></span>
+						<a href="<?php echo $post->getCategoryLink();?>" title="<?php echo $post->getCategoryTitle(); ?>"><?php echo $post->getCategoryTitle(); ?></a>
+					</div>
+				<?php endif; ?>
+				<?php if( $this->getPostConfig("post_showtags") ): ?>
+
+
+					<?php if( $tags = $post->getTags() ) :$tags = explode( ",",$tags );	?>
+						<div class="blog-tags">
+							<span><?php echo $this->__("Tags :");?> </span>
+							<?php foreach( $tags as $tag ): ?>
+								<a href="<?php echo Mage::helper('ves_blog')->getTagUrl(trim($tag));?>" title="<?php echo $tag;?>"><span><?php echo $tag; ?></span></a>,
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+
+				<?php endif; ?>
+			</div>
+
+			<?php if( $this->getPostConfig("post_showsocial") ): ?>
+				<div class="blog-social">
+					<?php echo $this->getChildHtml('post.social'); ?>
+				</div>
+			<?php endif; ?>
+			<div class="blog-extra vesclear">
+				<?php if( $this->getPostConfig("post_showmorepost") && $mores = $this->getMoreInCat() ): ?>
+					<div class="more-post">
+						<h3><?php echo $this->__("More post in same category");?></h3>
+						<ul>
+							<?php foreach( $mores as $more ) : ?>
+								<li><a href="<?php echo $more->getURL();?>" title="<?php echo $more->getTitle();?>"><span><?php echo $more->getTitle();?></span></a></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				<?php endif; ?>
+				<?php if( $this->getPostConfig("post_showrelatedpost") && $related = $this->getRelatedPost() ): ?>
+					<div class="related-post">
+						<h3><?php echo $this->__("Related by tags");?></h3>
+						<ul>
+							<?php foreach( $related as $relate ) : ?>
+								<li><a href="<?php echo $relate->getURL();?>" title="<?php echo $relate->getTitle();?>"><span><?php echo $relate->getTitle();?></span></a></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				<?php endif; ?>
+			</div>
+
+			<?php if( $this->getPostConfig("post_showcommentblock") ) :?>
+				<div class="blog-comment">
+					<?php echo $this->getChildHtml('post.comment'); ?>
+				</div>
+			<?php endif; ?>
+		</div>
+
+	<?php else: ?>
+		<div class="message"><?php echo $this->__( "The post could not existed in our system" );?></div>
+	<?php endif; ?>
+</div>
+</div>

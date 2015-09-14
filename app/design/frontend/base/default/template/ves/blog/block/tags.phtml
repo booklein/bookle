@@ -1,0 +1,45 @@
+<?php
+/**
+ * Venustheme
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Venustheme EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.venustheme.com/LICENSE-1.0.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.venustheme.com/ for more information
+ *
+ * @category   Ves
+ * @package    Ves_Blog
+ * @copyright  Copyright (c) 2014 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+
+/**
+ * Ves Blog Extension
+ *
+ * @category   Ves
+ * @package    Ves_Blog
+ * @author     Venustheme Dev Team <venustheme@gmail.com>
+ */
+?>
+<div class="block blog-list-tags">
+	<div class="block-title"><strong><span><?php echo $this->__("Tags"); ?></span></strong></div>
+	<div class="block-content">
+		<?php if( sizeof($tags) > 0 ): ?>
+		    <ul class="tags-list">
+		        <?php foreach ($tags as $key=>$val): ?>
+		            <li><a href="<?php echo Mage::helper('ves_blog')->getTagUrl(trim($key));?>" title="<?php echo $key;?>" style="font-size:<?php echo (int)$val*70+75 ?>%;"><span><?php echo $key; ?><span></a></li>
+		        <?php endforeach; ?>
+		    </ul>
+		<?php else: ?>
+		    <p class="note-msg"><?php echo $this->__('There are no tags available.') ?></p>
+		<?php endif; ?>
+	</div>
+</div>

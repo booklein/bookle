@@ -1,0 +1,93 @@
+<?php 
+	$itemsperpage = (int)$this->getConfig("max_items") ;
+	$itemsperpage = !empty($itemsperpage)?$itemsperpage:6;
+	$columns = (int)$this->getConfig("columns");
+	$columns = !empty($columns)?$columns:6;
+
+	$c = $this->getGeneralConfig( 'brand_imagesize', "" );
+	$tmp = explode( "x", $c );
+	$thumb_width = $thumb_height = "";
+	if( count($tmp) > 0 && (int)$tmp[0] ){
+		$thumb_width = (int)$tmp[0];
+		$thumb_height = (int)$tmp[1];
+	}
+	$id = rand(1,10); 
+	$span =  12/$columns;
+	$total = count($brands);
+	$i = 1;
+	$k = 1;
+	$title = $this->getGeneralConfig("title");
+	// check max item on page
+	if ($itemsperpage < $columns) {
+		$itemsperpage = $columns;
+	}
+?>
+<div id="ves-brandcarousel" class="block ves-brandcarousel">
+	<?php if($title) { ?>
+	<div class="block-title">
+		<strong>
+			<span>
+				<?php echo $title; ?>
+			</span>
+		</strong>
+		<?php if( ($pretext = $this->getConfig("pretext")) && !$cms ) { ?>
+		<div class="pretext"><?php echo $pretext;?></div>
+		<?php } elseif(isset($cms) && $cms != '') {
+			?>
+			<div class="pretext"><?php echo $cms;?></div>
+			<?php
+		} ?>
+	</div>
+	<?php } ?>
+		<div class="block-content">
+    <div id="vesbrandowlcarousel<?php echo $id;?>" class="owl-carousel vescarousel">
+
+			<?php if($brands) { ?>
+				<?php foreach ($brands as  $brand) {?>		
+				<div class="item <?php if(($i-1) % $columns == 0){echo "first";}  if($i%$columns == 0){echo "last";} ?>">
+						<div class="item-inner">
+							<?php $brand_link = $brand->getLink(); ?>
+							<?php
+							 $image = "";
+							 if($thumb_width && $thumb_height) {
+							 	$image = Mage::helper('ves_brand')->resize($brand->getFile(), $thumb_width, $thumb_height);
+							 } else {
+							 	$image = $brand->getImageUrl("l");
+							 }
+							?>
+							<?php if ($brand_link) { ?>
+							<a href="<?php echo $brand_link; ?>"><img src="<?php echo $image; ?>" alt="<?php echo $brand->getTitle(); ?>" class="lazyOwl img-responsive" /></a>
+							<?php } else { ?>
+							<img src="<?php echo $image; ?>" alt="<?php echo $brand->getTitle(); ?>" class="lazyOwl img-responsive" />
+							<?php } ?>
+						</div>
+				</div>
+				<?php $i++;$k++; }  ?>
+			<?php } //end if?>
+    </div> <!--end vesbrandcarousel -->  
+	</div> <!--end block-content -->
+</div> <!--end ves-brandcarousel -->
+<?php if( (int)$total > 1 ){ ?>
+<script type="text/javascript">
+jQuery(window).load(function() {
+	var owl = jQuery('#vesbrandowlcarousel<?php echo $id;?>');
+        owl.owlCarousel({
+            autoPlay: false,
+            slideSpeed: 500,
+            autoplayHoverPause: true,
+            lazyLoad:false,
+            navigationText: ["<span class='fa fa-angle-left'></span>","<span class='fa fa-angle-right'></span>"],
+            slideBy: 1,
+            loop: true,
+            margin: 0,
+            navigation: <?php echo (1 == $this->getModuleConfig("enable_brandnavmodule"))?'true':'false'; ?>,
+            rtl: false,
+            mouseDrag: true,
+            touchDrag: true,
+            autoWidth: false,
+            responsive: true,
+            items: <?php echo $columns?(int)$columns:6; ?>
+        });
+});
+</script>
+<?php } ?>

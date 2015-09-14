@@ -1,0 +1,171 @@
+
+<?php $route = Mage::app()->getRequest()->getRouteName(); ?>
+<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+
+
+    <div class="image">
+     <?php
+      if ($specialprice) {
+          if($today >= strtotime( $specialPriceFromDate) && $today <= strtotime($specialPriceToDate) || $today >= strtotime( $specialPriceFromDate) && is_null($specialPriceToDate)) {
+      ?>
+          <span class="onsale"><span><?php echo $this->__("Sale");?></span></span>
+      <?php  
+          }
+        }
+      ?>
+    <?php if($route !="tempcp"):?>
+    <a href="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" title="<?php echo $this->escapeHtml($this->getImageLabel()); ?>" class="colorbox">
+    <?php endif ; ?>
+        <?php
+        $_img = '<img id="image-main" itemprop="image" src="'.$this->helper('catalog/image')->init($_product, 'image')->resize($main_image_width,$main_image_height).'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" data-zoom-image="'.$this->helper('catalog/image')->init($_product, 'image').'" class="product-image-zoom img-responsive"/>';
+        echo $_helper->productAttribute($_product, $_img, 'image');
+
+        ?>
+    <?php if($route !="tempcp"):?>
+    </a>
+    <?php endif; ?>
+    </div>
+
+<?php else: ?>
+<p class="product-image" style="width:<?php echo $main_image_width ?>px;height: <?php echo $main_image_height;?>px">
+    <?php
+        $_img = '<img id="image-main" itemprop="image" src="'.$this->helper('catalog/image')->init($_product, 'image')->resize($main_image_width,$main_image_height).'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" />';
+        echo $_helper->productAttribute($_product, $_img, 'image');
+    ?>
+</p>
+<?php endif; ?>
+
+<?php if ( count($this->getGalleryImages()) > 0): ?>
+<div id="image-additional" class="image-additional slide carousel more-views">
+    <div class="carousel-inner" id="image-gallery-zoom">
+     <?php
+        $icols = $themeConfig->get("moreview_cols", 4);
+        $icols = !empty($icols)?$icols: 4;
+      $col = 12/$icols;
+
+        $i= 0;
+        $eimages = array();
+        
+        $gallery_images = array();
+        if(method_exists($this, "isGalleryImageVisible")){
+           foreach ($this->getGalleryImages() as $_image) { 
+                  if ($this->isGalleryImageVisible($_image)) {
+                    $gallery_images[] = $_image;
+                  }
+                }
+        } else {
+          $gallery_images = $this->getGalleryImages();
+        }
+        $total_images = count($gallery_images);
+        if($total_images > 0) {
+        foreach ($gallery_images as $_image) {
+        ?>
+        <?php if( $i%$icols == 0 ) { ?>
+
+        <div class="item row clearfix">
+        <?php } ?>
+           
+                <a class="colorbox cboxElement col-xs-<?php echo floor(12/$icols); ?>" href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile()); ?>" title="<?php echo $this->escapeHtml($_image->getLabel()) ?>" data-zoom-image="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile()); ?>" data-image="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($main_image_width, $main_image_height) ?>">
+
+                    <img id="image-<?php echo $i; ?>" src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($additional_image_width, $additional_image_height); ?>"  title="<?php echo $this->escapeHtml($_image->getLabel()) ?>" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" data-zoom-image="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile()) ?>" class="product-image-zoom img-responsive" />
+                </a>
+            
+
+        <?php $i++; ?>
+            <?php if( $i%$icols == 0 || $i==$total_images ) { ?>
+              </div>
+        <?php } ?>
+        <?php } ?>
+        <?php } ?>
+      </div>
+
+
+      
+
+        <!-- Controls -->
+        <a data-slide="prev" role="button" href="#image-additional" class="left carousel-control">
+            <span aria-hidden="true" class="fa fa-angle-left"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a data-slide="next" role="button" href="#image-additional" class="right carousel-control">
+            <span aria-hidden="true" class="fa fa-angle-right"></span>
+            <span class="sr-only">Next</span>
+        </a>
+
+</div>
+
+<script type="text/javascript">
+    jQuery('#image-additional .item:first').addClass('active');
+    jQuery('#image-additional').carousel({interval:false})
+</script>
+<?php endif; ?>
+
+
+<?php if( $themeConfig->get("product_enablezoom", 1) ) { ?>
+<script type="text/javascript" src="<?php echo $theme->getJs("elevatezoom/elevatezoom-min.js"); ?>"></script>
+<script type="text/javascript">
+ <?php if( $themeConfig->get('product_zoomgallery') == 'slider' ) {  ?>
+  jQuery("#image-main").elevateZoom({
+      <?php if( $themeConfig->get('product_zoommode') != 'basic' ) { ?>
+      zoomType        : "<?php echo $themeConfig->get('product_zoommode');?>",
+      <?php } ?>
+      gallery:'image-additional', 
+      cursor: 'pointer', 
+      easing : <?php echo (1 == $themeConfig->get('enable_zoom_easing', 0))?'true':'false'; ?>,
+      easingType : "<?php echo $themeConfig->get('zoom_easing_type', 'easeOutExpo'); ?>",
+      easingDuration : <?php echo $themeConfig->get('zoom_easing_duration', '2000'); ?>,
+      lensShape : "<?php echo $themeConfig->get('product_zoomlensshape');?>",
+      lensSize    : <?php echo (int)$themeConfig->get('product_zoomlenssize');?>,
+      galleryActiveClass: 'active'});
+  <?php } else { ?>
+  var zoomCollection = '<?php echo $themeConfig->get("product_zoomgallery")=="basic"?".product-image-zoom":"#image-main";?>';
+   jQuery( zoomCollection ).elevateZoom({
+      <?php if( $themeConfig->get('product_zoommode') != 'basic' ) { ?>
+      zoomType        : "<?php echo $themeConfig->get('product_zoommode');?>",
+      <?php } ?>
+      easing : <?php echo (1 == $themeConfig->get('enable_zoom_easing', 0))?'true':'false'; ?>,
+      easingType : "<?php echo $themeConfig->get('zoom_easing_type', 'easeOutExpo'); ?>",
+      easingDuration : <?php echo $themeConfig->get('zoom_easing_duration', '2000'); ?>,
+      lensShape : "<?php echo $themeConfig->get('product_zoomlensshape');?>",
+      lensSize    : <?php echo (int)$themeConfig->get('product_zoomlenssize');?>
+  
+   });
+  <?php } ?> 
+  if(typeof(ProductMediaManager) !== "undefined") {
+    ProductMediaManager.initZoom('<?php echo $themeConfig->get('product_zoomgallery');?>', '<?php echo $themeConfig->get('product_zoommode');?>', '<?php echo $themeConfig->get('product_zoomlensshape');?>', <?php echo (int)$themeConfig->get('product_zoomlenssize');?>);
+  }
+</script>
+<?php } else { ?>
+
+<script type="text/javascript">
+ jQuery("#image-additional .colorbox").click(function() {
+    var image_link = jQuery(this).attr("href");
+    jQuery("#image-main").attr("src", image_link);
+    return false;
+ })
+</script>
+
+<?php } ?>
+<?php if($route !="tempcp"):?>
+
+<script type="text/javascript"><!--
+  if(typeof(ProductMediaManager) !== "undefined") {
+    ProductMediaManager.initColorBox('<?php echo $popup_image_width; ?>', '<?php echo $popup_image_height; ?>');
+  }
+jQuery(document).ready(function() {
+  jQuery('.colorbox').colorbox({
+    width: '<?php echo $popup_image_width; ?>', 
+    height: '<?php echo $popup_image_height; ?>',
+    overlayClose: true,
+    opacity: 0.5,
+    rel: "colorbox"
+  });
+  jQuery('#image-gallery-zoom').find("a").click(function(){
+    if(jQuery(".product-img-box .image a").length > 0) {
+      var image_link = jQuery(this).attr("href");
+      jQuery(".product-img-box .image a").attr("href", image_link);
+    }
+  })
+});
+//--></script> 
+<?php endif; ?>

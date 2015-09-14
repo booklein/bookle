@@ -1,0 +1,31 @@
+<?xml version="1.0"?> 
+<config>
+	<acl>
+            <resources>
+                <admin>
+                    <children>
+                         <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ves_base>
+                                            <title>Ves Base</title>
+                                        </ves_base>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <translate>
+			<modules>
+				<Ves_Base>
+					<files>
+						<default>Ves_Base.csv</default>
+					</files>
+				</Ves_Base>
+			</modules>
+		</translate>
+</config>

@@ -1,0 +1,155 @@
+<?php 
+/*------------------------------------------------------------------------
+# Venus_TreeMenu Module, Build for Magento
+# ------------------------------------------------------------------------
+# @Copyright (C) 2008-2012 Ves. All Rights Reserved.
+# @License - Copyrighted Commercial Software
+# @Author: Ves
+# @Websites: http://ves.com
+-------------------------------------------------------------------------*/ 	
+?>
+<?php
+$enabled = $this->getConfig('enable_module', '');
+$showtitle = $this->getConfig('showtitle', '');
+$showproductcount = $this->getConfig('showproductcount', '');
+$event = $this->getConfig('event', '');
+$title = $this->getConfig('title', '');
+$style = $this->getConfig('menustyle', '');
+$event = $this->getConfig('event', '');
+
+?>
+<?php if($enabled == 1)://start enabled?>
+	<div class="block ves-categoriesmenu">
+		<div class="block-title">
+			<?php if($showtitle): ?>
+
+				<?php $_category = Mage::registry('current_category'); ?>
+				<strong><span><?php if($title != ''){ echo $title; }else{ echo $_category->getName(); }?></span></strong>
+
+			<?php endif; ?>
+		</div>
+		<div class="block-content">
+			<?php if($style=='Dropdown'):?>
+				<ul id="ves-dropdown">
+					<?php
+					$htmlChildren = '';
+					$category = Mage::registry('current_category');
+					$children = $category->getChildren();
+					$childrens = explode(',',$children);
+					$categories = Mage::getModel('catalog/category')->getCollection()
+					->addAttributeToSelect('*')
+					->addAttributeToFilter('entity_id',array('in'=>$childrens));
+					$i = 0;
+					$level = 0;
+					foreach ($categories as $_category) {
+						$htmlChildren.= $this->getTreeCategories($_category, $i);
+						$i++;
+					}
+
+					echo  $htmlChildren;
+					?>
+				</ul>
+				<?php if( trim($this->getConfig('show_number_item')) != '' && (int)$this->getConfig('show_number_item') > 0 && count($childrens)>=$this->getConfig('show_number_item')){ ?>
+				<div class="btnCat-loadmore"><a href="javascript:void(0);"><i class="fa fa-plus-circle"></i></a></div>
+				<?php } ?>
+			<?php endif; //end dropdown menu?>
+			<?php if ($style=='Accordion'):?>
+				<script type="text/javascript">
+					$jmenu(document).ready(function(){
+						// applying the settings
+						//$jmenu("#ves-accordion li.active span.head").addClass("selected");
+						$jmenu('#ves-accordion').Accordion({
+							active: 'span.selected',
+							header: 'span.head',
+							alwaysOpen: false,
+							animated: true,
+							showSpeed: 400,
+							hideSpeed: 800,
+							event: '<?php echo $event; ?>'
+						});
+					});	
+				</script>
+				<ul id="ves-accordion">
+					<?php
+					$htmlChildren = '';
+					$category = Mage::registry('current_category');
+					$children = $category->getChildren();
+					$childrens = explode(',',$children);
+					$categories = Mage::getModel('catalog/category')->getCollection()
+					->addAttributeToSelect('*')
+					->addAttributeToFilter('entity_id',array('in'=>$childrens));
+					$i = 0;
+					$level = 0;
+					foreach ($categories as $_category) {
+						$htmlChildren.= $this->getTreeCategories($_category, $i);
+						$i++;
+					}
+					echo  $htmlChildren;
+					?>
+				</ul>
+				<?php if( trim($this->getConfig('show_number_item')) != '' && (int)$this->getConfig('show_number_item') > 0 && count($childrens)>=$this->getConfig('show_number_item')){ ?>
+				<div class="btnCat-loadmore"><a class="btn btn-viewmore" href="javascript:void(0);"  data-target=".catCl" ><i class="fa fa-plus-circle"></i></a></div>
+				<?php } ?>
+
+			<?php endif; //end Accordion menu?>
+			<?php if ($style=='Tree'):?>
+				<ul id="ves-tree">
+					<?php
+					$htmlChildren = '';
+					$category = Mage::registry('current_category');
+					$children = $category->getChildren();
+					$childrens = explode(',',$children);
+					$categories = Mage::getModel('catalog/category')->getCollection()
+					->addAttributeToSelect('*')
+					->addAttributeToFilter('entity_id',array('in'=>$childrens));
+					$i = 0;
+					$level = 0;
+					foreach ($categories as $_category) {
+						$htmlChildren.= $this->getTreeCategories($_category, $i);
+						$i++;
+					}
+					echo  $htmlChildren;
+					?>
+				</ul>
+				<?php if( trim($this->getConfig('show_number_item')) != '' && (int)$this->getConfig('show_number_item') > 0 && count($childrens)>=$this->getConfig('show_number_item')){ ?>
+				<div class="btnCat-loadmore"><a href="javascript:void(0);" data-click-event="open"><i class="fa fa-plus-circle"></i></a></div>
+				<?php } ?>
+			<?php endif;//end tree menu?>
+
+
+			<?php if( trim($this->getConfig('show_number_item')) != '' && (int)$this->getConfig('show_number_item') > 0 && count($childrens)>=$this->getConfig('show_number_item') ){ ?>
+			<script type="text/javascript">
+				$jmenu(document).ready(function(){
+					var c = 0;
+					$jmenu('.btnCat-loadmore a').on('click',function(e){
+						e.preventDefault();
+						var $this = jQuery(this);
+						var $collapse = $this.closest('.ves-categoriesmenu').find('.collapse');
+
+						if($collapse.length > 0) {
+							$collapse.collapse('toggle');
+						} else {
+							var $collapse = $this.closest('.ves-categoriesmenu').find('.in');
+							$collapse.collapse('toggle');
+							$collapse.addClass("collapse");
+						}
+
+						if($this.data("clickEvent") == "open") {
+							$this.data("clickEvent","close");
+							$this.html('<i class="fa fa-plus-circle"></i>');
+						} else {
+							$this.data("clickEvent","open");
+							$this.html('<i class="fa fa-minus-circle"></i>');
+						}
+
+
+					});
+				});
+			</script>
+			<?php } ?>
+
+
+
+		</div> <!-- end class=block-content -->
+	</div> <!-- end class=ves-categoriesmenu -->
+<?php endif;//end enabled menu?>

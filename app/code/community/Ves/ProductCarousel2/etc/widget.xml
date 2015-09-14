@@ -1,0 +1,430 @@
+<?xml version="1.0"?>
+<widgets>
+<!-- Widget single image-->
+	<widget_product_carousel2 type="ves_productcarousel2/widget_carousel">
+		<name>Ves Base : Products Carousel 2</name>
+		<description>Create Products Carousel 2 Widget</description>
+		<parameters>
+			<show translate="label" module="core">
+				<visible>1</visible>
+				<label>Enabled</label>
+				<sort_order>10</sort_order>
+				<type>select</type>
+				<values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+				<value>true</value>
+			</show>
+			<title translate="label">
+				<visible>1</visible>
+                <label>Module Title </label>
+                <type>text</type>
+                <sort_order>15</sort_order>
+                <description>Empty for hide</description>
+                <value></value>
+            </title> 
+			<cmsblock translate="label">
+				<visible>1</visible>
+                <label>Select Static Block</label>
+                <type>select</type>
+                <source_model>ves_productcarousel2/system_config_source_listCms</source_model>
+                <sort_order>20</sort_order>
+				<description>Choose Template for your module</description>
+				<value>0</value>
+            </cmsblock>
+            <pretext translate="label">
+            	<visible>1</visible>
+                <label>Pretext</label>
+                <type>ves_productcarousel/widget_wysiwyg</type>
+                <sort_order>25</sort_order>
+                <description>Empty for hide. You put html code such A, H2,H3,H4...</description>
+            </pretext>
+            <prefix translate="label">
+            	<visible>1</visible>
+                <label>Prefix Class</label>
+                <type>text</type>
+                <sort_order>30</sort_order>
+            </prefix>
+			
+			<catsid translate="label">
+				<visible>1</visible>
+                <label>Categories ID: </label>
+                <type>multiselect</type>
+                <source_model>ves_productcarousel2/system_config_source_ListCategories</source_model>
+                <description>Eg: 22,23. Empty for all categories.</description>
+                <sort_order>31</sort_order>
+            </catsid>
+
+            <limit_item translate="label">
+            	<visible>1</visible>
+				<label># Qty of items</label>
+				<sort_order>32</sort_order>
+				<type>text</type>
+				<backend_model>ves_productcarousel2/system_config_backend_productcarousel_checkQty</backend_model>
+				<description>0 for show all</description>
+				<value>8</value>
+			</limit_item>
+			
+			
+			<source_products_mode translate="label">
+				<visible>1</visible>
+                <label>Show Products From: </label>
+                <type>select</type>
+                <source_model>ves_productcarousel2/system_config_source_listType</source_model>                         
+                <sort_order>34</sort_order>
+                <value>latest</value>
+            </source_products_mode>
+
+			<thumbnail_mode translate="label">
+				<visible>1</visible>
+                <label>Render Thumbnail</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>40</sort_order>
+                <description>Whether to render thumbnail with cropping-resizing function</description>
+                <value>true</value>
+            </thumbnail_mode>
+			<thumb_height translate="label">
+				<visible>1</visible>
+                <label>Thumbnail Height</label>
+                <type>text</type>
+                <sort_order>45</sort_order>
+                <value>260</value>
+            </thumb_height>
+			<thumb_width translate="label">
+				<visible>1</visible>
+                <label>Thumbnail Width</label>
+                <type>text</type>
+                <sort_order>50</sort_order>
+                <value>150</value>
+            </thumb_width>
+			
+			<show_navigator>
+				<visible>1</visible>
+				<label>Enable Button Navigation</label>
+                <type>select</type>
+				<values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>55</sort_order>
+                <value>true</value>
+			</show_navigator>
+
+			<show_title>
+				<visible>1</visible>
+				<label>Enable Main Title</label>
+                <type>select</type>
+				<values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>58</sort_order>
+                <value>true</value>
+			</show_title>
+			<show_desc>
+				<visible>1</visible>
+				<label>Enable Main Description</label>
+                <type>select</type>
+				<values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>60</sort_order>
+                <value>false</value>
+			</show_desc>
+			<show_price>
+				<visible>1</visible>
+				<label>Enable Price</label>
+                <type>select</type>
+				<values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>65</sort_order>
+                <value>true</value>
+			</show_price>
+
+			<show_wc>
+				<visible>1</visible>
+				<label>Enable Wishlist, Compare</label>
+                <type>select</type>
+				<values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>68</sort_order>
+                <value>true</value>
+			</show_wc>
+			<show_addcart>
+				<visible>1</visible>
+				<label>Enable Button addcart</label>
+                <type>select</type>
+				<values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>70</sort_order>
+                <value>true</value>
+			</show_addcart>
+			<show_review>
+				<visible>1</visible>
+				<label>Show Rating</label>
+                <type>select</type>
+				<values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>75</sort_order>
+                <value>true</value>
+			</show_review>
+
+            <show_pzoom>
+            	<visible>1</visible>
+                <label>Show Product Image Zooming</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>80</sort_order>
+                <value>false</value>
+            </show_pzoom>
+
+			<enable_quickview>
+				<visible>1</visible>
+                <label>Enable Quickview</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>95</sort_order>
+                <value>true</value>
+            </enable_quickview>
+            <enable_swap>
+            	<visible>1</visible>
+                <label>Enable Swap Images</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>115</sort_order>
+                <value>true</value>
+            </enable_swap>
+             <enable_sale_icon>
+             	<visible>1</visible>
+                <label>Enable Sale Icon</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>120</sort_order>
+                <value>true</value>
+            </enable_sale_icon>
+
+            <enable_new_icon>
+             	<visible>1</visible>
+                <label>Enable New Icon</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>130</sort_order>
+                <value>false</value>
+            </enable_new_icon>
+
+            <title_maxchar>
+            	<visible>1</visible>
+				<label>Title Max Chars</label>
+                <type>text</type>
+                <sort_order>140</sort_order>
+                <value>100</value>
+			</title_maxchar>
+			<desc_maxchar>
+				<visible>1</visible>
+				<label>Description Max Chars</label>
+                <type>text</type>
+                <sort_order>150</sort_order>
+                <value>100</value>
+			</desc_maxchar>
+			<auto_play>
+				<visible>1</visible>
+				<label>Auto Play</label>
+                <type>select</type>
+				<values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>160</sort_order>
+                <value>false</value>
+			</auto_play>
+			<interval>
+				<visible>1</visible>
+				<label>Speed</label>
+                <type>text</type>
+                <sort_order>170</sort_order>
+                <value>500</value>
+			</interval>
+			<max_items>
+				<visible>1</visible>
+				<label>Max items on a page</label>
+                <type>text</type>
+                <sort_order>180</sort_order>
+                <value>4</value>
+			</max_items>
+			<limit_cols>
+				<visible>1</visible>
+				<label>Max Colums</label>
+                <type>text</type>
+                <sort_order>190</sort_order>
+                <value>4</value>
+			</limit_cols>
+		   <image_width>
+		   		<visible>1</visible>
+                <label>Image Width</label>
+                <type>text</type>
+                <sort_order>200</sort_order>
+                <value>300</value>
+            </image_width>
+
+            <image_height>
+            	<visible>1</visible>
+                <label>Image Height</label>
+                <type>text</type>
+                <sort_order>210</sort_order>
+                <value>300</value>
+            </image_height>
+
+            <swap_image_number>
+            	<visible>1</visible>
+                <label>Swap Image Number</label>
+                <description>Input index number of product additional images to use for Swap image (index number start from 0), for example: you want get image 3 for swap image, you should input swap image number = 2 </description>
+                <type>text</type>
+                <sort_order>220</sort_order>
+                <value>0</value>
+            </swap_image_number>
+
+            <popup_quickview_width>
+            	<visible>1</visible>
+                <label>Popup Quickview Width</label>
+                <type>text</type>
+                <sort_order>230</sort_order>
+                <value>60%</value>
+            </popup_quickview_width>
+
+            <popup_quickview_height>
+            	<visible>1</visible>
+                <label>Popup Quickview Height</label>
+                <type>text</type>
+                <sort_order>240</sort_order>
+                <value>80%</value>
+            </popup_quickview_height>
+
+            <template translate="label">
+				<visible>1</visible>
+                <label>Module Template</label>
+                <description>Input custom module template file path. For example: ves/productcarousel2/default.phtml Empty for default</description>
+                <type>text</type>
+                <sort_order>250</sort_order>
+            </template> 
+		</parameters>
+	</widget_product_carousel2>
+</widgets>

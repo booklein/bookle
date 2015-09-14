@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+	<default>
+		<reference name="head">
+	    	<action method="addItem" ifconfig="ves_blog/general_setting/show"><type>skin_css</type><name>ves_blog/style.css</name></action>
+	    	<action method="addJs" module="ves_blog" ifconfig="ves_blog/general_setting/enable_jquery"><script>ves_blog/jquery.js</script></action>
+	    	<action method="addJs" module="ves_blog" ifconfig="ves_blog/general_setting/enable_jquery"><script>ves_blog/noconflict.js</script></action>
+	    	<action method="addJs" ifconfig="ves_blog/general_setting/show"><script>ves_blog/script.js</script></action>
+	    	<action method="addJs" ifconfig="ves_blog/general_setting/show"><script>ves_blog/menu.js</script></action>
+	  	</reference>
+	</default>
+    <blog_index_index>
+        <reference name="content">
+            <block type="ves_blog/blog_list" name="blog.frontpage">
+            	<block type="ves_blog/blog_toolbar" name="list.toolbar" template="ves/blog/toolbar.phtml"/>
+            </block>
+        </reference>
+
+		<reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+		<reference name="right">
+			<block type="ves_blog/search" name="ves.search" before="-" />
+			<block type="ves_blog/cmenu" name="ves.cmenu" after="ves.search" />
+			<block type="ves_blog/archives" name="ves.archives" after="ves.cmenu" />
+			<block type="ves_blog/latestcomment" name="ves.latestcomment" after="ves.cmenu" />
+			<block type="ves_blog/tags" name="ves.tags" after="-" />
+		</reference>
+
+    </blog_index_index>
+
+	<blog_category_view>
+		<reference name="content">
+            <block type="ves_blog/blog_category" name="blog.category">
+				<block type="ves_blog/blog_toolbar" name="list.toolbar" template="ves/blog/toolbar.phtml"/>
+			</block>
+        </reference>
+
+		<reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+
+		<reference name="right">
+			<block type="ves_blog/search" name="ves.search" before="-" />
+			<block type="ves_blog/cmenu" name="ves.cmenu" after="ves.search" />
+			<block type="ves_blog/archives" name="ves.archives" after="ves.cmenu" />
+			<block type="ves_blog/latestcomment" name="ves.latestcomment" after="ves.cmenu" />
+			<block type="ves_blog/tags" name="ves.tags" after="-" />
+		</reference>
+	</blog_category_view>
+
+
+	<blog_list_show>
+		<reference name="content">
+           <block type="ves_blog/blog_list" name="blog.frontpage">
+            	<block type="ves_blog/blog_toolbar" name="list.toolbar" template="ves/blog/toolbar.phtml"/>
+            </block>
+        </reference>
+
+		<reference name="right">
+			<block type="ves_blog/search" name="ves.search" before="-" />
+			<block type="ves_blog/cmenu" name="ves.cmenu" after="ves.search" />
+			<block type="ves_blog/archives" name="ves.archives" after="ves.cmenu" />
+			<block type="ves_blog/latestcomment" name="ves.latestcomment" after="ves.cmenu" />
+			<block type="ves_blog/tags" name="ves.tags" after="-" />
+		</reference>
+
+		<reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+	</blog_list_show>
+
+
+	 <blog_post_view>
+        <reference name="content">
+            <block type="ves_blog/blog_post" name="blog.post" template="ves/blog/post.phtml">
+
+				<block type="ves_blog/blog_post_recaptcha" name="post.recaptcha" template="ves/blog/post/recaptcha.phtml" />
+				<block type="ves_blog/blog_post_comment" name="post.comment" template="ves/blog/post/comment.phtml">
+					<block type="ves_blog/blog_toolbar" name="post.comment.toolbar" template="ves/blog/toolbar.phtml"/>
+				</block>
+				<block type="ves_blog/blog_post_social" name="post.social" template="ves/blog/post/social.phtml" />
+			</block>
+
+        </reference>
+
+		<reference name="right">
+			<block type="ves_blog/search" name="ves.search" before="-" />
+			<block type="ves_blog/cmenu" name="ves.cmenu" after="ves.search" />
+			<block type="ves_blog/archives" name="ves.archives" after="ves.cmenu" />
+			<block type="ves_blog/latestcomment" name="ves.latestcomment" after="ves.cmenu" />
+			<block type="ves_blog/tags" name="ves.tags" after="-" />
+		</reference>
+
+		<reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+
+    </blog_post_view>
+
+</layout>

@@ -1,0 +1,46 @@
+/******************************************************
+ * @package Ves Theme Framework for Magento
+ * @version 3.0
+ * @author http://www.venustheme.com
+ * @copyright Copyright (C) Augus 2013 Venustheme.com <@email:venustheme@gmail.com>.All rights reserved.
+ * @license   GNU General Public License version 2
+*******************************************************/
+.buttons{
+    @include clearfix();
+    padding: 20px 0; 
+    .left{
+       float:left;
+    }
+    .right{
+        float:right;
+    }
+
+}
+
+.btn-outline-inverse{
+    @include button-variant-outline($btn-default-color, $theme-color-default, $theme-color-default, $white, $theme-color-primary , $theme-color-primary );
+} 
+.btn-outline{  
+    border: none; outline:1px dashed $text-color;
+    outline-offset: -1px;
+    cursor: pointer;
+    text-transform: uppercase;
+    @include transition (all 0.4s ease 0s);
+    @include border-radius(3px);
+    color: $theme-color-default;
+    font-size: $font-size-base - 3;
+    letter-spacing: 0.4px;
+    font-family:  $font-family-three;
+    font-weight: 900;
+    margin: 0 !important;
+    padding:10px 22px;
+    line-height: 22px;
+    &:hover, &.btn-cart {
+        background: $theme-color-primary;
+        color: $white;
+        outline-color: $white;
+        outline-offset: -3px;
+        @include transition (all 0.4s ease 0s);
+        text-decoration: none;
+    }
+} 

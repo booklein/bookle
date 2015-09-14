@@ -1,0 +1,56 @@
+<?php 
+$_product = $this->getProduct();
+// Get the Discount
+if($_product->getSpecialPrice()):
+	$save_price = (float)$_product->getPrice() - (float)$_product->getSpecialPrice();
+	$save_price_currency = Mage::helper('core')->currency($save_price, true, false);
+	$discount = round(($save_price/$_product->getPrice())*100);
+	$date1 = date('G:i:s', strtotime($_product->getSpecialToDate()));
+	if ($date1 == "0:00:00") {
+	    $targetDate = date('m/d/Y \2\3\:\5\9\:\0\0', strtotime($_product->getSpecialToDate()));
+	}else{
+	    $targetDate = date('m/d/Y G:i:s', strtotime($_product->getSpecialToDate()));
+	}
+	$today = Mage::getModel('core/date')->date('m/d/Y G:i:s');
+
+	if(strtotime($targetDate) > strtotime($today)):
+?>
+	<div class="block block-deal-info" style="clear:both">
+		<div class="block-title">
+			<strong><span><?php echo $this->__("Time Left To Buy");?></span></strong>
+		</div>
+		<div class="block-content">
+			<div class="productdeals">
+				<div id="item_countdown_<?php echo $_product->getId(); ?>" class="item-countdown"></div>
+				<script type="text/javascript">
+		            jQuery(document).ready(function($){
+		                    $("#item_countdown_<?php echo $_product->getId(); ?>").lofCountDown({
+		                        formatStyle:2,
+		                        TargetDate:"<?php echo $targetDate; ?>",
+		                        DisplayFormat:"<ul><li>%%D%% <div><?php echo $this->__('Day');?></div></li><li> %%H%% <div><?php echo $this->__('Hours');?></div></li><li> %%M%% <div><?php echo $this->__('Mins');?></div></li><li> %%S%% <div><?php echo $this->__('Secs');?></div></li></ul>",
+		                        FinishMessage:"<?php echo $this->__('Expired');?>",
+		                    });
+		                });
+		        </script>
+		    </div>
+			<div class="clear" style="clear:both"></div>
+			<div class="deal_detail">
+	            <ul>
+	                <li>
+	                    <span><?php echo $this->__("Discount");?></span>
+	                    <span class="deal_detail_num">&nbsp;<?php echo $discount;?>%</span>
+	                </li>
+	                <li>
+	                    <span><?php echo $this->__("You save");?></span>
+	                    <span class="deal_detail_num">&nbsp;<span class="price"><?php echo $save_price_currency; ?></span></span>
+	                </li>
+	                <li>
+	                    <span><?php echo $this->__("Bought");?></span>
+	                    <span class="deal_detail_num">&nbsp;<?php echo Mage::helper("ves_tempcp")->getBought($_product->getSku());?></span>
+	                </li>
+	            </ul>
+	        </div>
+		</div>
+	</div>
+<?php endif; ?>
+<?php endif; ?>

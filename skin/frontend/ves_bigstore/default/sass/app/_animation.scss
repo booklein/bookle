@@ -1,0 +1,78 @@
+.product-block {
+    .add-to-links{
+        @include rtl-float-left(); width: 100%; position: relative;
+
+        li{
+            position: absolute; bottom: 0;
+            @include transition(all 0.4s ease-out 0s);
+            &.link-wishlist{@include rtl-left(-10%);}
+            &.link-compare{position: static;}
+            &.link-quickview{@include rtl-right(-10%);}
+        }
+    }
+    &:hover {
+        @include transition(all 0.4s ease-out 0s);
+        .add-to-links {
+            visibility: visible;
+            display: block;
+            @include opacity(1);
+            li{
+                &.link-wishlist{@include rtl-left(50%); @include rtl-margin-left(-68px);}
+                &.link-quickview{@include rtl-right(50%); @include rtl-margin-right(-68px);}
+            }
+        }
+    }
+}
+
+
+// effect banner
+.effect {
+    position: relative;
+    overflow: hidden;
+    .overlay {
+      &::before{
+        content:"";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        @include rtl-left(0);
+        @include transition(all 300ms ease-in-out);
+      }
+    }
+    &:hover{
+      .overlay::before{
+          @include box-shadow(0 0 0 20px rgba(255, 255, 255, 0.4) inset);   
+      }
+  }
+}
+
+#content .widget-images .img-animation{
+    position: relative;
+    overflow: hidden;
+    display: block;
+    &:before{
+        background: url("#{$image-theme-path}plus.png") no-repeat center center #222;
+        background-size:60px 60px;
+        height: 100%;
+        @include rtl-left(0);
+        @include opacity(0);
+        content:"";
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        transform: scale(0.8) rotateX(180deg);
+        @include transition(all 0.5s ease 0s);
+        width: 100%;
+        z-index: 7;
+    }
+    &:hover{
+        cursor: pointer; 
+        img{@include scale(1.06);@include transition(all 0.5s ease 0s);}            
+        &:before{
+            opacity: 0.4;
+            transform: scale(1) rotateX(0deg);
+            visibility: visible; 
+        } 
+    }
+}

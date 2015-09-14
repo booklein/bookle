@@ -1,0 +1,41 @@
+/******************************************************
+ * @package Ves Theme Framework for Magento
+ * @version 1.0
+ * @author http://www.venustheme.com
+ * @copyright Copyright (C) Augus 2013 Venustheme.com <@email:venustheme@gmail.com>.All rights reserved.
+ * @license   GNU General Public License version 2
+*******************************************************/
+
+/* Import ================================================================================ */
+//@import "compass";
+
+// Core variables and mixins
+@import "../../vars/bootstrap.vars";
+@import "../../vars/magento";
+
+@import "variables-skin";
+
+@import "../../mixins/bootstrap.mixin";
+@import "../../mixins/magento.mixin";
+
+@import "../../magento/rtl";
+
+@import "../../magento/base";
+@import "../../magento/magento-pages";
+@import "../../magento/paneltool";
+@import "../../magento/offcanvas";
+
+@import "../../magento/typo";
+@import "../../magento/form";
+
+@import "../../app/animation";
+@import "../../app/block";
+@import "../../app/form";
+@import "../../app/layout";
+@import "../../app/menu";
+@import "../../app/modules";
+@import "../../app/product";
+@import "../../app/product-viewmode";
+@import "../../app/top-widgets";
+
+@import "../../magento/responsive";

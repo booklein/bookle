@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <name>Motech_RemoveCompare</name>
+    <version>1.0.0</version>
+    <stability>stable</stability>
+    <license uri="http://www.opensource.org/licenses/osl-3.0.php">OSL 3.0</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Removes Compare Product Functionality and side widgets from Magento</summary>
+    <description>Removes Compare Product Functionality and side widgets from Magento</description>
+    <notes>Removes Compare Product Functionality and side widgets from Magento</notes>
+    <authors><author><name>Justin Saad</name><user>Motech</user><email>support@motechnetwork.com</email></author></authors>
+    <date>2012-12-10</date>
+    <time>17:43:19</time>
+    <contents><target name="magecommunity"><dir name="Motech"><dir name="RemoveCompare"><dir name="Helper"><dir name="Product"><file name="Compare.php" hash="7d67a6150290cd7ac94398da7781114d"/></dir></dir><dir name="etc"><file name="config.xml" hash="4a724e14f2203cd21adc1357fda75e15"/></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Motech_RemoveCompare.xml" hash="d85c0cec7db1016654b26e271e04d89f"/></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="removecompare.xml" hash="b1692bfb4aaf7e1df215d1edc8de4c2d"/></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.2.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

@@ -1,0 +1,116 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+$themeName =  Mage::getDesign()->getTheme('frontend');
+
+$helper = Mage::helper("ves_tempcp/framework")->getFramework( );
+
+if(!$helper || !is_object($helper)) {
+
+    $themeConfig = Mage::helper('ves_tempcp/theme')->getCurrentTheme();
+    $helper = Mage::helper("ves_tempcp/framework")->initFramework( $themeName, $themeConfig );
+
+} else {
+
+    $themeConfig = $helper->getConfig();
+    
+}
+$contact_customhtml = $themeConfig->get("contact_customhtml","", true);
+$store = Mage::getStoreConfig('general/store_information/name');
+$address = Mage::getStoreConfig('general/store_information/address');
+$address = !empty($address)?$address:'Head Office: Number 18, Athens, New York, United States  ';
+$telephone = Mage::getStoreConfig('general/store_information/phone');
+$fax = "";
+?>
+<div class="block locations">
+    <div class="block-title"> <span><?php echo Mage::helper('contacts')->__('Our Location'); ?></span> </div>
+    <div class="block-content">
+        <?php if($themeConfig->get("enable_google_map", 1)): ?>
+                <div class="contact-location hidden-xs">
+                    <div id="contact-map-footer"></div>
+                </div>
+                <?php // Jquery googlemap api v3 ?>
+                
+                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;language=en"></script>
+                <script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>venustheme/ves_tempcp/gmap/gmap3.min.js"></script>
+                <script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS);  ?>venustheme/ves_tempcp/gmap/gmap3.infobox.js"></script>
+                <script type="text/javascript">
+                    var mapDiv, map, infobox;
+                    var lat = <?php echo $themeConfig->get('location_latitude', '42.2603648'); ?>;
+                    var lon = <?php echo $themeConfig->get('location_longitude', '-73.8095707'); ?>;
+                    jQuery(document).ready(function($) {
+                        mapDiv = $("#contact-map-footer");
+                        mapDiv.height(110).gmap3({
+                            map:{
+                                options:{
+                                    center:[lat,lon],
+                                    zoom: 15
+                                }
+                            },
+                            marker:{
+                                values:[
+                                    {latLng:[lat, lon], data:"<?php echo $themeConfig->get('location_address', $address);?>"},
+                                ],
+                                options:{
+                                    draggable: false
+                                },
+                                events:{
+                                      mouseover: function(marker, event, context){
+                                        var map = $(this).gmap3("get"),
+                                            infowindow = $(this).gmap3({get:{name:"infowindow"}});
+                                        if (infowindow){
+                                            infowindow.open(map, marker);
+                                            infowindow.setContent(context.data);
+                                        } else {
+                                            $(this).gmap3({
+                                            infowindow:{
+                                                anchor:marker, 
+                                                options:{content: context.data}
+                                            }
+                                          });
+                                        }
+                                    },
+                                    mouseout: function(){
+                                        var infowindow = $(this).gmap3({get:{name:"infowindow"}});
+                                        if (infowindow){
+                                            infowindow.close();
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    });
+                </script>
+                <?php } ?>
+                <?php //end contact map ?>
+            <div class="media">
+                <div class="pull-left"> <em class="fa fa-map-marker"> </em></div>
+                <div class="address media-body">
+                    <?php echo $address; ?>
+                </div>
+            </div>
+
+    </div>
+</div>
