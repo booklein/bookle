@@ -17,7 +17,7 @@
 	<ul class="box-heading nav nav-tabs">
 		<li class="<?php $filter_deal = $this->getFilterdeal(); if($this->getFilterdeal() == 1 or empty($filter_deal)) { echo "active"; } ?> first"><a href="<?php echo Mage::helper("ves_deals")->getFilterUrl(1); ?>"><?php echo $this->__("Today deals");?></a></li>
 		<li class="<?php if($this->getFilterdeal() == 2) { echo "active"; } ?>"><a href="<?php echo Mage::helper("ves_deals")->getFilterUrl(2); ?>"><?php echo $this->__("Available deals");?></a></li>
-		<li class="<?php if($this->getFilterdeal() == 3) { echo "active"; } ?> last"><a href="<?php echo Mage::helper("ves_deals")->getFilterUrl(3); ?>"><?php echo $this->__("Pass deals"); ?></a></li>
+		<li class="<?php if($this->getFilterdeal() == 3) { echo "active"; } ?> last"><a href="<?php echo Mage::helper("ves_deals")->getFilterUrl(3); ?>"><?php echo $this->__("Past deals"); ?></a></li>
 	</ul>
 <div class="deal-products">
 <?php
